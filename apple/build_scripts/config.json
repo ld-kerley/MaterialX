@@ -1,0 +1,37 @@
+{
+  "requires": [
+  ],
+  "build_requires": [
+    "cmake-3.25+",
+    "certifi",
+    "python-3",
+    "six"
+  ],
+  "variants": {
+    "Python 3.9": {
+      "id": 0,
+      "alias": "python39",
+      "enabled": true,
+      "keys": [
+        "apple_universal-2",
+        "python-3.9.10-a1"
+      ],
+      "additions": [],
+      "architectures": ["x86_64", "arm64"]
+    },
+    "Maya": {
+      "id": 1,
+      "alias": "maya",
+      "enabled": true,
+      "keys": [
+        "apple_arch-x86_64",
+        "maya"
+      ],
+      "additions": [],
+      "architectures": ["x86_64"]
+
+    }
+  },
+  "branch_keys": {},
+  "branch_fallback": "custom"
+}
