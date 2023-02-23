@@ -39,6 +39,36 @@ mx::FileSearchPath getDefaultSearchPath()
     return searchPath;
 }
 
+std::filesystem::path getConfigPath()
+{
+    std::filesystem::path config_dir;
+    if (const char* const xdg_config = getenv("XDG_CONFIG_HOME"))
+    {
+        config_dir = std::filesystem::path(xdg_config) / "MaterialX";
+    }
+    else if (const char* const home = getenv("HOME"))
+    {
+#if defined(__APPLE__)
+        config_dir = std::filesystem::path(home) / "Library" / "Preferences" / "MaterialX";
+#else
+        config_dir = std::filesystem::path(home) / ".config" / "MaterialX";
+#endif
+    }
+    else
+    {
+        return {};
+    }
+
+    std::filesystem::create_directories(config_dir);
+    if (!std::filesystem::exists(config_dir))
+    {
+        std::cerr << "Failed to create MaterialX config directory at " << config_dir << std::endl;
+        return {};
+    }
+
+    return config_dir / "GraphEditor.imgui.ini";
+}
+
 const std::string options =
     " Options: \n"
     "    --material [FILENAME]          Specify the filename of the MTLX document to be displayed in the graph editor\n"
@@ -166,6 +196,12 @@ int main(int argc, char* const argv[])
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->AddFontDefault();
+
+    auto configPath = getConfigPath();
+    if (!configPath.empty())
+    {
+        io.IniFilename = configPath.c_str();
+    }
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
