@@ -40,14 +40,14 @@ def setup = {
 def get_version = {
   // Get the MaterialX version from the utils script
   script {
-    MaterialX_VERSION = sh (
+    MATERIALX_VERSION = sh (
       script: '''
         python3 $WORKSPACE/apple/build_scripts/utils.py version
       ''',
       returnStdout: true
     ).trim()
 
-    echo "Found Version ${MaterialX_VERSION} for materialx-${GIT_BRANCH}-${MATERIALX_VERSION}-a"
+    echo "Found Version ${MATERIALX_VERSION} for materialx-${GIT_BRANCH}-${MATERIALX_VERSION}-a"
     if (!MATERIALX_VERSION?.trim()) {
       error("Failed getting the MaterialX version for the Rez package")
     }
