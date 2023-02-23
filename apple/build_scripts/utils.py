@@ -215,6 +215,9 @@ def build_requires(*exclude):
 
 
 def cache_packages(packages):
+    print("Making sure git submodules are cloned...")
+    subprocess.call(["git", "submodule", "update", "--init", "--recursive"], cwd=repo)
+
     print("Caching {} ...".format(", ".join(packages)))
     commands = ["rez-env", "omnilauncher", "--", "rez-cache"] + list(packages)
 
@@ -401,7 +404,7 @@ def get_cmake_args(variant, root, request=None, env=None, exact_root=False):
         "MATERIALX_BUILD_SHARED_LIBS": True,
         "MATERIALX_PYTHON_EXECUTABLE": pyexe,
         "MATERIALX_BUILD_GRAPH_EDITOR": build_extras,
-        "MATERIALX_BUILD_TESTS": False, # TODO: Remove this if/when the tests are fixed to work with the newer clang random lib
+        "MATERIALX_BUILD_TESTS": False,  # TODO: Remove this if/when the tests are fixed to work with the newer clang random lib
     }
 
     for k, v in args.items():
@@ -525,6 +528,7 @@ def build_cmake(path, args, env, threads=None, xcrun=False):
     print("Finished Build!")
 
     copy_libglfw(path, args["CMAKE_INSTALL_PREFIX"])
+
 
 def copy_libglfw(build_dir, target_dir):
     print("Looking for libglfw to copy")
@@ -764,13 +768,15 @@ def fix_rpaths(start, destination, index):
                 graphEditor = os.path.join(root, f)
 
     if graphEditor:
-        subprocess.check_call([
-            "install_name_tool",
-            "-change",
-            "lib/libglfw.3.dylib",
-            "@rpath/libglfw.3.dylib",
-            graphEditor,
-        ])
+        subprocess.check_call(
+            [
+                "install_name_tool",
+                "-change",
+                "lib/libglfw.3.dylib",
+                "@rpath/libglfw.3.dylib",
+                graphEditor,
+            ]
+        )
 
     errors = {}
     for artifact in libs | bins:
