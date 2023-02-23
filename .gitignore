@@ -86,3 +86,7 @@ ehthumbs_vista.db
 .nfs
 # Files ending in ~ are Linux convention backup files
 *~
+
+
+# Graph Editor Cruft
+imgui.ini

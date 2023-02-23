@@ -16,7 +16,6 @@ import multiprocessing
 import tempfile
 import time
 import traceback
-import zipfile
 
 try:
     import six
@@ -525,6 +524,39 @@ def build_cmake(path, args, env, threads=None, xcrun=False):
 
     print("Finished Build!")
 
+    copy_libglfw(path, args["CMAKE_INSTALL_PREFIX"])
+
+def copy_libglfw(build_dir, target_dir):
+    print("Looking for libglfw to copy")
+    build_libs_dir = os.path.join(build_dir, "lib")
+    if not os.path.exists(build_libs_dir):
+        raise IOError(f"Couldn't find {build_libs_dir}")
+    target_libs_dir = os.path.join(target_dir, "lib")
+    os.makedirs(target_libs_dir, exist_ok=True)
+
+    for lib in os.listdir(build_libs_dir):
+        if "glfw" not in lib:
+            continue
+
+        path = os.path.join(build_libs_dir, lib)
+        target_path = os.path.join(target_libs_dir, lib)
+        if os.path.islink(path):
+            link = os.readlink(path)
+            if os.path.exists(target_path):
+                os.remove(target_path)
+            try:
+                # Sometimes this fails even though the previous step should have checked for it
+                # Some kind of TOCTOU bug?
+                os.symlink(link, target_path)
+            except FileExistsError:
+                print(
+                    f"‼️Symlink from {target_path} to {link} failed because it says it exists already"
+                )
+        else:
+            shutil.copy2(path, target_path)
+
+    print("Finished trying to copy libglfw")
+
 
 def set_executable(path):
     print("Marking {} as executable".format(path))
@@ -669,41 +701,6 @@ def check_local_links(path, ignore=None):
     return errors
 
 
-def fix_mod(path, old_path, new_path, variant):
-    print(f"Fix Mod: {path} -- {old_path} || {new_path}")
-    variant_keys = os.path.sep.join(variant["keys"])
-
-    with open(path, "r") as fp:
-        lines = fp.readlines()
-
-    write = False
-    for i, line in enumerate(lines):
-        new_line = line.replace(old_path, new_path)
-
-        # Fix duplication error that can occur with simple replace
-        if variant_keys in new_line:
-            tokens = new_line.split(variant_keys)
-            pre = tokens[0]
-            post = tokens[-1]
-            new_line = f"{pre}{variant_keys}{post}"
-
-        if line != new_line:
-            write = True
-
-            print(lines[i], "\n\t--->\n\t\t", new_line, "\n")
-            lines[i] = new_line
-
-    if not write:
-        print("No requirement to modify", path)
-        return
-
-    print("Modifying", path)
-    with open(path, "w") as fp:
-        fp.writelines(lines)
-
-    print("Done modifying", path)
-
-
 def add_rpath(lib, rpath):
     subprocess.call(["/usr/bin/install_name_tool", "-add_rpath", rpath, lib])
 
@@ -742,7 +739,7 @@ def fix_rpaths(start, destination, index):
     libs = set()
     bins = set()
     pys = set()
-    mods = set()
+    graphEditor = None
 
     for root, dirs, files in os.walk(start):
         if root.endswith("/bin"):
@@ -763,12 +760,17 @@ def fix_rpaths(start, destination, index):
                 file_path = os.path.join(root, f)
                 libs.add(file_path)
 
-            elif ext == ".mod":
-                file_path = os.path.join(root, f)
-                mods.add(file_path)
+            if f == "MaterialXGraphEditor":
+                graphEditor = os.path.join(root, f)
 
-    for mod in mods:
-        fix_mod(mod, start, variant_root, variant[1])
+    if graphEditor:
+        subprocess.check_call([
+            "install_name_tool",
+            "-change",
+            "lib/libglfw.3.dylib",
+            "@rpath/libglfw.3.dylib",
+            graphEditor,
+        ])
 
     errors = {}
     for artifact in libs | bins:
