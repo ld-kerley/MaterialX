@@ -135,7 +135,8 @@ def materialx_version():
     version = []
     with open(os.path.join(repo, "CMakeLists.txt")) as fp:
         for line in fp.readlines():
-            if match := re.match("set\(MATERIALX_[A-Z]+_VERSION (?P<ver>\d+)\)", line):
+            match = re.match("set\(MATERIALX_[A-Z]+_VERSION (?P<ver>\d+)\)", line)
+            if match:
                 version.append(match.groupdict()["ver"])
 
     return version
