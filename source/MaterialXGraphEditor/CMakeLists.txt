@@ -81,6 +81,16 @@ target_link_libraries(
     ${MATERIALX_LIBRARIES}
  	glfw_minimal)
 
+if (APPLE)
+    target_sources(MaterialXGraphEditor PRIVATE
+            "${CMAKE_CURRENT_SOURCE_DIR}/Apple/NativeFileDialog.mm"
+            "${CMAKE_CURRENT_SOURCE_DIR}/Apple/NativeFileDialog.h"
+            )
+    set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/Apple/NativeFileDialog.mm" PROPERTIES LANGUAGE CXX)
+    find_library(COREFOUNDATION Foundation REQUIRED)
+    target_link_libraries(MaterialXGraphEditor PRIVATE ${COREFOUNDATION})
+endif()
+
 install(TARGETS MaterialXGraphEditor
     EXPORT MaterialX
     RUNTIME DESTINATION bin)

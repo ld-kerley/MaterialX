@@ -16,6 +16,11 @@
 
 #include <stack>
 
+#if defined(__APPLE__)
+    #include <MaterialXGraphEditor/Apple/NativeFileDialog.h>
+#endif
+
+
 namespace ed = ax::NodeEditor;
 namespace mx = MaterialX;
 
@@ -210,10 +215,17 @@ class Graph
     bool _delete;
 
     // file dialog information
+#if defined(__APPLE__)
+    NativeFileDialog _fileDialog;
+    NativeFileDialog _fileDialogSave;
+    NativeFileDialog _fileDialogImage;
+    NativeFileDialog _fileDialogGeom;
+#else
     ImGui::FileBrowser _fileDialog;
     ImGui::FileBrowser _fileDialogSave;
     ImGui::FileBrowser _fileDialogImage;
     ImGui::FileBrowser _fileDialogGeom;
+#endif
 
     bool _isNodeGraph;
 
