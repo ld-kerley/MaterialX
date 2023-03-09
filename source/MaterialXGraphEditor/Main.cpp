@@ -4,6 +4,8 @@
 //
 
 #include <MaterialXGraphEditor/Graph.h>
+#include <MaterialXFormat/Environ.h>
+#include <MaterialXFormat/File.h>
 
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
@@ -260,7 +262,8 @@ int main(int argc, char* const argv[])
             break;
         }
 
-        double xpos, ypos;
+        double xpos = 0.0;
+        double ypos = 0.0;
         glfwGetCursorPos(window, &xpos, &ypos);
         graph->drawGraph(ImVec2((float) xpos, (float) ypos));
         ImGui::Render();
