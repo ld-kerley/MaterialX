@@ -41,19 +41,25 @@ mx::FileSearchPath getDefaultSearchPath()
     return searchPath;
 }
 
-std::filesystem::path getConfigPath()
+mx::FilePath getConfigPath()
 {
-    std::filesystem::path config_dir;
-    if (const char* const xdg_config = getenv("XDG_CONFIG_HOME"))
+    mx::FilePath configPath;
+    auto xdgConfigHome = mx::getEnviron("XDG_CONFIG_HOME");
+    auto homeDirectory = mx::getEnviron("HOME");
+    if (!xdgConfigHome.empty())
     {
-        config_dir = std::filesystem::path(xdg_config) / "MaterialX";
+        configPath = mx::FilePath(xdgConfigHome);
     }
-    else if (const char* const home = getenv("HOME"))
+    else if (!homeDirectory.empty())
     {
 #if defined(__APPLE__)
-        config_dir = std::filesystem::path(home) / "Library" / "Preferences" / "MaterialX";
+        configPath = mx::FilePath(homeDirectory) / "Library" / "Preferences";
 #else
-        config_dir = std::filesystem::path(home) / ".config" / "MaterialX";
+        configPath = mx::FilePath(homeDirectory) / ".config";
+        if (!configPath.exists())
+        {
+            configPath.createDirectory();
+        }
 #endif
     }
     else
@@ -61,14 +67,16 @@ std::filesystem::path getConfigPath()
         return {};
     }
 
-    std::filesystem::create_directories(config_dir);
-    if (!std::filesystem::exists(config_dir))
+    configPath = configPath / "MaterialX";
+    configPath.createDirectory();
+
+    if (!configPath.exists())
     {
-        std::cerr << "Failed to create MaterialX config directory at " << config_dir << std::endl;
+        std::cerr << "Failed to create MaterialX config directory at " << configPath.asString() << std::endl;
         return {};
     }
 
-    return config_dir / "GraphEditor.imgui.ini";
+    return configPath / "GraphEditor.imgui.ini";
 }
 
 const std::string options =
@@ -199,10 +207,10 @@ int main(int argc, char* const argv[])
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->AddFontDefault();
 
-    auto configPath = getConfigPath();
-    if (!configPath.empty())
+    mx::FilePath configPath = getConfigPath();
+    if (!configPath.isEmpty())
     {
-        io.IniFilename = configPath.c_str();
+        io.IniFilename = configPath.asString().c_str();
     }
 
     // Setup Dear ImGui style
