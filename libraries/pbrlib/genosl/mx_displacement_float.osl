@@ -1,4 +1,5 @@
 void mx_displacement_float(float displacement, float scale, output displacementshader result)
 {
-    result = vector(displacement * scale);
+    vector No = transform("object", N);
+    result = vector(No * displacement * scale);
 }
