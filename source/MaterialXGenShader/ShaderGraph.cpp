@@ -1021,9 +1021,26 @@ void ShaderGraph::optimize(GenContext& context)
     {
         if (node->hasClassification(ShaderNode::Classification::CONSTANT))
         {
-            // Constant nodes can be elided by moving their value downstream.
-            bypass(context, node, 0);
-            ++numEdits;
+            // the following code is a revert from https://github.com/AcademySoftwareFoundation/MaterialX/pull/1150
+            // as it breaks the code generation in arnold-usd
+            if (!context.getOptions().elideConnectedConstants)
+            {
+                // Constant nodes can be removed by assigning their value downstream
+                // But don't remove it if it's connected upstream, i.e. it's value
+                // input is published.
+                ShaderInput* valueInput = node->getInput(0);
+                if (!valueInput->getConnection())
+                {
+                    bypass(context, node, 0);
+                    ++numEdits;
+                }
+            }
+            else
+            {
+                // Constant nodes can be elided by moving their value downstream.
+                bypass(context, node, 0);
+                ++numEdits;
+            }
         }
         else if (node->hasClassification(ShaderNode::Classification::DOT))
         {

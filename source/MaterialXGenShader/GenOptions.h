@@ -91,7 +91,8 @@ class MX_GENSHADER_API GenOptions
         hwNormalizeUdimTexCoords(false),
         hwWriteAlbedoTable(false),
         hwImplicitBitangents(true),
-        emitColorTransforms(true)
+        emitColorTransforms(true),
+        elideConnectedConstants(true)
     {
     }
     virtual ~GenOptions() { }
@@ -181,6 +182,10 @@ class MX_GENSHADER_API GenOptions
     /// Enable emitting colorspace transform code if a color management
     /// system is defined. Defaults to true.
     bool emitColorTransforms;
+
+    /// Enable eliding connected constants, setting this option to true
+    /// breaks shader generation for arnold-usd. Defaults to true.
+    bool elideConnectedConstants;
 };
 
 MATERIALX_NAMESPACE_END
