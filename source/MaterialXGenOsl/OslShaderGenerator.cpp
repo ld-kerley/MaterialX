@@ -266,7 +266,7 @@ ShaderPtr OslShaderGenerator::generate(const string& name, ElementPtr element, G
         emitLine("output closure color " + singleOutput->getVariable() + " = 0", stage, false);
     }
 #ifdef MATERIALX_OSL_LEGACY_CLOSURES
-    else if (isBsdfOutput)
+    else if (isBsdfOutput && context.getOptions().wrapBSDFAsClosureGraphOutput)
     {
         // Special case for having 'BSDF' as final output type.
         // For legacy closures this type is a struct internally (response, throughput, thickness, ior)
@@ -330,7 +330,7 @@ ShaderPtr OslShaderGenerator::generate(const string& name, ElementPtr element, G
         emitScopeEnd(stage);
     }
 #ifdef MATERIALX_OSL_LEGACY_CLOSURES
-    else if (isBsdfOutput)
+    else if (isBsdfOutput && context.getOptions().wrapBSDFAsClosureGraphOutput)
     {
         // Special case for having 'BSDF' as final output type.
         // For legacy closures this type is a struct internally (response, throughput, thickness, ior)

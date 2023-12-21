@@ -92,7 +92,8 @@ class MX_GENSHADER_API GenOptions
         hwWriteAlbedoTable(false),
         hwImplicitBitangents(true),
         emitColorTransforms(true),
-        elideConnectedConstants(true)
+        elideConnectedConstants(true),
+        wrapBSDFAsClosureGraphOutput(true)
     {
     }
     virtual ~GenOptions() { }
@@ -186,6 +187,9 @@ class MX_GENSHADER_API GenOptions
     /// Enable eliding connected constants, setting this option to true
     /// breaks shader generation for arnold-usd. Defaults to true.
     bool elideConnectedConstants;
+
+    // Enable exporting OSL BSDFs as closures in graph outputs
+    bool wrapBSDFAsClosureGraphOutput;
 };
 
 MATERIALX_NAMESPACE_END
