@@ -227,7 +227,7 @@ bool ShaderRenderTester::validate(const mx::FilePath optionsFilePath)
             // colliding with implementations in previous test cases.
             context.clearNodeImplementations();
 
-            doc->importLibrary(dependLib);
+            doc->setDataLibrary(dependLib);
             ioTimer.endTimer();
 
             validateTimer.startTimer();
