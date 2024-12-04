@@ -227,16 +227,16 @@ class MX_GENSHADER_API ShaderStage
     }
 
     /// Start a new scope using the given bracket type.
-    void beginScope(Syntax::Punctuation punc = Syntax::CURLY_BRACKETS);
+    void beginScope(Syntax::Punctuation punc = Syntax::CURLY_BRACKETS, bool indentLine = true, bool newlineAfter = true);
 
     /// End the current scope.
-    void endScope(bool semicolon = false, bool newline = true);
+    void endScope(bool semicolon = false, bool indentLine = true, bool newlineAfter = true);
 
     /// Start a new line.
     void beginLine();
 
     /// End the current line.
-    void endLine(bool semicolon = true);
+    void endLine(bool semicolon = true, bool newline = true);
 
     /// Add a newline character.
     void newLine();
@@ -245,7 +245,7 @@ class MX_GENSHADER_API ShaderStage
     void addString(const string& str);
 
     /// Add a single line of code, optionally appending a semicolon.
-    void addLine(const string& str, bool semicolon = true);
+    void addLine(const string& str, bool semicolon = true, bool newline = true);
 
     /// Add a single line code comment.
     void addComment(const string& str);

@@ -34,14 +34,14 @@ ShaderGenerator::ShaderGenerator(SyntaxPtr syntax) :
 {
 }
 
-void ShaderGenerator::emitScopeBegin(ShaderStage& stage, Syntax::Punctuation punc) const
+void ShaderGenerator::emitScopeBegin(ShaderStage& stage, Syntax::Punctuation punc, bool indentLine, bool newlineAfter) const
 {
-    stage.beginScope(punc);
+    stage.beginScope(punc, indentLine, newlineAfter);
 }
 
-void ShaderGenerator::emitScopeEnd(ShaderStage& stage, bool semicolon, bool newline) const
+void ShaderGenerator::emitScopeEnd(ShaderStage& stage, bool semicolon, bool indentLine, bool newlineAfter) const
 {
-    stage.endScope(semicolon, newline);
+    stage.endScope(semicolon, indentLine, newlineAfter);
 }
 
 void ShaderGenerator::emitLineBegin(ShaderStage& stage) const
@@ -64,9 +64,9 @@ void ShaderGenerator::emitString(const string& str, ShaderStage& stage) const
     stage.addString(str);
 }
 
-void ShaderGenerator::emitLine(const string& str, ShaderStage& stage, bool semicolon) const
+void ShaderGenerator::emitLine(const string& str, ShaderStage& stage, bool semicolon, bool newline) const
 {
-    stage.addLine(str, semicolon);
+    stage.addLine(str, semicolon, newline);
 }
 
 void ShaderGenerator::emitComment(const string& str, ShaderStage& stage) const
@@ -84,6 +84,7 @@ void ShaderGenerator::emitLibraryInclude(const FilePath& filename, GenContext& c
     FilePath libraryPrefix = context.getOptions().libraryPrefix;
     FilePath fullFilename = libraryPrefix.isEmpty() ? filename : libraryPrefix / filename;
     FilePath resolvedFilename = context.resolveSourceFile(fullFilename, FilePath());
+    stage.addComment(filename);
     stage.addInclude(fullFilename, resolvedFilename, context);
 }
 

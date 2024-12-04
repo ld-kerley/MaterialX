@@ -207,33 +207,38 @@ const VariableBlock& ShaderStage::getConstantBlock() const
     return _constants;
 }
 
-void ShaderStage::beginScope(Syntax::Punctuation punc)
+void ShaderStage::beginScope(Syntax::Punctuation punc, bool indentLine, bool newlineAfter)
 {
+    if (indentLine)
+        beginLine();
+
     switch (punc)
     {
         case Syntax::CURLY_BRACKETS:
-            beginLine();
-            _code += "{" + _syntax->getNewline();
+            _code += "{";
             break;
         case Syntax::PARENTHESES:
-            beginLine();
-            _code += "(" + _syntax->getNewline();
+            _code += "(";
             break;
         case Syntax::SQUARE_BRACKETS:
-            beginLine();
-            _code += "[" + _syntax->getNewline();
+            _code += "[";
             break;
         case Syntax::DOUBLE_SQUARE_BRACKETS:
-            beginLine();
-            _code += "[[" + _syntax->getNewline();
+            _code += "[[";
+            break;
+        case Syntax::NONE:
+            _code += "";
             break;
     }
+
+    if (newlineAfter)
+        _code += _syntax->getNewline();
 
     ++_indentations;
     _scopes.push_back(Scope(punc));
 }
 
-void ShaderStage::endScope(bool semicolon, bool newline)
+void ShaderStage::endScope(bool semicolon, bool indentLine, bool newlineAfter)
 {
     if (_scopes.empty())
     {
@@ -244,28 +249,30 @@ void ShaderStage::endScope(bool semicolon, bool newline)
     _scopes.pop_back();
     --_indentations;
 
+    if (indentLine)
+        beginLine();
+
     switch (punc)
     {
         case Syntax::CURLY_BRACKETS:
-            beginLine();
             _code += "}";
             break;
         case Syntax::PARENTHESES:
-            beginLine();
             _code += ")";
             break;
         case Syntax::SQUARE_BRACKETS:
-            beginLine();
             _code += "]";
             break;
         case Syntax::DOUBLE_SQUARE_BRACKETS:
-            beginLine();
             _code += "]]";
+            break;
+        case Syntax::NONE:
+            _code += "";
             break;
     }
     if (semicolon)
         _code += ";";
-    if (newline)
+    if (newlineAfter)
         _code += _syntax->getNewline();
 }
 
@@ -277,13 +284,16 @@ void ShaderStage::beginLine()
     }
 }
 
-void ShaderStage::endLine(bool semicolon)
+void ShaderStage::endLine(bool semicolon, bool newline)
 {
     if (semicolon)
     {
         _code += ";";
     }
-    newLine();
+    if (newline)
+    {
+        newLine();
+    }
 }
 
 void ShaderStage::newLine()
@@ -296,11 +306,11 @@ void ShaderStage::addString(const string& str)
     _code += str;
 }
 
-void ShaderStage::addLine(const string& str, bool semicolon)
+void ShaderStage::addLine(const string& str, bool semicolon, bool newline)
 {
     beginLine();
     addString(str);
-    endLine(semicolon);
+    endLine(semicolon, newline);
 }
 
 void ShaderStage::addComment(const string& str)

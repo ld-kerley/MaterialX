@@ -49,7 +49,8 @@ class MX_GENSHADER_API Syntax
         PARENTHESES,
         CURLY_BRACKETS,
         SQUARE_BRACKETS,
-        DOUBLE_SQUARE_BRACKETS
+        DOUBLE_SQUARE_BRACKETS,
+        NONE
     };
 
   public:

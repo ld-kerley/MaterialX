@@ -47,10 +47,10 @@ class MX_GENSHADER_API ShaderGenerator
     }
 
     /// Start a new scope using the given bracket type.
-    virtual void emitScopeBegin(ShaderStage& stage, Syntax::Punctuation punc = Syntax::CURLY_BRACKETS) const;
+    virtual void emitScopeBegin(ShaderStage& stage, Syntax::Punctuation punc = Syntax::CURLY_BRACKETS, bool indentLine = true, bool newlineAfter = true) const;
 
     /// End the current scope.
-    virtual void emitScopeEnd(ShaderStage& stage, bool semicolon = false, bool newline = true) const;
+    virtual void emitScopeEnd(ShaderStage& stage, bool semicolon = false, bool indentLine = true, bool newlineAfter = true) const;
 
     /// Start a new line.
     virtual void emitLineBegin(ShaderStage& stage) const;
@@ -65,7 +65,7 @@ class MX_GENSHADER_API ShaderGenerator
     virtual void emitString(const string& str, ShaderStage& stage) const;
 
     /// Add a single line of code, optionally appending a semicolon.
-    virtual void emitLine(const string& str, ShaderStage& stage, bool semicolon = true) const;
+    virtual void emitLine(const string& str, ShaderStage& stage, bool semicolon = true, bool newline = true) const;
 
     /// Add a single line code comment.
     virtual void emitComment(const string& str, ShaderStage& stage) const;
