@@ -56,6 +56,9 @@ class MX_FORMAT_API XmlReadOptions
     /// The vector of parent XIncludes at the scope of the current document.
     /// Defaults to an empty vector.
     StringVec parentXIncludes;
+
+    /// Expand any <template> tags present in the document
+    bool expandTemplateTags = true;
 };
 
 /// @class XmlWriteOptions
@@ -73,6 +76,10 @@ class MX_FORMAT_API XmlWriteOptions
     /// If provided, this function will be used to exclude specific elements
     /// (those returning false) from the write operation.  Defaults to nullptr.
     ElementPredicate elementPredicate;
+
+    /// If true, any necessary directories will be created to write the
+    /// file.
+    bool createDirectories;
 };
 
 /// @class ExceptionParseError

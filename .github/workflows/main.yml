@@ -37,6 +37,15 @@ jobs:
           compiler_version: "14"
           python: 3.11
           test_render: ON
+          cmake_config: -DMATERIALX_BUILD_BAKE_NAMED_VALUES=ON
+
+        - name: Linux_GCC_14_Python313
+          os: ubuntu-24.04
+          compiler: gcc
+          compiler_version: "14"
+          python: 3.13
+          test_render: ON
+          cmake_config: -DMATERIALX_BUILD_BAKE_NAMED_VALUES=OFF
 
         - name: Linux_GCC_CoverageAnalysis
           os: ubuntu-24.04
