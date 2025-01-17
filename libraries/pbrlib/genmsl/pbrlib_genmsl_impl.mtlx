@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <materialx version="1.39">
 
-  <!-- <layer> -->
-  <implementation name="IM_layer_bsdf_genmsl" nodedef="ND_layer_bsdf" target="genmsl" />
-  <implementation name="IM_layer_vdf_genmsl" nodedef="ND_layer_vdf" target="genmsl" />
-
-
   <!-- <surface> -->
   <implementation name="IM_surface_genmsl" nodedef="ND_surface" target="genmsl" />
 
