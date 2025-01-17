@@ -31,7 +31,6 @@
 #include <MaterialXGenShader/Nodes/HwViewDirectionNode.h>
 #include <MaterialXGenShader/Nodes/ClosureSourceCodeNode.h>
 #include <MaterialXGenShader/Nodes/ClosureCompoundNode.h>
-#include <MaterialXGenShader/Nodes/ClosureLayerNode.h>
 
 MATERIALX_NAMESPACE_BEGIN
 
@@ -135,10 +134,6 @@ GlslShaderGenerator::GlslShaderGenerator() :
         "IM_image_vector4_" + GlslShaderGenerator::TARGET,
     };
     registerImplementation(elementNames, HwImageNode::create);
-
-    // <!-- <layer> -->
-    registerImplementation("IM_layer_bsdf_" + GlslShaderGenerator::TARGET, ClosureLayerNode::create);
-    registerImplementation("IM_layer_vdf_" + GlslShaderGenerator::TARGET, ClosureLayerNode::create);
 
     // <!-- <surfacematerial> -->
     registerImplementation("IM_surfacematerial_" + GlslShaderGenerator::TARGET, MaterialNode::create);
