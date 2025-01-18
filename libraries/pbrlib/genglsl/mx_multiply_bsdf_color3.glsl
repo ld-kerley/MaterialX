@@ -19,3 +19,8 @@ void mx_multiply_bsdf_color3_indirect(vec3 _unused1, BSDF in1, vec3 in2, out BSD
 {
     mx_multiply_bsdf_color3_impl(in1, in2, result);
 }
+
+void mx_multiply_bsdf_color3(int closureType, vec3 _unused1, vec3 _unused2, vec3 _unused3, float _unused4, BSDF in1, vec3 in2, out BSDF result)
+{
+
+}

@@ -32,3 +32,8 @@ void mx_subsurface_bsdf_indirect(vec3 V, float weight, vec3 color, vec3 radius, 
     vec3 Li = mx_environment_irradiance(normal);
     bsdf.response = Li * color * weight;
 }
+
+void mx_subsurface_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 color, vec3 radius, float anisotropy, vec3 normal, inout BSDF bsdf)
+{
+
+}

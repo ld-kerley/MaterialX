@@ -390,6 +390,9 @@ class MX_GENSHADER_API HwResourceBindingContext : public GenUserData
                                                 const std::string& arraySuffix = EMPTY_STRING) = 0;
 };
 
+
+MX_GENSHADER_API string getClosureTypeStr(HwShaderGenerator::ClosureContextType type);
+
 MATERIALX_NAMESPACE_END
 
 #endif

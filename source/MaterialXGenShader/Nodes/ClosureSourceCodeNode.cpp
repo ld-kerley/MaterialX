@@ -20,6 +20,11 @@ void ClosureSourceCodeNode::emitFunctionCall(const ShaderNode& node, GenContext&
     {
         const ShaderGenerator& shadergen = context.getShaderGenerator();
 
+        if (_functionName == "mx_dielectric_bsdf") {
+            int a = 0;
+        }
+
+
         // Emit calls for any closure dependencies upstream from this node.
         shadergen.emitDependentFunctionCalls(node, context, stage, ShaderNode::Classification::CLOSURE);
 
@@ -41,19 +46,20 @@ void ClosureSourceCodeNode::emitFunctionCall(const ShaderNode& node, GenContext&
             {
                 // Check if extra parameters has been added for this node.
                 const TypeDesc closureType = output->getType();
-                const ClosureContext::ClosureParams* params = cct->getClosureParams(&node);
-                if (closureType == Type::BSDF && params)
-                {
-                    // Assign the parameters to the BSDF.
-                    for (auto it : *params)
-                    {
-                        shadergen.emitLine(output->getVariable() + "." + it.first + " = " + shadergen.getUpstreamResult(it.second, context), stage);
-                    }
-                }
+                // const ClosureContext::ClosureParams* params = cct->getClosureParams(&node);
+                // if (closureType == Type::BSDF && params)
+                // {
+                //     // Assign the parameters to the BSDF.
+                //     for (auto it : *params)
+                //     {
+                //         shadergen.emitLine(output->getVariable() + "." + it.first + " = " + shadergen.getUpstreamResult(it.second, context), stage);
+                //     }
+                // }
 
                 // Emit function name.
                 shadergen.emitLineBegin(stage);
-                shadergen.emitString(_functionName + cct->getSuffix(closureType) + "(", stage);
+                // shadergen.emitString(_functionName + cct->getSuffix(closureType) + "(", stage);
+                shadergen.emitString(_functionName + "(", stage);
 
                 // Emit extra argument.
                 for (const ClosureContext::Argument& arg : cct->getArguments(closureType))

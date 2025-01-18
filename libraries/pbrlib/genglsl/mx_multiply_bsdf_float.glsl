@@ -5,7 +5,7 @@ void mx_multiply_bsdf_float_impl(BSDF in1, float in2, out BSDF result)
     result.throughput = in1.throughput * weight;
 }
 
-void mx_multiply_bsdf_float_reflection(vec3 _unused1, vec3 _unused2, vec3 _unused3, float weight, BSDF in1, float in2, out BSDF result)
+void mx_multiply_bsdf_float_reflection(vec3 _unused1, vec3 _unused2, vec3 _unused3, float _unused4, BSDF in1, float in2, out BSDF result)
 {
     mx_multiply_bsdf_float_impl(in1, in2, result);
 }
@@ -18,4 +18,9 @@ void mx_multiply_bsdf_float_transmission(vec3 _unused1, BSDF in1, float in2, out
 void mx_multiply_bsdf_float_indirect(vec3 _unused1, BSDF in1, float in2, out BSDF result)
 {
     mx_multiply_bsdf_float_impl(in1, in2, result);
+}
+
+void mx_multiply_bsdf_float(int closureType, vec3 _unused1, vec3 _unused2, vec3 _unused3, float _unused4, BSDF in1, float in2, out BSDF result)
+{
+
 }

@@ -36,3 +36,8 @@ void mx_burley_diffuse_bsdf_indirect(vec3 V, float weight, vec3 color, float rou
               mx_burley_diffuse_dir_albedo(NdotV, roughness);
     bsdf.response = Li * color * weight;
 }
+
+void mx_burley_diffuse_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 color, float roughness, vec3 normal, inout BSDF bsdf)
+{
+
+}

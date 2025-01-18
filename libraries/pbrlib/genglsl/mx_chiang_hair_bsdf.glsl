@@ -185,7 +185,7 @@ void mx_hair_attenuation(float f, vec3 T, out vec3 Ap[4])  // Ap
     Ap[3] = Ap[2] * T * f / (vec3(1.0) - T * f);
 }
 
-vec3 mx_chiang_hair_bsdf(
+vec3 mx_chiang_hair_bsdf_impl(
     vec3 L,
     vec3 V,
     vec3 tint_R,
@@ -289,7 +289,7 @@ void mx_chiang_hair_bsdf_reflection(
     inout BSDF bsdf
 )
 {
-    vec3 F = mx_chiang_hair_bsdf(
+    vec3 F = mx_chiang_hair_bsdf_impl(
         L,
         V,
         tint_R,
@@ -348,4 +348,29 @@ void mx_chiang_hair_bsdf_indirect(
 
     bsdf.throughput = vec3(0.0);
     bsdf.response = Li * comp * tint;
+}
+
+
+
+void mx_chiang_hair_bsdf(
+    int closureType,
+    vec3 L,
+    vec3 V,
+    vec3 P,
+    float occlusion,
+    vec3 tint_R,
+    vec3 tint_TT,
+    vec3 tint_TRT,
+    float ior,
+    vec2 roughness_R,
+    vec2 roughness_TT,
+    vec2 roughness_TRT,
+    float cuticle_angle,
+    vec3 absorption_coefficient,
+    vec3 N,
+    vec3 X,
+    inout BSDF bsdf
+)
+{
+
 }

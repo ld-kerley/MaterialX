@@ -58,3 +58,29 @@ void mx_conductor_bsdf_indirect(vec3 V, float weight, vec3 ior_n, vec3 ior_k, ve
 
     bsdf.response = Li * comp * weight;
 }
+
+void mx_conductor_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 ior_n, vec3 ior_k, vec2 roughness, float thinfilm_thickness, float thinfilm_ior, vec3 N, vec3 X, int distribution, inout BSDF bsdf)
+{
+/*
+
+    if (closureType == 1) // reflection
+    {
+        mx_conductor_bsdf_reflection(L, V, P, occlusion, weight, ior_n, ior_k, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, bsdf);
+    }
+    else if (closureType == 2) // transmission
+    {
+    }
+    else if (closureType == 3) // indirect
+    {
+        mx_conductor_bsdf_bsdf_indirect(V, weight, ior_n, ior_k, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, bsdf);
+    }
+    else if (closureType == 4) // emission
+    {
+    }
+    else // (closureType == 0) // default
+    {
+    }
+    */
+}
+
+

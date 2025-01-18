@@ -40,3 +40,8 @@ void mx_oren_nayar_diffuse_bsdf_indirect(vec3 V, float weight, vec3 color, float
     vec3 Li = mx_environment_irradiance(normal);
     bsdf.response = Li * diffuse * weight;
 }
+
+void mx_oren_nayar_diffuse_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 color, float roughness, vec3 normal, bool energy_compensation, inout BSDF bsdf)
+{
+
+}

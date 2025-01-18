@@ -251,16 +251,25 @@ HwShaderGenerator::HwShaderGenerator(SyntaxPtr syntax) :
     //
     // Reflection context
     _defReflection.setSuffix(Type::BSDF, CLOSURE_CONTEXT_SUFFIX_REFLECTION);
+    _defReflection.addArgument(Type::BSDF, ClosureContext::Argument(Type::INTEGER, "closureType"));
     _defReflection.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_L));
     _defReflection.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_V));
     _defReflection.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::WORLD_POSITION));
     _defReflection.addArgument(Type::BSDF, ClosureContext::Argument(Type::FLOAT, HW::OCCLUSION));
     // Transmission context
     _defTransmission.setSuffix(Type::BSDF, CLOSURE_CONTEXT_SUFFIX_TRANSMISSION);
+    _defTransmission.addArgument(Type::BSDF, ClosureContext::Argument(Type::INTEGER, "closureType"));
+    _defTransmission.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_L));
     _defTransmission.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_V));
+    _defTransmission.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::WORLD_POSITION));
+    _defTransmission.addArgument(Type::BSDF, ClosureContext::Argument(Type::FLOAT, HW::OCCLUSION));
     // Environment context
     _defIndirect.setSuffix(Type::BSDF, CLOSURE_CONTEXT_SUFFIX_INDIRECT);
+    _defIndirect.addArgument(Type::BSDF, ClosureContext::Argument(Type::INTEGER, "closureType"));
+    _defIndirect.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_L));
     _defIndirect.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_V));
+    _defIndirect.addArgument(Type::BSDF, ClosureContext::Argument(Type::VECTOR3, HW::WORLD_POSITION));
+    _defIndirect.addArgument(Type::BSDF, ClosureContext::Argument(Type::FLOAT, HW::OCCLUSION));
     // Emission context
     _defEmission.addArgument(Type::EDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_N));
     _defEmission.addArgument(Type::EDF, ClosureContext::Argument(Type::VECTOR3, HW::DIR_L));
@@ -646,5 +655,31 @@ bool HwImplementation::isEditable(const ShaderInput& input) const
 {
     return IMMUTABLE_INPUTS.count(input.getName()) == 0;
 }
+
+
+string getClosureTypeStr(HwShaderGenerator::ClosureContextType type)
+{
+    if (type == HwShaderGenerator::ClosureContextType::REFLECTION)
+    {
+        return "1";
+    }
+    else if (type == HwShaderGenerator::ClosureContextType::TRANSMISSION)
+    {
+        return "2";
+    }
+    else if (type == HwShaderGenerator::ClosureContextType::INDIRECT)
+    {
+        return "3";
+    }
+    else if (type == HwShaderGenerator::ClosureContextType::EMISSION)
+    {
+        return "4";
+    }
+    else // if (type == HwShaderGenerator::ClosureContextType::DEFAULT)
+    {
+        return "0";
+    }
+}
+
 
 MATERIALX_NAMESPACE_END

@@ -1,5 +1,10 @@
 #include "lib/mx_microfacet_sheen.glsl"
 
+//void mx_sheen_bsdf(float weight, vec3 color, float roughness, vec3 N, int mode, inout BSDF bsdf)
+//{
+//
+//}
+
 void mx_sheen_bsdf_reflection(vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 color, float roughness, vec3 N, int mode, inout BSDF bsdf)
 {
     if (weight < M_FLOAT_EPS)
@@ -60,4 +65,9 @@ void mx_sheen_bsdf_indirect(vec3 V, float weight, vec3 color, float roughness, v
     vec3 Li = mx_environment_irradiance(N);
     bsdf.throughput = vec3(1.0 - dirAlbedo * weight);
     bsdf.response = Li * color * dirAlbedo * weight;
+}
+
+void mx_sheen_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 color, float roughness, vec3 N, int mode, inout BSDF bsdf)
+{
+
 }

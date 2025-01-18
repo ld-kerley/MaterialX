@@ -294,18 +294,18 @@ class MX_GENSHADER_API ClosureContext
     }
     [[deprecated]] const string& getSuffix(const TypeDesc* nodeType) const { return getSuffix(*nodeType); }
 
-    /// Set extra parameters to use for evaluating a closure.
-    void setClosureParams(const ShaderNode* closure, const ClosureParams* params)
-    {
-        if (params)
-        {
-            _params[closure] = params;
-        }
-        else
-        {
-            _params.erase(closure);
-        }
-    }
+    // /// Set extra parameters to use for evaluating a closure.
+    // void setClosureParams(const ShaderNode* closure, const ClosureParams* params)
+    // {
+    //     if (params)
+    //     {
+    //         _params[closure] = params;
+    //     }
+    //     else
+    //     {
+    //         _params.erase(closure);
+    //     }
+    // }
 
     /// Return extra parameters to use for evaluating a closure. Or return
     /// nullptr if no parameters have been set for the given closure.
@@ -323,26 +323,26 @@ class MX_GENSHADER_API ClosureContext
 
     static const Arguments EMPTY_ARGUMENTS;
 };
-
-/// A RAII class for setting extra parameters for closure evaluation,
-/// stored in the closure context.
-class MX_GENSHADER_API ScopedSetClosureParams
-{
-  public:
-    /// Constructor for setting explicit parameters for a closure node.
-    ScopedSetClosureParams(const ClosureContext::ClosureParams* params, const ShaderNode* node, ClosureContext* cct);
-
-    /// Constructor for setting parameters from one closure node to another.
-    ScopedSetClosureParams(const ShaderNode* fromNode, const ShaderNode* toNode, ClosureContext* cct);
-
-    /// Destructor restoring the closure parameter state.
-    ~ScopedSetClosureParams();
-
-  private:
-    ClosureContext* _cct;
-    const ShaderNode* _node;
-    const ClosureContext::ClosureParams* _oldParams;
-};
+//
+// /// A RAII class for setting extra parameters for closure evaluation,
+// /// stored in the closure context.
+// class MX_GENSHADER_API ScopedSetClosureParams
+// {
+//   public:
+//     /// Constructor for setting explicit parameters for a closure node.
+//     ScopedSetClosureParams(const ClosureContext::ClosureParams* params, const ShaderNode* node, ClosureContext* cct);
+//
+//     /// Constructor for setting parameters from one closure node to another.
+//     ScopedSetClosureParams(const ShaderNode* fromNode, const ShaderNode* toNode, ClosureContext* cct);
+//
+//     /// Destructor restoring the closure parameter state.
+//     ~ScopedSetClosureParams();
+//
+//   private:
+//     ClosureContext* _cct;
+//     const ShaderNode* _node;
+//     const ClosureContext::ClosureParams* _oldParams;
+// };
 
 /// A RAII class for overriding port variable names.
 class MX_GENSHADER_API ScopedSetVariableName

@@ -90,3 +90,27 @@ void mx_dielectric_bsdf_indirect(vec3 V, float weight, vec3 tint, float ior, vec
     vec3 Li = mx_environment_radiance(N, V, X, safeAlpha, distribution, fd);
     bsdf.response = Li * safeTint * comp * weight;
 }
+
+void mx_dielectric_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 tint, float ior, vec2 roughness, float thinfilm_thickness, float thinfilm_ior, vec3 N, vec3 X, int distribution, int scatter_mode, inout BSDF bsdf)
+{
+    if (closureType == 1) // reflection
+    {
+        mx_dielectric_bsdf_reflection(L, V, P, occlusion, weight, tint, ior, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, scatter_mode, bsdf);
+    }
+    else if (closureType == 2) // transmission
+    {
+        mx_dielectric_bsdf_transmission(V, weight, tint, ior, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, scatter_mode, bsdf);
+    }
+    else if (closureType == 3) // indirect
+    {
+        mx_dielectric_bsdf_indirect(V, weight, tint, ior, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, scatter_mode, bsdf);
+    }
+    else if (closureType == 4) // emission
+    {
+    }
+    else // (closureType == 0) // default
+    {
+    }
+}
+
+
