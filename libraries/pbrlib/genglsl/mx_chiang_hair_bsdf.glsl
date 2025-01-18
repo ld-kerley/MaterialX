@@ -372,5 +372,21 @@ void mx_chiang_hair_bsdf(
     inout BSDF bsdf
 )
 {
-
+    if (closureType == 1) // reflection
+    {
+        mx_chiang_hair_bsdf_reflection(L, V, P, occlusion, tint_R, tint_TT, tint_TRT, ior, roughness_R, roughness_TT, roughness_TRT, cuticle_angle, absorption_coefficient, N, X, bsdf);
+    }
+    else if (closureType == 2) // transmission
+    {
+    }
+    else if (closureType == 3) // indirect
+    {
+        mx_chiang_hair_bsdf_indirect(V, tint_R, tint_TT, tint_TRT, ior, roughness_R, roughness_TT, roughness_TRT, cuticle_angle, absorption_coefficient, N, X, bsdf);
+    }
+    else if (closureType == 4) // emission
+    {
+    }
+    else // (closureType == 0) // default
+    {
+    }
 }

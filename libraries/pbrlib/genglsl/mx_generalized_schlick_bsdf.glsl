@@ -99,5 +99,22 @@ void mx_generalized_schlick_bsdf_indirect(vec3 V, float weight, vec3 color0, vec
 
 void mx_generalized_schlick_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 color0, vec3 color82, vec3 color90, float exponent, vec2 roughness, float thinfilm_thickness, float thinfilm_ior, vec3 N, vec3 X, int distribution, int scatter_mode, inout BSDF bsdf)
 {
-
+    if (closureType == 1) // reflection
+    {
+        mx_generalized_schlick_bsdf_reflection(L, V, P, occlusion, weight, color0, color82, color90, exponent, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, scatter_mode, bsdf);
+    }
+    else if (closureType == 2) // transmission
+    {
+        mx_generalized_schlick_bsdf_transmission(V, weight, color0, color82, color90, exponent, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, scatter_mode, bsdf);
+    }
+    else if (closureType == 3) // indirect
+    {
+        mx_generalized_schlick_bsdf_indirect(V, weight, color0, color82, color90, exponent, roughness, thinfilm_thickness, thinfilm_ior, N, X, distribution, scatter_mode, bsdf);
+    }
+    else if (closureType == 4) // emission
+    {
+    }
+    else // (closureType == 0) // default
+    {
+    }
 }

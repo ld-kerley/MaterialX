@@ -30,5 +30,21 @@ void mx_translucent_bsdf_indirect(vec3 V, float weight, vec3 color, vec3 normal,
 
 void mx_translucent_bsdf(int closureType, vec3 L, vec3 V, vec3 P, float occlusion, float weight, vec3 color, vec3 normal, inout BSDF bsdf)
 {
-
+    if (closureType == 1) // reflection
+    {
+        mx_translucent_bsdf_reflection(L, V, P, occlusion, weight, color, normal, bsdf);
+    }
+    else if (closureType == 2) // transmission
+    {
+    }
+    else if (closureType == 3) // indirect
+    {
+        mx_translucent_bsdf_indirect(V, weight, color, normal, bsdf);
+    }
+    else if (closureType == 4) // emission
+    {
+    }
+    else // (closureType == 0) // default
+    {
+    }
 }
