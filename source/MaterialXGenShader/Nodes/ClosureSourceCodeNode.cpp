@@ -20,11 +20,6 @@ void ClosureSourceCodeNode::emitFunctionCall(const ShaderNode& node, GenContext&
     {
         const ShaderGenerator& shadergen = context.getShaderGenerator();
 
-        if (_functionName == "mx_dielectric_bsdf") {
-            int a = 0;
-        }
-
-
         // Emit calls for any closure dependencies upstream from this node.
         shadergen.emitDependentFunctionCalls(node, context, stage, ShaderNode::Classification::CLOSURE);
 
