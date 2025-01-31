@@ -13,9 +13,9 @@
 #include <MaterialXGenGlsl/Nodes/LightShaderNodeGlsl.h>
 #include <MaterialXGenGlsl/Nodes/LightSamplerNodeGlsl.h>
 #include <MaterialXGenGlsl/Nodes/NumLightsNodeGlsl.h>
-#include <MaterialXGenGlsl/Nodes/BlurNodeGlsl.h>
 
 #include <MaterialXGenShader/Nodes/MaterialNode.h>
+#include <MaterialXGenShader/Nodes/HwBlurNode.h>
 #include <MaterialXGenShader/Nodes/HwImageNode.h>
 #include <MaterialXGenShader/Nodes/HwGeomColorNode.h>
 #include <MaterialXGenShader/Nodes/HwGeomPropValueNode.h>
@@ -35,6 +35,7 @@ MATERIALX_NAMESPACE_BEGIN
 
 const string GlslShaderGenerator::TARGET = "genglsl";
 const string GlslShaderGenerator::VERSION = "400";
+const string GlslSamplingIncludeFilename = "stdlib/genmsl/lib/mx_sampling.glsl";
 
 //
 // GlslShaderGenerator methods
@@ -99,7 +100,7 @@ GlslShaderGenerator::GlslShaderGenerator() :
     registerImplementation("IM_spot_light_" + GlslShaderGenerator::TARGET, LightShaderNodeGlsl::create);
 
     // <!-- <heighttonormal> -->
-    registerImplementation("IM_heighttonormal_vector3_" + GlslShaderGenerator::TARGET, HwHeightToNormalNode::create);
+    registerImplementation("IM_heighttonormal_vector3_" + GlslShaderGenerator::TARGET, []() -> ShaderNodeImplPtr { return HwHeightToNormalNode::create(GlslSamplingIncludeFilename);});
 
     // <!-- <blur> -->
     elementNames = {
@@ -110,7 +111,7 @@ GlslShaderGenerator::GlslShaderGenerator() :
         "IM_blur_vector3_" + GlslShaderGenerator::TARGET,
         "IM_blur_vector4_" + GlslShaderGenerator::TARGET,
     };
-    registerImplementation(elementNames, BlurNodeGlsl::create);
+    registerImplementation(elementNames, []() -> ShaderNodeImplPtr { return HwBlurNode::create(GlslSamplingIncludeFilename);});
 
     // <!-- <ND_transformpoint> ->
     registerImplementation("IM_transformpoint_vector3_" + GlslShaderGenerator::TARGET, HwTransformPointNode::create);

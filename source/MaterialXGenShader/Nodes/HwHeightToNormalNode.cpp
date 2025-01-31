@@ -28,9 +28,11 @@ const float filterOffset = 0.0;
 
 } // namespace
 
-ShaderNodeImplPtr HwHeightToNormalNode::create()
+ShaderNodeImplPtr HwHeightToNormalNode::create(const string& samplingIncludeFilename)
 {
-    return std::make_shared<HwHeightToNormalNode>();
+    auto node = std::make_shared<HwHeightToNormalNode>();
+    node->_samplingIncludeFilename = samplingIncludeFilename;
+    return node;
 }
 
 void HwHeightToNormalNode::createVariables(const ShaderNode&, GenContext&, Shader&) const
@@ -63,7 +65,7 @@ void HwHeightToNormalNode::emitFunctionDefinition(const ShaderNode&, GenContext&
     {
         // Emit sampling functions
         const ShaderGenerator& shadergen = context.getShaderGenerator();
-        shadergen.emitLibraryInclude("stdlib/genglsl/lib/mx_sampling.glsl", context, stage);
+        shadergen.emitLibraryInclude(_samplingIncludeFilename, context, stage);
         shadergen.emitLineBreak(stage);
     }
 }

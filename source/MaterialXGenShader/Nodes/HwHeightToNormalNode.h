@@ -12,11 +12,11 @@
 
 MATERIALX_NAMESPACE_BEGIN
 
-/// HeightToNormal node implementation for MSL
+/// HeightToNormal node implementation for Hw shader languages
 class MX_GENSHADER_API HwHeightToNormalNode : public ConvolutionNode
 {
   public:
-    static ShaderNodeImplPtr create();
+    static ShaderNodeImplPtr create(const string& samplingIncludeFilename);
 
     void createVariables(const ShaderNode&, GenContext&, Shader& shader) const override;
 
@@ -30,6 +30,9 @@ class MX_GENSHADER_API HwHeightToNormalNode : public ConvolutionNode
     /// Compute offset strings for sampling
     void computeSampleOffsetStrings(const string& sampleSizeName, const string& offsetTypeString,
                                     unsigned int filterWidth, StringVec& offsetStrings) const override;
+
+  private:
+    string _samplingIncludeFilename;
 };
 
 MATERIALX_NAMESPACE_END
