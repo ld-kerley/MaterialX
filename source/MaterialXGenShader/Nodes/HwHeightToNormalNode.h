@@ -3,17 +3,17 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_HEIGHTTONORMALNODEMSL_H
-#define MATERIALX_HEIGHTTONORMALNODEMSL_H
+#ifndef MATERIALX_HWHEIGHTTONORMALNODE_H
+#define MATERIALX_HWHEIGHTTONORMALNODE_H
 
-#include <MaterialXGenMsl/Export.h>
+#include <MaterialXGenShader/HwShaderGenerator.h>
 
 #include <MaterialXGenShader/Nodes/ConvolutionNode.h>
 
 MATERIALX_NAMESPACE_BEGIN
 
 /// HeightToNormal node implementation for MSL
-class MX_GENMSL_API HeightToNormalNodeMsl : public ConvolutionNode
+class MX_GENSHADER_API HwHeightToNormalNode : public ConvolutionNode
 {
   public:
     static ShaderNodeImplPtr create();
@@ -22,8 +22,6 @@ class MX_GENMSL_API HeightToNormalNodeMsl : public ConvolutionNode
 
     void emitFunctionDefinition(const ShaderNode& node, GenContext& context, ShaderStage& stage) const override;
     void emitFunctionCall(const ShaderNode& node, GenContext& context, ShaderStage& stage) const override;
-
-    const string& getTarget() const override;
 
   protected:
     /// Return if given type is an acceptable input

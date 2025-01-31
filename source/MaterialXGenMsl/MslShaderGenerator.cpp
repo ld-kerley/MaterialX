@@ -11,7 +11,6 @@
 #include <MaterialXGenMsl/Nodes/LightNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/LightCompoundNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/LightShaderNodeMsl.h>
-#include <MaterialXGenMsl/Nodes/HeightToNormalNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/LightSamplerNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/NumLightsNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/BlurNodeMsl.h>
@@ -20,6 +19,7 @@
 #include <MaterialXGenShader/Nodes/HwImageNode.h>
 #include <MaterialXGenShader/Nodes/HwGeomColorNode.h>
 #include <MaterialXGenShader/Nodes/HwGeomPropValueNode.h>
+#include <MaterialXGenShader/Nodes/HwHeightToNormalNode.h>
 #include <MaterialXGenShader/Nodes/HwTexCoordNode.h>
 #include <MaterialXGenShader/Nodes/HwTransformNode.h>
 #include <MaterialXGenShader/Nodes/HwPositionNode.h>
@@ -104,7 +104,7 @@ MslShaderGenerator::MslShaderGenerator() :
     registerImplementation("IM_spot_light_" + MslShaderGenerator::TARGET, LightShaderNodeMsl::create);
 
     // <!-- <heighttonormal> -->
-    registerImplementation("IM_heighttonormal_vector3_" + MslShaderGenerator::TARGET, HeightToNormalNodeMsl::create);
+    registerImplementation("IM_heighttonormal_vector3_" + MslShaderGenerator::TARGET, HwHeightToNormalNode::create);
 
     // <!-- <blur> -->
     elementNames = {
