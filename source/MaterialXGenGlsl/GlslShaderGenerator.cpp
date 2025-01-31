@@ -35,7 +35,7 @@ MATERIALX_NAMESPACE_BEGIN
 
 const string GlslShaderGenerator::TARGET = "genglsl";
 const string GlslShaderGenerator::VERSION = "400";
-const string GlslSamplingIncludeFilename = "stdlib/genmsl/lib/mx_sampling.glsl";
+const string GlslSamplingIncludeFilename = "stdlib/genglsl/lib/mx_sampling.glsl";
 
 //
 // GlslShaderGenerator methods
