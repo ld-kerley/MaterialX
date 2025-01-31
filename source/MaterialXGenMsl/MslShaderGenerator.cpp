@@ -6,8 +6,6 @@
 #include <MaterialXGenMsl/MslShaderGenerator.h>
 
 #include <MaterialXGenMsl/MslSyntax.h>
-#include <MaterialXGenMsl/Nodes/GeomColorNodeMsl.h>
-#include <MaterialXGenMsl/Nodes/GeomPropValueNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/SurfaceNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/UnlitSurfaceNodeMsl.h>
 #include <MaterialXGenMsl/Nodes/LightNodeMsl.h>
@@ -20,6 +18,8 @@
 
 #include <MaterialXGenShader/Nodes/MaterialNode.h>
 #include <MaterialXGenShader/Nodes/HwImageNode.h>
+#include <MaterialXGenShader/Nodes/HwGeomColorNode.h>
+#include <MaterialXGenShader/Nodes/HwGeomPropValueNode.h>
 #include <MaterialXGenShader/Nodes/HwTexCoordNode.h>
 #include <MaterialXGenShader/Nodes/HwTransformNode.h>
 #include <MaterialXGenShader/Nodes/HwPositionNode.h>
@@ -65,9 +65,9 @@ MslShaderGenerator::MslShaderGenerator() :
     registerImplementation("IM_texcoord_vector2_" + MslShaderGenerator::TARGET, HwTexCoordNode::create);
     registerImplementation("IM_texcoord_vector3_" + MslShaderGenerator::TARGET, HwTexCoordNode::create);
     // <!-- <geomcolor> -->
-    registerImplementation("IM_geomcolor_float_" + MslShaderGenerator::TARGET, GeomColorNodeMsl::create);
-    registerImplementation("IM_geomcolor_color3_" + MslShaderGenerator::TARGET, GeomColorNodeMsl::create);
-    registerImplementation("IM_geomcolor_color4_" + MslShaderGenerator::TARGET, GeomColorNodeMsl::create);
+    registerImplementation("IM_geomcolor_float_" + MslShaderGenerator::TARGET, HwGeomColorNode::create);
+    registerImplementation("IM_geomcolor_color3_" + MslShaderGenerator::TARGET, HwGeomColorNode::create);
+    registerImplementation("IM_geomcolor_color4_" + MslShaderGenerator::TARGET, HwGeomColorNode::create);
     // <!-- <geompropvalue> -->
     elementNames = {
         "IM_geompropvalue_integer_" + MslShaderGenerator::TARGET,
@@ -78,10 +78,10 @@ MslShaderGenerator::MslShaderGenerator() :
         "IM_geompropvalue_vector3_" + MslShaderGenerator::TARGET,
         "IM_geompropvalue_vector4_" + MslShaderGenerator::TARGET,
     };
-    registerImplementation(elementNames, GeomPropValueNodeMsl::create);
-    registerImplementation("IM_geompropvalue_boolean_" + MslShaderGenerator::TARGET, GeomPropValueNodeMslAsUniform::create);
-    registerImplementation("IM_geompropvalue_string_" + MslShaderGenerator::TARGET, GeomPropValueNodeMslAsUniform::create);
-    registerImplementation("IM_geompropvalue_filename_" + MslShaderGenerator::TARGET, GeomPropValueNodeMslAsUniform::create);
+    registerImplementation(elementNames, HwGeomPropValueNode::create);
+    registerImplementation("IM_geompropvalue_boolean_" + MslShaderGenerator::TARGET, HwGeomPropValueNodeAsUniform::create);
+    registerImplementation("IM_geompropvalue_string_" + MslShaderGenerator::TARGET, HwGeomPropValueNodeAsUniform::create);
+    registerImplementation("IM_geompropvalue_filename_" + MslShaderGenerator::TARGET, HwGeomPropValueNodeAsUniform::create);
 
 
     // <!-- <frame> -->
