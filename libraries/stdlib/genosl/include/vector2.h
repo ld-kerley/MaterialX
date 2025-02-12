@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 // https://github.com/AcademySoftwareFoundation/OpenShadingLanguage
 
-#pragma once
+#ifndef VECTOR2_H
 #define VECTOR2_H
 
 // vector2 is a 2D vector
@@ -331,3 +331,5 @@ vector2 atan2(vector2 a, vector2 b)
     return vector2(atan2(a.x, b.x),
                    atan2(a.y, b.y));
 }
+
+#endif

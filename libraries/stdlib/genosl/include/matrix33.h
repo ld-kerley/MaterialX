@@ -3,7 +3,7 @@
 // https://github.com/AcademySoftwareFoundation/OpenShadingLanguage
 
 
-#pragma once
+#ifndef MATRIX33_H
 #define MATRIX33_H
 
 
@@ -159,3 +159,5 @@ normal transform(matrix33 a, normal b)
 {
     return transform(a.m, b);
 }
+
+#endif

@@ -9,6 +9,7 @@
 #include <MaterialXGenShader/ShaderStage.h>
 #include <MaterialXGenShader/ShaderGenerator.h>
 #include <MaterialXFormat/Util.h>
+#include <MaterialXLibrary/EmbeddedLibrary.h>
 
 MATERIALX_NAMESPACE_BEGIN
 
@@ -31,7 +32,15 @@ void SourceCodeNode::resolveSourceCode(const InterfaceElement& element, GenConte
 
     FilePath localPath = FilePath(impl.getActiveSourceUri()).getParentPath();
     _sourceFilename = context.resolveSourceFile(impl.getAttribute("file"), localPath);
-    _functionSource = readFile(_sourceFilename);
+    if (0)
+    {
+        _functionSource = readShaderSourceFile(_sourceFilename);
+    }
+    else
+    {
+        _functionSource = readEmbeddedSourceFile(_sourceFilename);
+    }
+
     if (_functionSource.empty())
     {
         throw ExceptionShaderGenError("Failed to get source code from file '" + _sourceFilename.asString() +
@@ -207,3 +216,11 @@ void SourceCodeNode::emitFunctionCall(const ShaderNode& node, GenContext& contex
 }
 
 MATERIALX_NAMESPACE_END
+
+/*
+0000000000010048 b guard variable for MaterialX_v1_39_3::readEmbeddedSourceFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)::embeddedFiles
+0000000000010018 b guard variable for MaterialX_v1_39_3::readEmbeddedSourceFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)::missingFileContents
+0000000000003184 t MaterialX_v1_39_3::readEmbeddedSourceFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)
+0000000000010020 b MaterialX_v1_39_3::readEmbeddedSourceFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)::embeddedFiles
+0000000000010000 b MaterialX_v1_39_3::readEmbeddedSourceFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&)::missingFileContents
+*/

@@ -22,6 +22,7 @@ MATERIALX_NAMESPACE_BEGIN
 /// Read the given file and return a string containing its contents; if the read is not
 /// successful, then the empty string is returned.
 MX_FORMAT_API string readFile(const FilePath& file);
+MX_FORMAT_API string readShaderSourceFile(const FilePath& file);
 
 /// Get all subdirectories for a given set of directories and search paths
 MX_FORMAT_API void getSubdirectories(const FilePathVec& rootDirectories, const FileSearchPath& searchPath, FilePathVec& subDirectories);

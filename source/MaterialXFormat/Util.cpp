@@ -31,6 +31,22 @@ string readFile(const FilePath& filePath)
     return EMPTY_STRING;
 }
 
+string readShaderSourceFile(const FilePath& filePath)
+{
+    std::ifstream file(filePath.asString(), std::ios::in);
+    if (file)
+    {
+        std::stringstream stream;
+        stream << file.rdbuf();
+        file.close();
+        if (stream)
+        {
+            return stream.str();
+        }
+    }
+    return EMPTY_STRING;
+}
+
 void getSubdirectories(const FilePathVec& rootDirectories, const FileSearchPath& searchPath, FilePathVec& subDirectories)
 {
     for (const FilePath& root : rootDirectories)

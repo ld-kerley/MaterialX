@@ -15,6 +15,7 @@
 #include <MaterialXGenShader/Shader.h>
 #include <MaterialXGenShader/Util.h>
 #include <MaterialXGenShader/TypeDesc.h>
+#include <MaterialXLibrary/EmbeddedLibrary.h>
 
 #include <iostream>
 
@@ -57,7 +58,11 @@ bool getShaderSource(mx::GenContext& context,
         sourcePath = implementation->getFile();
         mx::FilePath localPath = mx::FilePath(implementation->getSourceUri()).getParentPath();
         mx::FilePath resolvedPath = context.resolveSourceFile(sourcePath, localPath);
-        sourceContents = mx::readFile(resolvedPath);
+        if (0) {
+            sourceContents = mx::readShaderSourceFile(resolvedPath);
+        } else {
+            sourceContents = mx::readEmbeddedSourceFile(resolvedPath);
+        }
         resolvedSource = resolvedPath.asString();
         return !sourceContents.empty();
     }

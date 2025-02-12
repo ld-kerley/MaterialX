@@ -9,5 +9,7 @@ mx_add_library(MaterialXGenShader
     MTLX_MODULES
         MaterialXFormat
         MaterialXCore
+        MaterialXEmbeddedLibrary
     EXPORT_DEFINE
         MATERIALX_GENSHADER_EXPORTS)
+

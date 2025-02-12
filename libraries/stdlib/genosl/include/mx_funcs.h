@@ -4,12 +4,13 @@
 // MaterialX specification (c) 2017 Lucasfilm Ltd.
 // http://www.materialx.org/
 
-#pragma once
+#ifndef MX_FUNCS_H
+#define MX_FUNCS_H
 
-#include "color4.h"
-#include "vector2.h"
-#include "vector4.h"
-#include "matrix33.h"
+#include "stdlib/genosl/include/color4.h"
+#include "stdlib/genosl/include/vector2.h"
+#include "stdlib/genosl/include/vector4.h"
+#include "stdlib/genosl/include/matrix33.h"
 
 //
 // Support functions for OSL implementations of the MaterialX nodes.
@@ -671,3 +672,5 @@ vector mx_worley_noise_vector3(vector p, float jitter, int style, int metric)
         return sqdist;
     }
 }
+
+#endif

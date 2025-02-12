@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 // https://github.com/AcademySoftwareFoundation/OpenShadingLanguage
 
-#pragma once
+#ifndef VECTOR4_H
 #define VECTOR4_H
 
 
@@ -422,3 +422,5 @@ vector4 transform (string fromspace, string tospace, vector4 p)
 {
     return transform (matrix(fromspace,tospace), p);
 }
+
+#endif

@@ -4,6 +4,9 @@ set(MATERIALX_MINOR_VERSION 39)
 set(MATERIALX_BUILD_VERSION 3)
 set(MATERIALX_LIBRARY_VERSION ${MATERIALX_MAJOR_VERSION}.${MATERIALX_MINOR_VERSION}.${MATERIALX_BUILD_VERSION})
 
+set(EMBED_MTLX_LIBRARY ON)
+
+
 # Cmake setup
 cmake_minimum_required(VERSION 3.24)
 set(CMAKE_CXX_STANDARD 17)
@@ -467,6 +470,7 @@ if(MATERIALX_BUILD_GEN_GLSL OR MATERIALX_BUILD_GEN_OSL OR MATERIALX_BUILD_GEN_MD
         add_subdirectory(source/MaterialXGenMsl)
     endif()
     add_subdirectory(libraries)
+    add_subdirectory(source/MaterialXLibrary)
 endif()
 
 # Add rendering and viewer subdirectories

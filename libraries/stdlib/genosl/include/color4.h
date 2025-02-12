@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 // https://github.com/AcademySoftwareFoundation/OpenShadingLanguage
 
-#pragma once
+#ifndef COLOR4_H
 #define COLOR4_H
 
 
@@ -330,3 +330,5 @@ color4 transformc (string fromspace, string tospace, color4 C)
 {
     return color4 (transformc (fromspace, tospace, C.rgb), C.a);
 }
+
+#endif

@@ -346,7 +346,7 @@ void OslShaderGenerator::emitLibraryIncludes(ShaderStage& stage, GenContext& con
     static const string INCLUDE_SUFFIX = "\"";
     static const StringVec INCLUDE_FILES =
     {
-        "mx_funcs.h"
+        "stdlib/genosl/include/mx_funcs.h"
     };
 
     for (const string& file : INCLUDE_FILES)
@@ -358,7 +358,11 @@ void OslShaderGenerator::emitLibraryIncludes(ShaderStage& stage, GenContext& con
         string pathStr = path.asString();
         std::replace(pathStr.begin(), pathStr.end(), '\\', '/');
 
-        emitLine(INCLUDE_PREFIX + pathStr + INCLUDE_SUFFIX, stage, false);
+        // emitLine(INCLUDE_PREFIX + pathStr + INCLUDE_SUFFIX, stage, false);
+
+        emitLibraryInclude(path.asString(), context, stage);
+
+
     }
 
     emitLineBreak(stage);

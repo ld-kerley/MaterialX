@@ -9,6 +9,7 @@
 #include <MaterialXGenShader/GenContext.h>
 #include <MaterialXGenShader/Syntax.h>
 #include <MaterialXGenShader/Util.h>
+#include <MaterialXLibrary/EmbeddedLibrary.h>
 
 #include <MaterialXCore/Value.h>
 
@@ -349,7 +350,17 @@ void ShaderStage::addInclude(const FilePath& includeFilename, const FilePath& so
 
     if (!_includes.count(resolvedFile))
     {
-        string content = readFile(resolvedFile);
+        string content;
+
+        if (0)
+        {
+            content = readShaderSourceFile(resolvedFile);
+        }
+        else
+        {
+            content = readEmbeddedSourceFile(resolvedFile);
+        }
+
         if (content.empty())
         {
             throw ExceptionShaderGenError("Could not find include file: '" + includeFilename.asString() + "'");
