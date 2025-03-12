@@ -274,6 +274,38 @@ ShaderPtr OslShaderGenerator::createShader(const string& name, ElementPtr elemen
     ShaderGraphPtr graph = ShaderGraph::create(nullptr, name, element, context);
     ShaderPtr shader = std::make_shared<Shader>(name, graph);
 
+    // Check if there are inputs with default geomprops assigned. In order to bind the
+    // corresponding data to these inputs we insert geomprop nodes in the graph.
+    bool geomNodeAdded = false;
+    for (ShaderGraphInputSocket* socket : graph->getInputSockets())
+    {
+        if (!socket->getGeomProp().empty())
+        {
+            ConstDocumentPtr doc = element->getDocument();
+            GeomPropDefPtr geomprop = doc->getGeomPropDef(socket->getGeomProp());
+            if (geomprop)
+            {
+                // A default geomprop was assigned to this graph input.
+                // For all internal connections to this input, break the connection
+                // and assign a geomprop node that generates this data.
+                // Note: If a geomprop node exists already it is reused,
+                // so only a single node per geometry type is created.
+                ShaderInputVec connections = socket->getConnections();
+                for (auto connection : connections)
+                {
+                    connection->breakConnection();
+                    graph->addDefaultGeomNode(connection, *geomprop, context);
+                    geomNodeAdded = true;
+                }
+            }
+        }
+    }
+    // If nodes were added we need to re-sort the nodes in topological order.
+    if (geomNodeAdded)
+    {
+        graph->topologicalSort();
+    }
+
     // Create our stage.
     ShaderStagePtr stage = createStage(Stage::PIXEL, *shader);
     stage->createUniformBlock(OSL::UNIFORMS);
