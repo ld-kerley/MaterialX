@@ -56,6 +56,9 @@ class MX_FORMAT_API XmlReadOptions
     /// The vector of parent XIncludes at the scope of the current document.
     /// Defaults to an empty vector.
     StringVec parentXIncludes;
+
+    /// Expand any <template> tags present in the document
+    bool expandTemplateTags = true;
 };
 
 /// @class XmlWriteOptions

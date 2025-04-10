@@ -55,70 +55,6 @@ mx::FilePathVec getMaterialXFiles(const mx::FilePath& libraryRoot)
     return result;
 }
 
-void recursivelyReplaceStrings(mx::ElementPtr elem, const mx::StringMap& strReplaceMapping)
-{
-    for (const auto& attrName : elem->getAttributeNames())
-    {
-        auto attrValue = elem->getAttribute(attrName);
-        auto newAttrValue = mx::replaceSubstrings(attrValue, strReplaceMapping);
-        elem->setAttribute(attrName, newAttrValue);
-    }
-
-    for (auto childElem : elem->getChildren())
-    {
-        recursivelyReplaceStrings(childElem, strReplaceMapping);
-    }
-}
-
-void expandTemplates(mx::DocumentPtr doc)
-{
-    // replace node definitions that use a TypeList
-    for (auto elem : doc->traverseTree())
-    {
-        if (elem->getCategory() != "template")
-            continue;
-
-        if (!elem->hasAttribute("varName")) {
-            std::cerr << "<template> without 'varName' attribute found" << std::endl;
-            continue;
-        }
-
-        if (!elem->hasAttribute("options")) {
-            std::cerr << "<template> without 'options' attribute found" << std::endl;
-            continue;
-        }
-
-        const auto typeNameAttr = elem->getAttribute("varName");
-        const auto optionsAttr = elem->getAttribute("options");
-
-        const auto options = mx::splitString(optionsAttr, mx::ARRAY_VALID_SEPARATORS);
-
-        const auto childElems = elem->getChildren();
-
-        auto parentElem = elem->getParent();
-        const auto origIndex = parentElem->getChildIndex(elem->getName());
-
-        for (const auto& childElem : childElems)
-        {
-            auto index = origIndex;
-
-            for (const auto& option : options)
-            {
-                mx::StringMap strReplaceMapping = {{"@"+typeNameAttr+"@", option}};
-
-                std::string newName = mx::replaceSubstrings(childElem->getName(), strReplaceMapping);
-
-                auto newChildElem = parentElem->addChildOfCategory(childElem->getCategory(), newName);
-                parentElem->setChildIndex(newChildElem->getName(), index++);
-                newChildElem->copyContentFrom(childElem);
-
-                recursivelyReplaceStrings(newChildElem, strReplaceMapping);
-            }
-            parentElem->removeChild(elem->getName());
-        }
-    }
-}
-
 void replaceNamedValues(mx::DocumentPtr doc, mx::ConstDocumentPtr stdlib)
 {
     const std::string typeValuePrefix = "Value:";
@@ -228,6 +164,7 @@ int main(int argc, char* const argv[])
     mx::XmlReadOptions readOptions;
     readOptions.readComments = true;
     readOptions.readNewlines = true;
+    readOptions.expandTemplateTags = true;
 
     mx::XmlWriteOptions writeOptions;
     writeOptions.createDirectories = true;
@@ -240,8 +177,6 @@ int main(int argc, char* const argv[])
         mx::FilePath destFile = destLibrarayRoot / mtlxFile;
 
         mx::readFromXmlFile(doc, sourceFile, mx::FileSearchPath(), &readOptions);
-
-        expandTemplates(doc);
 
         replaceNamedValues(doc, stdlib);
 
