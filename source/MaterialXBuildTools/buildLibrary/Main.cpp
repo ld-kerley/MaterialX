@@ -7,6 +7,8 @@
 #include <MaterialXFormat/File.h>
 #include <MaterialXFormat/XmlIo.h>
 #include <MaterialXCore/Exception.h>
+#include <MaterialXCore/Util.h>
+#include <MaterialXCore/Types.h>
 
 namespace mx = MaterialX;
 
@@ -51,6 +53,109 @@ mx::FilePathVec getMaterialXFiles(const mx::FilePath& libraryRoot)
         }
     }
     return result;
+}
+
+void recursivelyReplaceStrings(mx::ElementPtr elem, const mx::StringMap& strReplaceMapping)
+{
+    for (const auto& attrName : elem->getAttributeNames())
+    {
+        auto attrValue = elem->getAttribute(attrName);
+        auto newAttrValue = mx::replaceSubstrings(attrValue, strReplaceMapping);
+        elem->setAttribute(attrName, newAttrValue);
+    }
+
+    for (auto childElem : elem->getChildren())
+    {
+        recursivelyReplaceStrings(childElem, strReplaceMapping);
+    }
+}
+
+void expandTemplates(mx::DocumentPtr doc)
+{
+    // replace node definitions that use a TypeList
+    for (auto elem : doc->traverseTree())
+    {
+        if (elem->getCategory() != "template")
+            continue;
+
+        if (!elem->hasAttribute("varName")) {
+            std::cerr << "<template> without 'varName' attribute found" << std::endl;
+            continue;
+        }
+
+        if (!elem->hasAttribute("options")) {
+            std::cerr << "<template> without 'options' attribute found" << std::endl;
+            continue;
+        }
+
+        auto typeNameAttr = elem->getAttribute("varName");
+        auto optionsAttr = elem->getAttribute("options");
+
+        auto options = mx::splitString(optionsAttr, mx::ARRAY_VALID_SEPARATORS);
+
+        const auto childElems = elem->getChildren();
+
+        auto parentElem = elem->getParent();
+        const auto origIndex = parentElem->getChildIndex(elem->getName());
+
+        for (const auto& childElem : childElems)
+        {
+            auto index = origIndex;
+
+            for (const auto& option : options)
+            {
+                mx::StringMap strReplaceMapping = {{"@"+typeNameAttr+"@", option}};
+
+                std::string newName = mx::replaceSubstrings(childElem->getName(), strReplaceMapping);
+
+                auto newChildElem = parentElem->addChildOfCategory(childElem->getCategory(), newName);
+                parentElem->setChildIndex(newChildElem->getName(), index++);
+                newChildElem->copyContentFrom(childElem);
+
+                recursivelyReplaceStrings(newChildElem, strReplaceMapping);
+            }
+            parentElem->removeChild(elem->getName());
+        }
+    }
+}
+
+void replaceNamedValues(mx::DocumentPtr doc, mx::ConstDocumentPtr stdlib)
+{
+    const std::string typeValuePrefix = "Value:";
+
+    // replace named value "Value:" strings with concrete values
+    for (auto elem : doc->traverseTree())
+    {
+        auto port = elem->asA<mx::PortElement>();
+        if (!port)
+        {
+            continue;
+        }
+
+        if (!port->hasValueString())
+        {
+            continue;
+        }
+
+        auto valueStr = port->getValueString();
+        if (mx::stringStartsWith(valueStr, typeValuePrefix))
+        {
+            auto valueNameStr = valueStr.substr(typeValuePrefix.size());
+
+            auto typeDef = stdlib->getTypeDef(port->getType());
+            if (!typeDef)
+            {
+                throw mx::Exception("Unable to find typeDef '"+port->getType()+"'");
+            }
+
+            if (!typeDef->hasAttribute(valueNameStr))
+            {
+                throw mx::Exception("Unable to find named value '"+valueNameStr+"' for type '"+typeDef->getName()+"'");
+            }
+
+            port->setValueString(typeDef->getAttribute(valueNameStr));
+        }
+    }
 }
 
 int main(int argc, char* const argv[])
@@ -127,8 +232,6 @@ int main(int argc, char* const argv[])
     mx::XmlWriteOptions writeOptions;
     writeOptions.createDirectories = true;
 
-    const std::string typeValuePrefix = "Value:";
-
     for (const auto& mtlxFile : mtlxFiles)
     {
         mx::DocumentPtr doc = mx::createDocument();
@@ -138,38 +241,9 @@ int main(int argc, char* const argv[])
 
         mx::readFromXmlFile(doc, sourceFile, mx::FileSearchPath(), &readOptions);
 
-        for (auto elem : doc->traverseTree())
-        {
-            auto port = elem->asA<mx::PortElement>();
-            if (!port)
-            {
-                continue;
-            }
+        expandTemplates(doc);
 
-            if (!port->hasValueString())
-            {
-                continue;
-            }
-
-            auto valueStr = port->getValueString();
-            if (mx::stringStartsWith(valueStr, typeValuePrefix))
-            {
-                auto valueNameStr = valueStr.substr(typeValuePrefix.size());
-
-                auto typeDef = stdlib->getTypeDef(port->getType());
-                if (!typeDef)
-                {
-                    throw mx::Exception("Unable to find typeDef '"+port->getType()+"'");
-                }
-
-                if (!typeDef->hasAttribute(valueNameStr))
-                {
-                    throw mx::Exception("Unable to find named value '"+valueNameStr+"' for type '"+typeDef->getName()+"'");
-                }
-
-                port->setValueString(typeDef->getAttribute(valueNameStr));
-            }
-        }
+        replaceNamedValues(doc, stdlib);
 
         mx::writeToXmlFile(doc, destFile, &writeOptions);
     }
