@@ -14,7 +14,7 @@ namespace mx = MaterialX;
 
 #include <iostream>
 
-const std::string options =
+const std::string cmdLineOptions =
     " Options: \n"
     "    --sourceLibraryRoot [FILEPATH]     Directory containing the source data library files.\n"
     "    --destLibraryRoot [FILEPATH]       Directory to write the modified data library files.\n"
@@ -88,10 +88,10 @@ void expandTemplates(mx::DocumentPtr doc)
             continue;
         }
 
-        auto typeNameAttr = elem->getAttribute("varName");
-        auto optionsAttr = elem->getAttribute("options");
+        const auto typeNameAttr = elem->getAttribute("varName");
+        const auto optionsAttr = elem->getAttribute("options");
 
-        auto options = mx::splitString(optionsAttr, mx::ARRAY_VALID_SEPARATORS);
+        const auto options = mx::splitString(optionsAttr, mx::ARRAY_VALID_SEPARATORS);
 
         const auto childElems = elem->getChildren();
 
@@ -185,7 +185,7 @@ int main(int argc, char* const argv[])
         else if (token == "--help")
         {
             std::cout << " MaterialXBuildLibrary version " << mx::getVersionString() << std::endl;
-            std::cout << options << std::endl;
+            std::cout << cmdLineOptions << std::endl;
             return 0;
         }
         else
