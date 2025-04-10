@@ -1467,7 +1467,7 @@
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
-  <template name="TMPLT_ND_addFA" varName="typeName" options="color4, vector2, vector3, vector4">
+  <template name="TMPLT_ND_addFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_add_@typeName@FA" node="add" nodegroup="math">
       <input name="in1" type="@typeName@" value="Value:zero" />
       <input name="in2" type="float" value="Value:zero" />
