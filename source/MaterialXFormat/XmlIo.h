@@ -39,15 +39,15 @@ class MX_FORMAT_API XmlReadOptions
 
     /// If true, then XML comments will be read into documents as comment elements.
     /// Defaults to false.
-    bool readComments;
+    bool readComments = false;
 
     /// If true, then XML newlines will be read into documents as newline elements.
     /// Defaults to false.
-    bool readNewlines;
+    bool readNewlines = false;
 
     /// If true, then documents from earlier versions of MaterialX will be upgraded
     /// to the current version.  Defaults to true.
-    bool upgradeVersion;
+    bool upgradeVersion = true;
 
     /// If provided, this function will be invoked when an XInclude reference
     /// needs to be read into a document.  Defaults to readFromXmlFile.
@@ -71,7 +71,7 @@ class MX_FORMAT_API XmlWriteOptions
 
     /// If true, elements with source file markings will be written as
     /// XIncludes rather than explicit data.  Defaults to true.
-    bool writeXIncludeEnable;
+    bool writeXIncludeEnable = true;
 
     /// If provided, this function will be used to exclude specific elements
     /// (those returning false) from the write operation.  Defaults to nullptr.
@@ -79,7 +79,7 @@ class MX_FORMAT_API XmlWriteOptions
 
     /// If true, any necessary directories will be created to write the
     /// file.
-    bool createDirectories;
+    bool createDirectories = false;
 };
 
 /// @class ExceptionParseError

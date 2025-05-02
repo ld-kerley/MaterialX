@@ -71,7 +71,6 @@ endif()
 
 list(APPEND CMAKE_MODULE_PATH
         ${PROJECT_SOURCE_DIR}/cmake/macros)
-
 include(Public)
 
 # Apple ecosystem cross-compilation

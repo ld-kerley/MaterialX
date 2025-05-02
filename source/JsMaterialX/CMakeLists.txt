@@ -85,7 +85,6 @@ else()
 endif()
 
 
-#set(JS_LINK_FLAGS_GENSHADER "${JS_LINK_FLAGS_CORE} --preload-file ${PROJECT_SOURCE_DIR}/libraries@libraries ")
 set(JS_LINK_FLAGS_GENSHADER "${JS_LINK_FLAGS_CORE} --preload-file ${PROJECT_BINARY_DIR}/libraries/DataLibraryBuild@libraries ")
 
 add_executable(JsMaterialXCore MaterialXLib.cpp

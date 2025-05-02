@@ -337,9 +337,6 @@ unsigned int getParseOptions(const XmlReadOptions* readOptions)
 //
 
 XmlReadOptions::XmlReadOptions() :
-    readComments(false),
-    readNewlines(false),
-    upgradeVersion(true),
     readXIncludeFunction(readFromXmlFile)
 {
 }
@@ -348,8 +345,7 @@ XmlReadOptions::XmlReadOptions() :
 // XmlWriteOptions methods
 //
 
-XmlWriteOptions::XmlWriteOptions() :
-    writeXIncludeEnable(true), createDirectories(false)
+XmlWriteOptions::XmlWriteOptions()
 {
 }
 

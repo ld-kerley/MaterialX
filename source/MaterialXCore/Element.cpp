@@ -650,8 +650,7 @@ const string ValueElement::getValueString() const
 #if MATERIALX_BUILD_BAKE_NAMED_VALUES
     return getAttribute(VALUE_ATTRIBUTE);
 #else
-
-    static string typeValuePrefix = "Value:";
+    const string typeValuePrefix = "Value:";
 
     auto valueStr = getAttribute(VALUE_ATTRIBUTE);
     if (!stringStartsWith(valueStr, typeValuePrefix))
@@ -659,14 +658,13 @@ const string ValueElement::getValueString() const
         return valueStr;
     }
 
-    auto valueNameStr = valueStr.substr(typeValuePrefix.size());
-
     auto typeDef = getTypeDef();
     if (!typeDef)
     {
         throw Exception("Unable to find typeDef '"+getType()+"'");
     }
 
+    auto valueNameStr = valueStr.substr(typeValuePrefix.size());
     if (!typeDef->hasAttribute(valueNameStr))
     {
         throw Exception("Unable to find named value '"+valueNameStr+"' for type '"+typeDef->getName()+"'");
