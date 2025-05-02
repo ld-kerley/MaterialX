@@ -3651,98 +3651,98 @@
   -->
   <template name="TP_NG_range" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodegraph name="NG_range_@typeName@" nodedef="ND_range_@typeName@">
-      <remap name="N_remap1_@typeName@" type="@typeName@">
+      <remap name="N_remap1" type="@typeName@">
         <input name="in" type="@typeName@" interfacename="in" />
         <input name="inlow" type="@typeName@" interfacename="inlow" />
         <input name="inhigh" type="@typeName@" interfacename="inhigh" />
         <input name="outlow" type="@typeName@" value="Value:zero" />
         <input name="outhigh" type="@typeName@" value="Value:one" />
       </remap>
-      <divide name="N_recip_@typeName@" type="@typeName@">
+      <divide name="N_recip" type="@typeName@">
         <input name="in1" type="@typeName@" value="Value:one" />
         <input name="in2" type="@typeName@" interfacename="gamma" />
       </divide>
-      <absval name="N_abs_@typeName@" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_remap1_@typeName@" />
+      <absval name="N_abs" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_remap1" />
       </absval>
-      <power name="N_pow_@typeName@" type="@typeName@">
-        <input name="in1" type="@typeName@" nodename="N_abs_@typeName@" />
-        <input name="in2" type="@typeName@" nodename="N_recip_@typeName@" />
+      <power name="N_pow" type="@typeName@">
+        <input name="in1" type="@typeName@" nodename="N_abs" />
+        <input name="in2" type="@typeName@" nodename="N_recip" />
       </power>
-      <sign name="N_sign_@typeName@" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_remap1_@typeName@" />
+      <sign name="N_sign" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_remap1" />
       </sign>
-      <multiply name="N_gamma_@typeName@" type="@typeName@">
-        <input name="in1" type="@typeName@" nodename="N_pow_@typeName@" />
-        <input name="in2" type="@typeName@" nodename="N_sign_@typeName@" />
+      <multiply name="N_gamma" type="@typeName@">
+        <input name="in1" type="@typeName@" nodename="N_pow" />
+        <input name="in2" type="@typeName@" nodename="N_sign" />
       </multiply>
-      <remap name="N_remap2_@typeName@" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_gamma_@typeName@" />
+      <remap name="N_remap2" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_gamma" />
         <input name="inlow" type="@typeName@" value="Value:zero" />
         <input name="inhigh" type="@typeName@" value="Value:one" />
         <input name="outlow" type="@typeName@" interfacename="outlow" />
         <input name="outhigh" type="@typeName@" interfacename="outhigh" />
       </remap>
-      <clamp name="N_clamp_@typeName@" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_remap2_@typeName@" />
+      <clamp name="N_clamp" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_remap2" />
         <input name="low" type="@typeName@" interfacename="outlow" />
         <input name="high" type="@typeName@" interfacename="outhigh" />
       </clamp>
-      <ifequal name="N_switch_@typeName@" type="@typeName@">
-        <input name="in1" type="@typeName@" nodename="N_clamp_@typeName@" />
-        <input name="in2" type="@typeName@" nodename="N_remap2_@typeName@" />
+      <ifequal name="N_switch" type="@typeName@">
+        <input name="in1" type="@typeName@" nodename="N_clamp" />
+        <input name="in2" type="@typeName@" nodename="N_remap2" />
         <input name="value1" type="boolean" interfacename="doclamp" />
         <input name="value2" type="boolean" value="true" />
       </ifequal>
-      <output name="out" type="@typeName@" nodename="N_switch_@typeName@" />
+      <output name="out" type="@typeName@" nodename="N_switch" />
     </nodegraph>
   </template>
   <template name="TP_NG_rangeFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodegraph name="NG_range_@typeName@FA" nodedef="ND_range_@typeName@FA">
-      <remap name="N_remap1_@typeName@FA" type="@typeName@">
+      <remap name="N_remap1_FA" type="@typeName@">
         <input name="in" type="@typeName@" interfacename="in" />
         <input name="inlow" type="float" interfacename="inlow" />
         <input name="inhigh" type="float" interfacename="inhigh" />
         <input name="outlow" type="float" value="Value:zero" />
         <input name="outhigh" type="float" value="Value:one" />
       </remap>
-      <divide name="N_recip_@typeName@FA" type="float">
+      <divide name="N_recip_FA" type="float">
         <input name="in1" type="float" value="Value:one" />
         <input name="in2" type="float" interfacename="gamma" />
       </divide>
-      <absval name="N_abs_@typeName@FA" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_remap1_@typeName@FA" />
+      <absval name="N_abs_FA" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_remap1_FA" />
       </absval>
-      <power name="N_pow_@typeName@FA" type="@typeName@">
-        <input name="in1" type="@typeName@" nodename="N_abs_@typeName@FA" />
-        <input name="in2" type="float" nodename="N_recip_@typeName@FA" />
+      <power name="N_pow_FA" type="@typeName@">
+        <input name="in1" type="@typeName@" nodename="N_abs_FA" />
+        <input name="in2" type="float" nodename="N_recip_FA" />
       </power>
-      <sign name="N_sign_@typeName@FA" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_remap1_@typeName@FA" />
+      <sign name="N_sign_FA" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_remap1_FA" />
       </sign>
-      <multiply name="N_gamma_@typeName@FA" type="@typeName@">
-        <input name="in1" type="@typeName@" nodename="N_pow_@typeName@FA" />
-        <input name="in2" type="@typeName@" nodename="N_sign_@typeName@FA" />
+      <multiply name="N_gamma_FA" type="@typeName@">
+        <input name="in1" type="@typeName@" nodename="N_pow_FA" />
+        <input name="in2" type="@typeName@" nodename="N_sign_FA" />
       </multiply>
-      <remap name="N_remap2_@typeName@FA" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_gamma_@typeName@FA" />
+      <remap name="N_remap2_FA" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_gamma_FA" />
         <input name="inlow" type="float" value="Value:zero" />
         <input name="inhigh" type="float" value="Value:one" />
         <input name="outlow" type="float" interfacename="outlow" />
         <input name="outhigh" type="float" interfacename="outhigh" />
       </remap>
-      <clamp name="N_clamp_@typeName@FA" type="@typeName@">
-        <input name="in" type="@typeName@" nodename="N_remap2_@typeName@FA" />
+      <clamp name="N_clamp_FA" type="@typeName@">
+        <input name="in" type="@typeName@" nodename="N_remap2_FA" />
         <input name="low" type="float" interfacename="outlow" />
         <input name="high" type="float" interfacename="outhigh" />
       </clamp>
-      <ifequal name="N_switch_@typeName@FA" type="@typeName@">
-        <input name="in1" type="@typeName@" nodename="N_clamp_@typeName@FA" />
-        <input name="in2" type="@typeName@" nodename="N_remap2_@typeName@FA" />
+      <ifequal name="N_switch_FA" type="@typeName@">
+        <input name="in1" type="@typeName@" nodename="N_clamp_FA" />
+        <input name="in2" type="@typeName@" nodename="N_remap2_FA" />
         <input name="value1" type="boolean" interfacename="doclamp" />
         <input name="value2" type="boolean" value="true" />
       </ifequal>
-      <output name="out" type="@typeName@" nodename="N_switch_@typeName@FA" />
+      <output name="out" type="@typeName@" nodename="N_switch_FA" />
     </nodegraph>
   </template>
 
@@ -4666,11 +4666,11 @@
         <input name="in1" type="@typeName@" interfacename="in6" />
         <input name="in2" type="@typeName@" nodename="ifgreater_7" />
       </ifgreater>
-      <ifgreater name="ifgreater_5" type="float">
+      <ifgreater name="ifgreater_5" type="@typeName@">
         <input name="value1" type="float" value="5.0" />
         <input name="value2" type="float" interfacename="which" />
-        <input name="in1" type="float" interfacename="in5" />
-        <input name="in2" type="float" nodename="ifgreater_6" />
+        <input name="in1" type="@typeName@" interfacename="in5" />
+        <input name="in2" type="@typeName@" nodename="ifgreater_6" />
       </ifgreater>
       <ifgreater name="ifgreater_4" type="@typeName@">
         <input name="value1" type="float" value="4.0" />
@@ -4699,8 +4699,8 @@
       <output name="out" type="@typeName@" nodename="ifgreater_1" />
     </nodegraph>
   </template>
-  <template name="TP_NG_switch" varName="typeName" options="float, color3, color4, vector2, vector3, vector4, matrix33, matrix44">
-    <nodegraph name="NG_switch_@typeName@I" nodedef="ND_switch_floatI">
+  <template name="TP_NG_switchI" varName="typeName" options="float, color3, color4, vector2, vector3, vector4, matrix33, matrix44">
+    <nodegraph name="NG_switch_@typeName@I" nodedef="ND_switch_@typeName@I">
       <ifgreater name="ifgreater_10" type="@typeName@">
         <input name="value1" type="integer" value="10" />
         <input name="value2" type="integer" interfacename="which" />

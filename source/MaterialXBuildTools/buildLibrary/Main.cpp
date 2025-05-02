@@ -8,7 +8,6 @@
 #include <MaterialXFormat/XmlIo.h>
 #include <MaterialXCore/Exception.h>
 #include <MaterialXCore/Util.h>
-#include <MaterialXCore/Types.h>
 
 namespace mx = MaterialX;
 
@@ -164,6 +163,10 @@ int main(int argc, char* const argv[])
     mx::XmlReadOptions readOptions;
     readOptions.readComments = true;
     readOptions.readNewlines = true;
+
+
+    // investigate if we should merge expandTemplate with replaceNamedValues together.
+    // and possibly do all of it on load - and thus this tool would just read and then write the files.
     readOptions.expandTemplateTags = true;
 
     mx::XmlWriteOptions writeOptions;
