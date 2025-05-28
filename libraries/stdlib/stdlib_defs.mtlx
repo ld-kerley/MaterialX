@@ -895,29 +895,29 @@
   -->
   <template name="TP_ND_add" varName="typeName" options="float, integer, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_add_@typeName@" node="add" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="@typeName@" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:zero" spec_desc="The stream to add to `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_add_matrix" varName="typeName" options="matrix33, matrix44">
     <nodedef name="ND_add_@typeName@" node="add" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:one" />
-      <input name="in2" type="@typeName@" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:one" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:zero" spec_desc="The stream to add to `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_addFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_add_@typeName@FA" node="add" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="float" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="float" value="Value:zero" spec_desc="The stream to add to `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_add_matrixFA" varName="typeName" options="matrix33, matrix44">
     <nodedef name="ND_add_@typeName@FA" node="add" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:one" />
-      <input name="in2" type="float" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:one" spec_desc="The primary input stream"/>
+      <input name="in2" type="float" value="Value:zero" spec_desc="The stream to add to `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
@@ -928,29 +928,29 @@
   -->
   <template name="TP_ND_subtract" varName="typeName" options="float, integer, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_subtract_@typeName@" node="subtract" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="@typeName@" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:zero" spec_desc="The stream to subtract from `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_subtract_matrix" varName="typeName" options="matrix33, matrix44">
     <nodedef name="ND_subtract_@typeName@" node="subtract" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:one" />
-      <input name="in2" type="@typeName@" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:one" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:zero" spec_desc="The stream to subtract from `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_subtractFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_subtract_@typeName@FA" node="subtract" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="float" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="float" value="Value:zero" spec_desc="The stream to subtract from `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_subtract_matrixFA" varName="typeName" options="matrix33, matrix44">
     <nodedef name="ND_subtract_@typeName@FA" node="subtract" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:one" />
-      <input name="in2" type="float" value="Value:zero" />
+      <input name="in1" type="@typeName@" value="Value:one" spec_desc="The primary input stream"/>
+      <input name="in2" type="float" value="Value:zero" spec_desc="The stream to subtract from `in1`"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
@@ -962,22 +962,22 @@
   -->
   <template name="TP_ND_multiply" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_multiply_@typeName@" node="multiply" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="@typeName@" value="Value:one" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:one" spec_desc="The stream to multiply `in1` by"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_multiply_matrix" varName="typeName" options="matrix33, matrix44">
     <nodedef name="ND_multiply_@typeName@" node="multiply" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:one" />
-      <input name="in2" type="@typeName@" value="Value:one" />
+      <input name="in1" type="@typeName@" value="Value:one" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:one" spec_desc="The stream to multiply `in1` by"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_multiplyFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_multiply_@typeName@FA" node="multiply" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="float" value="Value:one" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="float" value="Value:one" spec_desc="The stream to multiply `in1` by"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
@@ -990,22 +990,22 @@
   -->
   <template name="TP_ND_divide" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_divide_@typeName@" node="divide" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="@typeName@" value="Value:one" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:one" spec_desc="The stream to divide `in1` by"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_divide_matrix" varName="typeName" options="matrix33, matrix44">
     <nodedef name="ND_divide_@typeName@" node="divide" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:one" />
-      <input name="in2" type="@typeName@" value="Value:one" />
+      <input name="in1" type="@typeName@" value="Value:one" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:one" spec_desc="The stream to divide `in1` by"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_divideFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_divide_@typeName@FA" node="divide" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="float" value="Value:one" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="float" value="Value:one" spec_desc="The stream to divide `in1` by"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
@@ -1017,15 +1017,15 @@
   -->
   <template name="TP_ND_modulo" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_modulo_@typeName@" node="modulo" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="@typeName@" value="Value:one" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="@typeName@" value="Value:one" spec_acceptedvalues="`in2` != 0"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>
   <template name="TP_ND_moduloFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_modulo_@typeName@FA" node="modulo" nodegroup="math">
-      <input name="in1" type="@typeName@" value="Value:zero" />
-      <input name="in2" type="float" value="1.0" />
+      <input name="in1" type="@typeName@" value="Value:zero" spec_desc="The primary input stream"/>
+      <input name="in2" type="float" value="1.0" spec_acceptedvalues="`in2` != 0"/>
       <output name="out" type="@typeName@" defaultinput="in1" />
     </nodedef>
   </template>

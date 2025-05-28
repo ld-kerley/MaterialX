@@ -17,3 +17,4 @@ add_subdirectory(../MaterialXCore MaterialXCore)
 add_subdirectory(../MaterialXFormat MaterialXFormat)
 
 add_subdirectory(buildLibrary)
+add_subdirectory(buildDocs)

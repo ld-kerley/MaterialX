@@ -192,6 +192,19 @@ int main(int argc, char* const argv[])
             replaceNamedValues(doc, stdlib);
         }
 
+        {
+            // remove "specification" attributes all start with "spec_"
+            for (auto elem: doc->traverseTree())
+            {
+                mx::StringVec const& attributeNames = elem->getAttributeNames();
+                for (std::string const& attrName: attributeNames) {
+                    if (mx::stringStartsWith(attrName, "spec_")) {
+                        elem->removeAttribute(attrName);
+                    }
+                }
+            }
+        }
+
         mx::writeToXmlFile(doc, destFile, &writeOptions);
     }
 

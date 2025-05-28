@@ -366,6 +366,8 @@ if (MATERIALX_BUILD_EXPAND_TEMPLATE_ELEMS OR MATERIALX_BUILD_BAKE_NAMED_VALUES)
     else()
         set(_MaterialXBuildLibrary MaterialXBuildLibrary)
         add_subdirectory(source/MaterialXBuildTools/buildLibrary)
+        add_subdirectory(source/MaterialXBuildTools/buildDocs)
+        add_subdirectory(dev_spec)
     endif()
 endif()
 
