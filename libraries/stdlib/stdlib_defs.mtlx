@@ -378,31 +378,31 @@
   -->
   <template name="TP_ND_noise2d" varName="typeName" options="float, vector2, vector3, vector4">
     <nodedef name="ND_noise2d_@typeName@" node="noise2d" nodegroup="procedural2d">
-      <input name="amplitude" type="@typeName@" value="Value:one" />
-      <input name="pivot" type="float" value="0.0" />
-      <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
+      <input name="amplitude" type="@typeName@" value="Value:one" spec_desc="The center-to-peak amplitude of the noise"/>
+      <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+      <input name="texcoord" type="vector2" defaultgeomprop="UV0" spec_desc="The 2D texture coordinate at which the noise is evaluated"/>
       <output name="out" type="@typeName@" default="Value:zero" />
     </nodedef>
   </template>
 
   <nodedef name="ND_noise2d_color3" node="noise2d" nodegroup="procedural2d">
-    <input name="amplitude" type="vector3" value="1.0, 1.0, 1.0" />
-    <input name="pivot" type="float" value="0.0" />
-    <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
+    <input name="amplitude" type="vector3" value="1.0, 1.0, 1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+    <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+    <input name="texcoord" type="vector2" defaultgeomprop="UV0" spec_desc="The 2D texture coordinate at which the noise is evaluated"/>
     <output name="out" type="color3" default="0.0, 0.0, 0.0" />
   </nodedef>
   <nodedef name="ND_noise2d_color4" node="noise2d" nodegroup="procedural2d">
-    <input name="amplitude" type="vector4" value="1.0, 1.0, 1.0, 1.0" />
-    <input name="pivot" type="float" value="0.0" />
-    <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
+    <input name="amplitude" type="vector4" value="1.0, 1.0, 1.0, 1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+    <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+    <input name="texcoord" type="vector2" defaultgeomprop="UV0" spec_desc="The 2D texture coordinate at which the noise is evaluated"/>
     <output name="out" type="color4" default="0.0, 0.0, 0.0, 0.0" />
   </nodedef>
 
   <template name="TP_ND_noise2d_FA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_noise2d_@typeName@FA" node="noise2d" nodegroup="procedural2d">
-      <input name="amplitude" type="float" value="1.0" />
-      <input name="pivot" type="float" value="0.0" />
-      <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
+      <input name="amplitude" type="float" value="1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+      <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+      <input name="texcoord" type="vector2" defaultgeomprop="UV0" spec_desc="The 2D texture coordinate at which the noise is evaluated"/>
       <output name="out" type="@typeName@" default="Value:zero" />
     </nodedef>
   </template>
@@ -414,31 +414,31 @@
   -->
   <template name="TP_ND_noise3d" varName="typeName" options="float, vector2, vector3, vector4">
     <nodedef name="ND_noise3d_@typeName@" node="noise3d" nodegroup="procedural3d">
-      <input name="amplitude" type="@typeName@" value="Value:one" />
-      <input name="pivot" type="float" value="0.0" />
-      <input name="position" type="vector3" defaultgeomprop="Pobject" />
+      <input name="amplitude" type="@typeName@" value="Value:one" spec_desc="The center-to-peak amplitude of the noise"/>
+      <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+      <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
       <output name="out" type="@typeName@" default="Value:zero" />
     </nodedef>
   </template>
 
   <nodedef name="ND_noise3d_color3" node="noise3d" nodegroup="procedural3d">
-    <input name="amplitude" type="vector3" value="1.0, 1.0, 1.0" />
-    <input name="pivot" type="float" value="0.0" />
-    <input name="position" type="vector3" defaultgeomprop="Pobject" />
+    <input name="amplitude" type="vector3" value="1.0, 1.0, 1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+    <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+    <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
     <output name="out" type="color3" default="0.0, 0.0, 0.0" />
   </nodedef>
   <nodedef name="ND_noise3d_color4" node="noise3d" nodegroup="procedural3d">
-    <input name="amplitude" type="vector4" value="1.0, 1.0, 1.0, 1.0" />
-    <input name="pivot" type="float" value="0.0" />
-    <input name="position" type="vector3" defaultgeomprop="Pobject" />
+    <input name="amplitude" type="vector4" value="1.0, 1.0, 1.0, 1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+    <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+    <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
     <output name="out" type="color4" default="0.0, 0.0, 0.0, 0.0" />
   </nodedef>
 
   <template name="TP_ND_noise3d_FA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_noise3d_@typeName@FA" node="noise3d" nodegroup="procedural3d">
-      <input name="amplitude" type="float" value="1.0" />
-      <input name="pivot" type="float" value="0.0" />
-      <input name="position" type="vector3" defaultgeomprop="Pobject" />
+      <input name="amplitude" type="float" value="1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+      <input name="pivot" type="float" value="0.0" spec_desc="The center value of the output noise"/>
+      <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
       <output name="out" type="@typeName@" default="Value:zero" />
     </nodedef>
   </template>
@@ -450,39 +450,39 @@
   -->
   <template name="TP_ND_fractal3d" varName="typeName" options="float, vector2, vector3, vector4">
     <nodedef name="ND_fractal3d_@typeName@" node="fractal3d" nodegroup="procedural3d">
-      <input name="amplitude" type="@typeName@" value="Value:one" />
-      <input name="octaves" type="integer" value="3" />
-      <input name="lacunarity" type="float" value="2.0" />
-      <input name="diminish" type="float" value="0.5" />
-      <input name="position" type="vector3" defaultgeomprop="Pobject" />
+      <input name="amplitude" type="@typeName@" value="Value:one" spec_desc="The center-to-peak amplitude of the noise"/>
+      <input name="octaves" type="integer" value="3" spec_desc="The number of octaves of noise to be summed"/>
+      <input name="lacunarity" type="float" value="2.0" spec_desc="The exponential scale between successive octaves of noise "/>
+      <input name="diminish" type="float" value="0.5" spec_desc="The rate at which noise amplitude is diminished for each octave"/>
+      <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
       <output name="out" type="@typeName@" default="Value:zero" />
     </nodedef>
   </template>
 
   <nodedef name="ND_fractal3d_color3" node="fractal3d" nodegroup="procedural3d">
-    <input name="amplitude" type="vector3" value="1.0, 1.0, 1.0" />
-    <input name="octaves" type="integer" value="3" />
-    <input name="lacunarity" type="float" value="2.0" />
-    <input name="diminish" type="float" value="0.5" />
-    <input name="position" type="vector3" defaultgeomprop="Pobject" />
+    <input name="amplitude" type="vector3" value="1.0, 1.0, 1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+    <input name="octaves" type="integer" value="3" spec_desc="The number of octaves of noise to be summed"/>
+    <input name="lacunarity" type="float" value="2.0" spec_desc="The exponential scale between successive octaves of noise "/>
+    <input name="diminish" type="float" value="0.5" spec_desc="The rate at which noise amplitude is diminished for each octave"/>
+    <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
     <output name="out" type="color3" default="0.0, 0.0, 0.0" />
   </nodedef>
   <nodedef name="ND_fractal3d_color4" node="fractal3d" nodegroup="procedural3d">
-    <input name="amplitude" type="vector4" value="1.0, 1.0, 1.0, 1.0" />
-    <input name="octaves" type="integer" value="3" />
-    <input name="lacunarity" type="float" value="2.0" />
-    <input name="diminish" type="float" value="0.5" />
-    <input name="position" type="vector3" defaultgeomprop="Pobject" />
+    <input name="amplitude" type="vector4" value="1.0, 1.0, 1.0, 1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+    <input name="octaves" type="integer" value="3" spec_desc="The number of octaves of noise to be summed"/>
+    <input name="lacunarity" type="float" value="2.0" spec_desc="The exponential scale between successive octaves of noise "/>
+    <input name="diminish" type="float" value="0.5" spec_desc="The rate at which noise amplitude is diminished for each octave"/>
+    <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
     <output name="out" type="color4" default="0.0, 0.0, 0.0, 0.0" />
   </nodedef>
 
   <template name="TP_ND_fractal3d_FA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_fractal3d_@typeName@FA" node="fractal3d" nodegroup="procedural3d">
-      <input name="amplitude" type="float" value="1.0" />
-      <input name="octaves" type="integer" value="3" />
-      <input name="lacunarity" type="float" value="2.0" />
-      <input name="diminish" type="float" value="0.5" />
-      <input name="position" type="vector3" defaultgeomprop="Pobject" />
+      <input name="amplitude" type="float" value="1.0" spec_desc="The center-to-peak amplitude of the noise"/>
+      <input name="octaves" type="integer" value="3" spec_desc="The number of octaves of noise to be summed"/>
+      <input name="lacunarity" type="float" value="2.0" spec_desc="The exponential scale between successive octaves of noise "/>
+      <input name="diminish" type="float" value="0.5" spec_desc="The rate at which noise amplitude is diminished for each octave"/>
+      <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
       <output name="out" type="@typeName@" default="Value:zero" />
     </nodedef>
   </template>
@@ -492,7 +492,7 @@
     2D cellular noise in 1 channel.
   -->
   <nodedef name="ND_cellnoise2d_float" node="cellnoise2d" nodegroup="procedural2d">
-    <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
+    <input name="texcoord" type="vector2" defaultgeomprop="UV0" spec_desc="The 2D texture coordinate at which the noise is evaluated"/>
     <output name="out" type="float" default="0.0" />
   </nodedef>
 
@@ -501,7 +501,7 @@
     3D cellular noise in 1 channel.
   -->
   <nodedef name="ND_cellnoise3d_float" node="cellnoise3d" nodegroup="procedural3d">
-    <input name="position" type="vector3" defaultgeomprop="Pobject" />
+    <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
     <output name="out" type="float" default="0.0" />
   </nodedef>
 
@@ -509,24 +509,14 @@
     Node: <worleynoise2d>
     2D Worley (voronoi) noise in 1, 2 or 3 channels.
   -->
-  <nodedef name="ND_worleynoise2d_float" node="worleynoise2d" nodegroup="procedural2d">
-    <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
-    <input name="jitter" type="float" value="1.0" />
-    <input name="style" uiname="Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" />
-    <output name="out" type="float" default="0.0" />
-  </nodedef>
-  <nodedef name="ND_worleynoise2d_vector2" node="worleynoise2d" nodegroup="procedural2d">
-    <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
-    <input name="jitter" type="float" value="1.0" />
-    <input name="style" uiname="Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" />
-    <output name="out" type="vector2" default="0.0, 0.0" />
-  </nodedef>
-  <nodedef name="ND_worleynoise2d_vector3" node="worleynoise2d" nodegroup="procedural2d">
-    <input name="texcoord" type="vector2" defaultgeomprop="UV0" />
-    <input name="jitter" type="float" value="1.0" />
-    <input name="style" uiname="Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" />
-    <output name="out" type="vector3" default="0.0, 0.0, 0.0" />
-  </nodedef>
+  <template name="TP_ND_worleynoise2d" varName="typeName" options="float, vector2, vector3">
+    <nodedef name="ND_worleynoise2d_@typeName@" node="worleynoise2d" nodegroup="procedural2d">
+      <input name="texcoord" type="vector2" defaultgeomprop="UV0" spec_desc="The 2D texture coordinate at which the noise is evaluated"/>
+      <input name="jitter" type="float" value="1.0" spec_desc="The amount to jitter the cell center position"/>
+      <input name="style" uiname="Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" spec_desc="The output style "/>
+      <output name="out" type="@typeName@" default="0.0" />
+    </nodedef>
+  </template>
 
   <!--
     Node: <worleynoise3d>
@@ -534,9 +524,9 @@
   -->
   <template name="TP_ND_worleynoise3d" varName="typeName" options="float, vector2, vector3">
     <nodedef name="ND_worleynoise3d_@typeName@" node="worleynoise3d" nodegroup="procedural3d">
-      <input name="position" type="vector3" defaultgeomprop="Pobject" />
-      <input name="jitter" type="float" value="1.0" />
-      <input name="style" uiname="Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" />
+      <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="The 3D position at which the noise is evaluated"/>
+      <input name="jitter" type="float" value="1.0" spec_desc="The amount to jitter the cell center position"/>
+      <input name="style" uiname="Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" spec_desc="The output style "/>
       <output name="out" type="@typeName@" default="Value:zero" />
     </nodedef>
   </template>
@@ -559,18 +549,18 @@
     The output is 1 channel, with controls to adjust the output range.
   -->
   <nodedef name="ND_unifiednoise2d_float" node="unifiednoise2d" nodegroup="procedural2d">
-    <input name="texcoord" type="vector2" uifolder="Common" defaultgeomprop="UV0" doc="The input 2d space. Default is the first texture coordinates." />
-    <input name="freq" type="vector2" uiname="Frequency" uifolder="Common" value="1, 1" doc="Adjusts the noise frequency, with higher values producing smaller noise shapes. Default is (1,1)." />
-    <input name="offset" type="vector2" uiname="Offset" uifolder="Common" value="0, 0" doc="Shift the noise in 2d space. Default is (0,0)." />
-    <input name="jitter" type="float" uiname="Jitter" uifolder="Common" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Adjust uniformity of Worley noise; for other noise types jitters the results." />
-    <input name="outmin" type="float" uiname="Output Min" uifolder="Post Process" value="0" doc="The lowest values fit to the noise. Default is 0.0." />
-    <input name="outmax" type="float" uiname="Output Max" uifolder="Post Process" value="1" doc="The highest values fit to the noise. Default is 1.0." />
-    <input name="clampoutput" type="boolean" uiname="Clamp Output" uifolder="Post Process" value="true" doc="Clamp the output to the min and max output values." />
-    <input name="octaves" type="integer" uiname="Octaves" uifolder="Fractal" value="3" doc="The number of octaves of Fractal noise to be generated. Default is 3." />
-    <input name="lacunarity" type="float" uiname="Lacunarity" uifolder="Fractal" value="2" doc="The exponential scale between successive octaves of Fractal noise. Default is 2.0." />
-    <input name="diminish" type="float" uiname="Diminish" uifolder="Fractal" uisoftmin="0.0" uisoftmax="1.0" value="0.5" doc="The rate at which noise amplitude is diminished for each octave of Fractal noise. Default is 0.5." />
-    <input name="type" type="integer" uiname="Noise Type" uifolder="Common" uisoftmin="0" uisoftmax="3" value="0" enum="Perlin,Cell,Worley,Fractal" enumvalues="0,1,2,3" doc="Menu to select the type of noise: Perlin, Cell, Worley, or Fractal. Default is Perlin." />
-    <input name="style" uiname="Worley Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" doc="Sets the style of cell used when Noise Type is set to Worley." />
+    <input name="texcoord" type="vector2" uifolder="Common" defaultgeomprop="UV0" doc="The input 2d space. Default is the first texture coordinates." spec_desc="The 2D texture coordinate at which the noise is evaluated"/>
+    <input name="freq" type="vector2" uiname="Frequency" uifolder="Common" value="1, 1" doc="Adjusts the noise frequency, with higher values producing smaller noise shapes. Default is (1,1)." spec_desc="The noise frequency, with higher values producing smaller noise shapes."/>
+    <input name="offset" type="vector2" uiname="Offset" uifolder="Common" value="0, 0" doc="Shift the noise in 2d space. Default is (0,0)." spec_desc="The amount to offset 2d space"/>
+    <input name="jitter" type="float" uiname="Jitter" uifolder="Common" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Adjust uniformity of Worley noise; for other noise types jitters the results." spec_desc="The amount to jitter the cell center position"/>
+    <input name="outmin" type="float" uiname="Output Min" uifolder="Post Process" value="0" doc="The lowest values fit to the noise. Default is 0.0." spec_desc="The lowest output value "/>
+    <input name="outmax" type="float" uiname="Output Max" uifolder="Post Process" value="1" doc="The highest values fit to the noise. Default is 1.0." spec_desc="The highest output value"/>
+    <input name="clampoutput" type="boolean" uiname="Clamp Output" uifolder="Post Process" value="true" doc="Clamp the output to the min and max output values." spec_desc="If enabled the output is clamped between the min and max output values"/>
+    <input name="octaves" type="integer" uiname="Octaves" uifolder="Fractal" value="3" doc="The number of octaves of Fractal noise to be generated. Default is 3." spec_desc="The number of octaves of noise to be summed"/>
+    <input name="lacunarity" type="float" uiname="Lacunarity" uifolder="Fractal" value="2" doc="The exponential scale between successive octaves of Fractal noise. Default is 2.0." spec_desc="The exponential scale between successive octaves of noise "/>
+    <input name="diminish" type="float" uiname="Diminish" uifolder="Fractal" uisoftmin="0.0" uisoftmax="1.0" value="0.5" doc="The rate at which noise amplitude is diminished for each octave of Fractal noise. Default is 0.5." spec_desc="The rate at which noise amplitude is diminished for each octave"/>
+    <input name="type" type="integer" uiname="Noise Type" uifolder="Common" uisoftmin="0" uisoftmax="3" value="0" enum="Perlin,Cell,Worley,Fractal" enumvalues="0,1,2,3" doc="Menu to select the type of noise: Perlin, Cell, Worley, or Fractal. Default is Perlin." spec_desc="The type of noise function to use.  One of 0 (Perlin), 1 (Cell), 2 (Worley), or 3 (Fractal)"/>
+    <input name="style" uiname="Worley Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" doc="Sets the style of cell used when Noise Type is set to Worley." spec_desc="The output style "/>
     <output name="out" type="float" />
   </nodedef>
 
@@ -579,18 +569,18 @@
     The 3d flavor of <unifiednoise2d>.
   -->
   <nodedef name="ND_unifiednoise3d_float" node="unifiednoise3d" nodegroup="procedural3d">
-    <input name="position" type="vector3" uifolder="Common" defaultgeomprop="Pobject" doc="The input 3d space. Default is position in object-space." />
-    <input name="freq" type="vector3" uiname="Frequency" uifolder="Common" value="1, 1, 1" doc="Adjusts the noise frequency, with higher values producing smaller noise shapes. Default is (1,1,1)." />
-    <input name="offset" type="vector3" uiname="Offset" uifolder="Common" value="0, 0, 0" doc="Shift the noise in 3d space. Default is (0,0,0)." />
-    <input name="jitter" type="float" uiname="Jitter" uifolder="Common" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Adjust uniformity of Worley noise; for other noise types jitters the results." />
-    <input name="outmin" type="float" uiname="Output Min" uifolder="Post Process" value="0" doc="The lowest values fit to the noise. Default is 0.0." />
-    <input name="outmax" type="float" uiname="Output Max" uifolder="Post Process" value="1" doc="The highest values fit to the noise. Default is 1.0." />
-    <input name="clampoutput" type="boolean" uiname="Clamp Output" uifolder="Post Process" value="true" doc="Clamp the output to the min and max output values." />
-    <input name="octaves" type="integer" uiname="Octaves" uifolder="Fractal" value="3" doc="The number of octaves of Fractal noise to be generated. Default is 3." />
-    <input name="lacunarity" type="float" uiname="Lacunarity" uifolder="Fractal" value="2" doc="The exponential scale between successive octaves of Fractal noise. Default is 2.0." />
-    <input name="diminish" type="float" uiname="Diminish" uifolder="Fractal" uisoftmin="0.0" uisoftmax="1.0" value="0.5" doc="The rate at which noise amplitude is diminished for each octave of Fractal noise. Default is 0.5." />
-    <input name="type" type="integer" uiname="Noise Type" uifolder="Common" uisoftmin="0" uisoftmax="3" value="0" enum="Perlin,Cell,Worley,Fractal" enumvalues="0,1,2,3" doc="Menu to select the type of noise: Perlin, Cell, Worley, or Fractal. Default is Perlin." />
-    <input name="style" uiname="Worley Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" doc="Sets the style of cell used when Noise Type is set to Worley." />
+    <input name="position" type="vector3" uifolder="Common" defaultgeomprop="Pobject" doc="The input 3d space. Default is position in object-space." spec_desc="The 3D position at which the noise is evaluated"/>
+    <input name="freq" type="vector3" uiname="Frequency" uifolder="Common" value="1, 1, 1" doc="Adjusts the noise frequency, with higher values producing smaller noise shapes. Default is (1,1,1)." spec_desc="The noise frequency, with higher values producing smaller noise shapes."/>
+    <input name="offset" type="vector3" uiname="Offset" uifolder="Common" value="0, 0, 0" doc="Shift the noise in 3d space. Default is (0,0,0)." spec_desc="The amount to offset 3d space"/>
+    <input name="jitter" type="float" uiname="Jitter" uifolder="Common" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Adjust uniformity of Worley noise; for other noise types jitters the results." spec_desc="The amount to jitter the cell center position"/>
+    <input name="outmin" type="float" uiname="Output Min" uifolder="Post Process" value="0" doc="The lowest values fit to the noise. Default is 0.0." spec_desc="The lowest output value "/>
+    <input name="outmax" type="float" uiname="Output Max" uifolder="Post Process" value="1" doc="The highest values fit to the noise. Default is 1.0." spec_desc="The highest output value"/>
+    <input name="clampoutput" type="boolean" uiname="Clamp Output" uifolder="Post Process" value="true" doc="Clamp the output to the min and max output values." spec_desc="If enabled the output is clamped between the min and max output values"/>
+    <input name="octaves" type="integer" uiname="Octaves" uifolder="Fractal" value="3" doc="The number of octaves of Fractal noise to be generated. Default is 3." spec_desc="The number of octaves of noise to be summed"/>
+    <input name="lacunarity" type="float" uiname="Lacunarity" uifolder="Fractal" value="2" doc="The exponential scale between successive octaves of Fractal noise. Default is 2.0." spec_desc="The exponential scale between successive octaves of noise "/>
+    <input name="diminish" type="float" uiname="Diminish" uifolder="Fractal" uisoftmin="0.0" uisoftmax="1.0" value="0.5" doc="The rate at which noise amplitude is diminished for each octave of Fractal noise. Default is 0.5." spec_desc="The rate at which noise amplitude is diminished for each octave"/>
+    <input name="type" type="integer" uiname="Noise Type" uifolder="Common" uisoftmin="0" uisoftmax="3" value="0" enum="Perlin,Cell,Worley,Fractal" enumvalues="0,1,2,3" doc="Menu to select the type of noise: Perlin, Cell, Worley, or Fractal. Default is Perlin." spec_desc="The type of noise function to use.  One of 0 (Perlin), 1 (Cell), 2 (Worley), or 3 (Fractal)"/>
+    <input name="style" uiname="Worley Cell Style" type="integer" value="0" enum="Distance,Solid" enumvalues="0,1" doc="Sets the style of cell used when Noise Type is set to Worley." spec_desc="The output style "/>
     <output name="out" type="float" />
   </nodedef>
 
