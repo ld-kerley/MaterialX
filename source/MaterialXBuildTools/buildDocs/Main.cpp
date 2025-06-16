@@ -347,7 +347,7 @@ int main(int argc, char* const argv[])
 
             auto row = MDTable::Row();
 
-            row.emplace_back(portName);
+            row.emplace_back(std::string("`") + portName + "`");
             row.emplace_back(portDesc);
             row.emplace_back(portType);
             row.emplace_back(portDefault);
