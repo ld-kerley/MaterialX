@@ -319,7 +319,16 @@ int main(int argc, char* const argv[])
             std::string portDesc = port->getAttribute("spec_desc");
             std::string portType = port->getType();
             std::string portDefault = port->getValueString();
+            if (portDefault.empty())
+            {
+                portDefault = port->getAttribute("defaultgeomprop");
+            }
+
             std::string portAcceptedValues = port->getAttribute("spec_acceptedvalues");
+            if (portAcceptedValues.empty())
+            {
+                portAcceptedValues = port->getAttribute("enum");
+            }
 
             portDefault = mx::replaceSubstrings(portDefault, {{"Value:",""}});
 
@@ -347,7 +356,7 @@ int main(int argc, char* const argv[])
 
             auto row = MDTable::Row();
 
-            row.emplace_back(portName);
+            row.emplace_back(std::string("`") + portName + "`");
             row.emplace_back(portDesc);
             row.emplace_back(portType);
             row.emplace_back(portDefault);

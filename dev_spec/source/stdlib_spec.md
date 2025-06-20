@@ -1,8 +1,3 @@
-## Place holder for specification document
-
-To generate the markdown table for the node ports just add the string `@MX_TABLE_<name>@` in the markdown file.
-
-
 ## Texture Nodes
 
 ### image
