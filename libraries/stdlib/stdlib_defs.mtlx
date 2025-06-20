@@ -2428,7 +2428,7 @@
   <nodedef name="ND_logical_xor" node="xor" nodegroup="conditional">
     <input name="in1" type="boolean" value="false" spec_desc="The first input stream" />
     <input name="in2" type="boolean" value="false" spec_desc="The second input stream" />
-    <output name="out" type="boolean" defaultinput="in1" spec_desc="`in1` XOR `in2" />
+    <output name="out" type="boolean" defaultinput="in1" spec_desc="`in1` XOR `in2`" />
   </nodedef>
 
   <!--
