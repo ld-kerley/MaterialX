@@ -1646,7 +1646,7 @@
   <template name="TP_ND_contrast" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_contrast_@typeName@" node="contrast" nodegroup="adjustment">
       <input name="in" type="@typeName@" value="Value:zero" spec_desc="The input color stream to be adjusted" />
-      <input name="amount" type="@typeName@" value="Value:one" spec_desc="Slope multiplier for contrast adjustment. Values greater than 1.0 increase contrast, values between 0.0 and 1.0 reduce contrast." spec_acceptedvalues="[0, +inf]" />
+      <input name="amount" type="@typeName@" value="Value:one" spec_desc="Slope multiplier for contrast adjustment. Values greater than 1.0 increase contrast, values between 0.0 and 1.0 reduce contrast." spec_acceptedvalues="[__zero__, __+inf__)" />
       <input name="pivot" type="@typeName@" value="Value:half" spec_desc="Center pivot value of contrast adjustment; this is the value that will not change as contrast is adjusted. " />
       <output name="out" type="@typeName@" defaultinput="in" spec_desc="the adjusted color value" />
     </nodedef>
@@ -1655,7 +1655,7 @@
   <template name="TP_ND_contrastFA" varName="typeName" options="color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_contrast_@typeName@FA" node="contrast" nodegroup="adjustment">
       <input name="in" type="@typeName@" value="Value:zero" spec_desc="The input color stream to be adjusted" />
-      <input name="amount" type="float" value="1.0" spec_desc="Slope multiplier for contrast adjustment. Values greater than 1.0 increase contrast, values between 0.0 and 1.0 reduce contrast." spec_acceptedvalues="[0, +inf]"/>
+      <input name="amount" type="float" value="1.0" spec_desc="Slope multiplier for contrast adjustment. Values greater than 1.0 increase contrast, values between 0.0 and 1.0 reduce contrast." spec_acceptedvalues="[0, +inf)"/>
       <input name="pivot" type="float" value="0.5" spec_desc="Center pivot value of contrast adjustment; this is the value that will not change as contrast is adjusted." />
       <output name="out" type="@typeName@" defaultinput="in" spec_desc="the adjusted color value"/>
     </nodedef>
@@ -1672,8 +1672,8 @@
       <input name="inlow" type="@typeName@" value="Value:zero" spec_desc="Low value for the input range" />
       <input name="inhigh" type="@typeName@" value="Value:one" spec_desc="High value for the input range" />
       <input name="gamma" type="@typeName@" value="Value:one" spec_desc="Reciprocal of the exponent applied to the remapped input" />
-      <input name="outlow" type="float" value="0.0" spec_desc="Low value for the output range"/>
-      <input name="outhigh" type="float" value="1.0" spec_desc="High value for the output range"/>
+      <input name="outlow" type="@typeName@" value="Value:zero" spec_desc="Low value for the output range"/>
+      <input name="outhigh" type="@typeName@" value="Value:one" spec_desc="High value for the output range"/>
       <input name="doclamp" type="boolean" value="false" spec_desc="If true, the output is clamped to [`outlow`, `outhigh`]" />
       <output name="out" type="@typeName@" defaultinput="in" spec_desc="the adjusted value" />
     </nodedef>
@@ -1728,16 +1728,16 @@
   -->
   <template name="TP_ND_colorcorrect" varName="typeName" options="color3, color4">
     <nodedef name="ND_colorcorrect_@typeName@" node="colorcorrect" nodegroup="adjustment">
-      <input name="in" type="@typeName@" uiname="Input Color" value="Value:one" doc="The input color to be adjusted." />
-      <input name="hue" type="float" uiname="Hue" uisoftmin="0.0" uisoftmax="1.0" value="0" doc="Rotates the color hue, with values wrapping at 0-1 boundaries." />
-      <input name="saturation" type="float" uiname="Saturation" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Adjusts the input color saturation level." />
-      <input name="gamma" type="float" uiname="Gamma" uisoftmin="0.0" uisoftmax="3.0" value="1" doc="Applies a gamma correction to the color." />
-      <input name="lift" type="float" uiname="Lift" uisoftmin="0.0" uisoftmax="1.0" value="0" doc="Raise the dark color values, leaving the white values unchanged." />
-      <input name="gain" type="float" uiname="Gain" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Multiplier increases lighter color values, leaving black values unchanged." />
-      <input name="contrast" type="float" uiname="Contrast" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Linearly increase or decrease the color contrast." />
-      <input name="contrastpivot" type="float" uiname="Contrast Pivot" uisoftmin="0.0" uisoftmax="1.0" value="0.5" doc="Pivot value around which contrast applies. This value will not change as contrast is adjusted." />
-      <input name="exposure" type="float" uiname="Exposure" uisoftmin="-1.0" uisoftmax="1.0" value="0" doc="Multiplier which increases or decreases color brightness by 2^value." />
-      <output name="out" type="@typeName@" />
+      <input name="in" type="@typeName@" uiname="Input Color" value="Value:one" doc="The input color to be adjusted." spec_desc="The input color stream"/>
+      <input name="hue" type="float" uiname="Hue" uisoftmin="0.0" uisoftmax="1.0" value="0" doc="Rotates the color hue, with values wrapping at 0-1 boundaries." spec_desc="Rotates the color hue" />
+      <input name="saturation" type="float" uiname="Saturation" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Adjusts the input color saturation level." spec_desc="Multiplies the input color saturation level" />
+      <input name="gamma" type="float" uiname="Gamma" uisoftmin="0.0" uisoftmax="3.0" value="1" doc="Applies a gamma correction to the color." spec_desc="Applies a gamma correction to the color" />
+      <input name="lift" type="float" uiname="Lift" uisoftmin="0.0" uisoftmax="1.0" value="0" doc="Raise the dark color values, leaving the white values unchanged." spec_desc="Raises the dark color values, leaving the white values unchanged" />
+      <input name="gain" type="float" uiname="Gain" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Multiplier increases lighter color values, leaving black values unchanged." spec_desc="Multiplier increases lighter color values, leaving black values unchanged" />
+      <input name="contrast" type="float" uiname="Contrast" uisoftmin="0.0" uisoftmax="1.0" value="1" doc="Linearly increase or decrease the color contrast." spec_desc="Linearly increase or decrease the color contrast" />
+      <input name="contrastpivot" type="float" uiname="Contrast Pivot" uisoftmin="0.0" uisoftmax="1.0" value="0.5" doc="Pivot value around which contrast applies. This value will not change as contrast is adjusted." spec_desc="Pivot value around which contrast applies"/>
+      <input name="exposure" type="float" uiname="Exposure" uisoftmin="-1.0" uisoftmax="1.0" value="0" doc="Multiplier which increases or decreases color brightness by 2^value." spec_desc="Logarithmic brightness multiplier as 2^`exposure`" />
+      <output name="out" type="@typeName@" spec_desc="the color-corrected value" />
     </nodedef>
   </template>
 
