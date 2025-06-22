@@ -1582,7 +1582,15 @@ Conditional nodes are used to compare values of two streams, or to select a valu
 
 Output the value of the `in1` or `in2` stream depending on whether the `value1` input is greater than the `value2` input.
 
-@MX_TABLE_ifgreater@
+
+|Port    |Description                                       |Type                                     |Default |Accepted Values|
+|--------|--------------------------------------------------|-----------------------------------------|--------|---------------|
+|`value1`|The first value to be compared                    |float, integer                           |__one__ |               |
+|`value2`|The second value to be compared                   |float, integer                           |__zero__|               |
+|`in1`   |The value stream to output if `value1` > `value2` |float, colorN, vectorN, matrixNN, integer|__zero__|               |
+|`in2`   |The value stream to output if `value1` <= `value2`|Same as `in1`                            |__zero__|               |
+|`out`   |Output: the result of the comparison              |Same as `in1`                            |`in1`   |               |
+
 
 ---
 
@@ -1590,13 +1598,43 @@ Output the value of the `in1` or `in2` stream depending on whether the `value1` 
 
 Output the value of the `in1` or `in2` stream depending on whether the `value1` input is greater or equal to the `value2` input.
 
-@MX_TABLE_ifgreatereq@
+
+|Port    |Description                                       |Type                                     |Default |Accepted Values|
+|--------|--------------------------------------------------|-----------------------------------------|--------|---------------|
+|`value1`|the first value to be compared                    |float, integer                           |__one__ |               |
+|`value2`|the second value to be compared                   |float, integer                           |__zero__|               |
+|`in1`   |The value stream to output if `value1` >= `value2`|float, colorN, vectorN, matrixNN, integer|__zero__|               |
+|`in2`   |The value stream to output if `value1` < `value2` |Same as `in1`                            |__zero__|               |
+|`out`   |Output: the result of the comparison              |Same as `in1`                            |`in1`   |               |
 
 ---
 
 ### ifequal
 
-@MX_TABLE_ifequal@
+
+|Port    |Description                                       |Type                                     |Default |Accepted Values|
+|--------|--------------------------------------------------|-----------------------------------------|--------|---------------|
+|`value1`|the first value to be compared                    |float, integer                           |__one__ |               |
+|`value2`|the second value to be compared                   |float, integer                           |__zero__|               |
+|`in1`   |The value stream to output if `value1` = `value2` |float, colorN, vectorN, matrixNN, integer|__zero__|               |
+|`in2`   |The value stream to output if `value1` != `value2`|Same as `in1`                            |__zero__|               |
+|`out`   |Output: the result of the comparison              |Same as `in1`                            |`in1`   |               |
+
+
+|Port    |Description                                       |Type                                     |Default |Accepted Values|
+|--------|--------------------------------------------------|-----------------------------------------|--------|---------------|
+|`value1`|The first value to be compared                    |boolean                                  |false   |               |
+|`value2`|The second value to be compared                   |boolean                                  |false   |               |
+|`in1`   |The value stream to output if `value1` = `value2` |float, colorN, vectorN, matrixNN, integer|__zero__|               |
+|`in2`   |The value stream to output if `value1` != `value2`|Same as `in1`                            |__zero__|               |
+|`out`   |Output: the result of the comparison              |Same as `in1`                            |`in1`   |               |
+
+
+|Port    |Description                       |Type   |Default|Accepted Values|
+|--------|----------------------------------|-------|-------|---------------|
+|`value1`|The first value to be compared    |boolean|false  |               |
+|`value2`|The first value to be compared    |boolean|false  |               |
+|`out`   |Output: true if `value1` = `value2|boolean|       |               |
 
 ---
 
