@@ -1,5 +1,14 @@
 ## Texture Nodes
 
+Texture nodes read image data from one or more files located at a user-provided URI. The file name may include one or more substitutions to change the file name (including frame number) that is accessed, as described in the Filename Substitutions section.
+
+If no value for layer is provided and the input file has multiple layers, then the "default" layer will be used, or "rgba" if there is no "default" layer.
+
+If a file resolution fails (for example if "[interface token]" or "{hostattr}" is included in the filename but no substitution value or default is defined, or if the resolved file URI cannot be read), and no `default` value is specified, then 0.0 will be used as the default in all channels.
+
+If no `filtertype` is specified, and application may use its own default texture filtering method.
+
+
 ### image
 Samples data from a single image, or from a layer within a multi-layer image.
 
