@@ -321,7 +321,15 @@ int main(int argc, char* const argv[])
             std::string portDefault = port->getValueString();
             if (portDefault.empty())
             {
-                portDefault = port->getAttribute("defaultgeomprop");
+                portDefault = port->getAttribute("defaultinput");
+                if (portDefault.empty())
+                {
+                    portDefault = port->getAttribute("defaultgeomprop");
+                }
+                else
+                {
+                    portDefault = std::string("`") + portDefault + "`";
+                }
             }
 
             std::string portAcceptedValues = port->getAttribute("spec_acceptedvalues");
@@ -331,6 +339,10 @@ int main(int argc, char* const argv[])
             }
 
             portDefault = mx::replaceSubstrings(portDefault, {{"Value:",""}});
+            if (portDefault == "zero" || portDefault == "one" || portDefault == "half")
+            {
+                portDefault = std::string("__") + portDefault + "__";
+            }
 
             if (portType == matchString)
             {
