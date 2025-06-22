@@ -62,12 +62,12 @@ By default the first set of UV coordinates will be used for `texcoord`.
 
 The output, `out`, of this node is the linear interpolation of `value_l` and `value_r` with respect to interpolant parameter `U`:
 
-\[
+$$
 \begin{align*}
 U &= \text{Clamp}(\text{texcoord}_x, 0.0, 1.0) \\
 \text{out}_i &= \text{value}_{r_i} \cdot U + \text{value}_{l_i} \cdot (1 - U)
 \end{align*}
-\]
+$$
 
 ---
 
@@ -84,12 +84,12 @@ By default the first set of UV coordinates will be used for `texcoord`.
 
 The output, `out`, of this node is the linear interpolation of `value_l` and `value_r` with respect to interpolant parameter `V`:
 
-\[
+```math
 \begin{align*}
 V &= \text{Clamp}(\text{texcoord}_y, 0.0, 1.0) \\
 \text{out}_i &= \text{value}_{r_i} \cdot V + \text{value}_{l_i} \cdot (1 - V)
 \end{align*}
-\]
+```
 
 ---
 
@@ -102,7 +102,7 @@ A 4-corner bilinear value ramp.
 The output, `out`, is given by a bilinear interpolation of `valuetl`, `valuetr`, `valuebl`, `valuebr`, with respect to interpolant parameters derived from the `texcoord` parameter
 
 
-\[
+```math
 \begin{align*}
 S &= \text{Clamp}(\text{texcoord}_x, 0.0, 1.0) \\
 T &= \text{Clamp}(\text{texcoord}_y, 0.0, 1.0) \\
@@ -110,7 +110,7 @@ T &= \text{Clamp}(\text{texcoord}_y, 0.0, 1.0) \\
 \text{Bottom}_{\text{mix}} &= \text{Mix}(\text{valuebl}, \text{valuebr}, S) \\
 \text{out} &= \text{Mix}(\text{Top}_{\text{mix}}, \text{Bottom}_{\text{mix}}, T)
 \end{align*}
-\]
+```
 
 ---
 
@@ -121,12 +121,12 @@ A left-right split matte, split at a specified `U` value.
 
 The output, `out`, is given by linear interpolation of `value_l` and `value_r` with respect to linear interpolant, `T`, given by:
 
-\[
+```math
 \begin{align*}
 T &= \text{aastep}(\text{center}, \text{texcoord}_x) \\
 \text{out}_i &= \text{value}_{r_i} \cdot T + \text{value}_l \cdot (1 - T)
 \end{align*}
-\]
+```
 
 ---
 
@@ -137,12 +137,12 @@ A top-bottom split matte, split at a specified `V`` value.
 
 The output, `out`, is given by linear interpolation of `value_l` and `value_r` with respect to linear interpolant, `T`, given by:
 
-\[
+```math
 \begin{align*}
 T &= \text{aastep}(\text{center}, \text{texcoord}_y) \\
 \text{out}_i &= \text{value}_{r_i} \cdot T + \text{value}_l \cdot (1 - T)
 \end{align*}
-\]
+```
 
 ---
 
@@ -256,7 +256,7 @@ Produces a stable randomized float value between 'min' and 'max', based on an 'i
 
 @MX_TABLE_randomfloat@
 
-\[
+```math
 \begin{aligned}
 s &= \text{float}(\text{seed}) \\
 x &= \begin{cases}
@@ -267,7 +267,7 @@ x &= \begin{cases}
 n &= \text{cellnoise2d}(\vec{v}) \quad \text{where } n \in [0, 1] \\
 \text{out} &= \min + n \cdot (\max - \min)
 \end{aligned}
-\]
+```
 
 ---
 
@@ -278,7 +278,7 @@ Produces a randomized RGB color within a randomized hue, saturation and brightne
 
 The output, `out`, is a random color computed by the method below:
 
-\[
+```math
 \begin{aligned}
 \text{seed}_f &= \text{float}(\text{seed}) \\
 \text{seed}_\text{hue} &= \left\lceil \text{seed}_f + 413.3 \right\rceil \\
@@ -292,7 +292,7 @@ The output, `out`, is a random color computed by the method below:
 \text{val} &= \text{val}_{\text{low}} + \text{rand}_\text{val} \cdot (\text{val}_{\text{high}} - \text{val}_{\text{low}}) \\
 \text{out} &= \text{HSVtoRGB}(\text{hue}, \text{sat}, \text{val})
 \end{aligned}
-\]
+```
 
 ## Shape Nodes
 
