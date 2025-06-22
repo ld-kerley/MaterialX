@@ -122,18 +122,22 @@
   <!--
     Node: <image>
     Samples data from a single image, or from a layer within a multi-layer image.
+
+    The filename can include one or more substitutions to change the file name (including frame number) that is accessed, as described in the Filename Substitutions section. 
+    If no value for layer is provided and the input file has multiple layers, then the 'default' layer will be used, or 'rgba' if there is no 'default' layer. 
+    If `filtertype` is not specified, an application may use its own filtering method. 
   -->
   <template name="TP_ND_image" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_image_@typeName@" node="image" nodegroup="texture2d">
-      <input name="file" type="filename" value="" uiname="Filename" uniform="true" spec_desc="The URI of an image file. The filename can include one or more substitutions to change the file name (including frame number) that is accessed, as described in the Filename Substitutions section. " />
-      <input name="layer" type="string" value="" uiname="Layer" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file. If no value for layer is provided and the input file has multiple layers, then the 'default' layer will be used, or 'rgba' if there is no 'default' layer. "/>
-      <input name="default" type="@typeName@" value="Value:zero" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved (e.g. if a <geometry token>, [interface token] or {hostattr} is included in the filename but no substitution value or default is defined, or if the resolved file URI cannot be read), or if the specified layer does not exist in the file. The default value must be the same type as the <image> element itself. If default is not defined, the default color value will be 0.0 in all channels. " />
-      <input name="texcoord" type="vector2" defaultgeomprop="UV0" uiname="Texture Coordinates" spec_desc="The 2D texture coordinate at which the image data is read. Default is to use the current u,v coordinate. " />
+      <input name="file" type="filename" value="" uiname="Filename" uniform="true" spec_desc="The URI of an image file" />
+      <input name="layer" type="string" value="" uiname="Layer" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file"/>
+      <input name="default" type="@typeName@" value="Value:zero" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved" />
+      <input name="texcoord" type="vector2" defaultgeomprop="UV0" uiname="Texture Coordinates" spec_desc="The 2D texture coordinate at which the image data is read" />
       <input name="uaddressmode" type="string" value="periodic" enum="constant,clamp,periodic,mirror" uiname="Address Mode U" uniform="true" spec_desc="Determines how U coordinates outside the 0-1 range are processed before sampling the image" spec_acceptedvalues="constant, clamp, periodic, mirror" />
       <input name="vaddressmode" type="string" value="periodic" enum="constant,clamp,periodic,mirror" uiname="Address Mode V" uniform="true" spec_desc="Determines how V coordinates outside the 0-1 range are processed before sampling the image" spec_acceptedvalues="constant, clamp, periodic, mirror"/>
-      <input name="filtertype" type="string" value="linear" enum="closest,linear,cubic" uiname="Filter Type" uniform="true" spec_desc="The type of texture filtering to use; standard values include 'closest' (nearest-neighbor single-sample), 'linear', and 'cubic'. If not specified, an application may use its own default texture filtering method." />
-      <input name="framerange" type="string" value="" uiname="Frame Range" uniform="true" spec_desc="A string 'minframe-maxframe', e.g. '10-99', to specify the range of frames that the image file is allowed to have, usually the range of image files on disk. Default is unbounded. " />
-      <input name="frameoffset" type="integer" value="0" uiname="Frame Offset" uniform="true" spec_desc="A number that is added to the current frame number to get the image file frame number. E.g. if `frameoffset` is 25, then processing frame 100 will result in reading frame 125 from the imagefile sequence. Default is no frame offset." />
+      <input name="filtertype" type="string" value="linear" enum="closest,linear,cubic" uiname="Filter Type" uniform="true" spec_desc="The type of texture filtering to use" />
+      <input name="framerange" type="string" value="" uiname="Frame Range" uniform="true" spec_desc="A string 'minframe-maxframe', e.g. '10-99', to specify the range of frames that the image file is allowed to have" />
+      <input name="frameoffset" type="integer" value="0" uiname="Frame Offset" uniform="true" spec_desc="A number that is added to the current frame number to get the image file frame number" />
       <input name="frameendaction" type="string" value="constant" enum="constant,clamp,periodic,mirror" uiname="Frame End Action" uniform="true" spec_desc="What to do when the resolved image frame number is outside the `framerange` range" spec_acceptedvalues="constant, clamp, periodic, mirror" />
       <output name="out" type="@typeName@" default="Value:zero" spec_desc="the sampled texture value" />
     </nodedef>
@@ -146,16 +150,16 @@
   -->
   <template name="TP_ND_tiledimage" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_tiledimage_@typeName@" node="tiledimage" nodegroup="texture2d">
-      <input name="file" type="filename" value="" uniform="true" spec_desc="the URI of an image file. The filename can include one or more substitutions to change the file name (including frame number) that is accessed, as described in the Filename Substitutions section."/>
-      <input name="default" type="@typeName@" value="Value:zero" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved (e.g. if a <geometry token>, [interface token] or {hostattr} is included in the filename but no substitution value or default is defined, or if the resolved file URI cannot be read), or if the specified layer does not exist in the file. The default value must be the same type as the <image> element itself. If default is not defined, the default color value will be 0.0 in all channels. " />
-      <input name="texcoord" type="vector2" defaultgeomprop="UV0" uiname="Texture Coordinates" spec_desc="The 2D texture coordinate at which the image data is read. Default is to use the current u,v coordinate. " />
-      <input name="uvtiling" type="vector2" value="1.0, 1.0" spec_desc="The tiling rate for the given image along the U and V axes. Mathematically equivalent to multiplying the incoming texture coordinates by the given vector value." />
-      <input name="uvoffset" type="vector2" value="0.0, 0.0" spec_desc="The offset for the given image along the U and V axes. Mathematically equivalent to subtracting the given vector value from the incoming texture coordinates." />
-      <input name="realworldimagesize" type="vector2" value="1.0, 1.0" unittype="distance" spec_desc="The real-world size represented by the file image, with unittype 'distance'. A unit attribute may be provided to indicate the units that realworldimagesize is expressed in." />
-      <input name="realworldtilesize" type="vector2" value="1.0, 1.0" unittype="distance" spec_desc="The real-world size of a single square 0-1 UV tile, with unittype 'distance'. A unit attribute may be provided to indicate the units that realworldtilesize is expressed in. " />
-      <input name="filtertype" type="string" value="linear" enum="closest,linear,cubic" uiname="Filter Type" uniform="true" spec_desc="The type of texture filtering to use; standard values include 'closest' (nearest-neighbor single-sample), 'linear', and 'cubic'. If not specified, an application may use its own default texture filtering method." />
-      <input name="framerange" type="string" value="" uiname="Frame Range" uniform="true" spec_desc="A string 'minframe-maxframe', e.g. '10-99', to specify the range of frames that the image file is allowed to have, usually the range of image files on disk. Default is unbounded. " />
-      <input name="frameoffset" type="integer" value="0" uiname="Frame Offset" uniform="true" spec_desc="A number that is added to the current frame number to get the image file frame number. E.g. if `frameoffset` is 25, then processing frame 100 will result in reading frame 125 from the imagefile sequence. Default is no frame offset." />
+      <input name="file" type="filename" value="" uniform="true" spec_desc="the URI of an image file"/>
+      <input name="default" type="@typeName@" value="Value:zero" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved" />
+      <input name="texcoord" type="vector2" defaultgeomprop="UV0" uiname="Texture Coordinates" spec_desc="The 2D texture coordinate at which the image data is read" />
+      <input name="uvtiling" type="vector2" value="1.0, 1.0" spec_desc="The tiling rate for the given image along the U and V axes" />
+      <input name="uvoffset" type="vector2" value="0.0, 0.0" spec_desc="The offset for the given image along the U and V axes" />
+      <input name="realworldimagesize" type="vector2" value="1.0, 1.0" unittype="distance" spec_desc="The real-world size represented by the file image" />
+      <input name="realworldtilesize" type="vector2" value="1.0, 1.0" unittype="distance" spec_desc="The real-world size of a single square 0-1 UV tile" />
+      <input name="filtertype" type="string" value="linear" enum="closest,linear,cubic" uiname="Filter Type" uniform="true" spec_desc="The type of texture filtering to use" />
+      <input name="framerange" type="string" value="" uiname="Frame Range" uniform="true" spec_desc="A string 'minframe-maxframe', e.g. '10-99', to specify the range of frames that the image file is allowed to have" />
+      <input name="frameoffset" type="integer" value="0" uiname="Frame Offset" uniform="true" spec_desc="A number that is added to the current frame number to get the image file frame number" />
       <input name="frameendaction" type="string" value="constant" enum="constant,clamp,periodic,mirror" uiname="Frame End Action" uniform="true" spec_desc="What to do when the resolved image frame number is outside the `framerange` range" spec_acceptedvalues="constant, clamp, periodic, mirror" />
       <output name="out" type="@typeName@" default="Value:zero" spec_desc="the sampled texture value" />
     </nodedef>
@@ -166,8 +170,8 @@
     Samples an equiangular map with adjustable rotation offset.
   -->
   <nodedef name="ND_latlongimage" node="latlongimage" nodegroup="texture2d">
-    <input name="file" type="filename" value="" uniform="true" spec_desc="the URI of an image file. The filename can include one or more substitutions to change the file name (including frame number) that is accessed, as described in the Filename Substitutions section."/>
-    <input name="default" type="color3" value="0.0, 0.0, 0.0" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved (e.g. if a <geometry token>, [interface token] or {hostattr} is included in the filename but no substitution value or default is defined, or if the resolved file URI cannot be read), or if the specified layer does not exist in the file. The default value must be the same type as the <image> element itself. If default is not defined, the default color value will be 0.0 in all channels. " />
+    <input name="file" type="filename" value="" uniform="true" spec_desc="the URI of an image file"/>
+    <input name="default" type="color3" value="0.0, 0.0, 0.0" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved" />
     <input name="viewdir" type="vector3" value="0.0, 0.0, 1.0" uiname="View Direction" spec_desc="The view direction determining the value sampled from the projected equiangular map" />
     <input name="rotation" type="float" value="0.0" unittype="angle" unit="degree" uimin="0" uimax="360" uiname="Longitude Offset" spec_desc="The longitudinal sampling offset, in degrees" />
     <output name="out" type="color3" default="0.0, 0.0, 0.0" spec_desc="the sampled texture value"/>
@@ -208,17 +212,17 @@
       <input name="filex" type="filename" value="" uniform="true" spec_desc="The URI of an image file to be projected in the direction from the +X axis back toward the origin" />
       <input name="filey" type="filename" value="" uniform="true" spec_desc="The URI of an image file to be projected in the direction from the +Y axis back toward the origin"/>
       <input name="filez" type="filename" value="" uniform="true" spec_desc="The URI of an image file to be projected in the direction from the +Z axis back toward the origin"/>
-      <input name="layerx" type="string" value="" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file for the X-axis projection. If no value for layerx is provided and the input file has multiple layers, then the 'default' layer will be used, or 'rgba' if there is no 'default'" />
-      <input name="layery" type="string" value="" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file for the Y-axis projection. If no value for layerx is provided and the input file has multiple layers, then the 'default' layer will be used, or 'rgba' if there is no 'default'"/>
-      <input name="layerz" type="string" value="" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file for the Z-axis projection. If no value for layerx is provided and the input file has multiple layers, then the 'default' layer will be used, or 'rgba' if there is no 'default'"/>
-      <input name="default" type="@typeName@" value="Value:zero" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved (e.g. if a <geometry token>, [interface token] or {hostattr} is included in the filename but no substitution value or default is defined, or if the resolved file URI cannot be read), or if the specified layer does not exist in the file. The default value must be the same type as the <image> element itself. If default is not defined, the default color value will be 0.0 in all channels." />
-      <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="A spatially-varying input specifying the 3D position at which the projection is evaluated. Default is to use the current 3D object-space coordinate" />
-      <input name="normal" type="vector3" defaultgeomprop="Nobject" spec_desc="A spatially-varying input specifying the 3D normal vector used for blending. Default is to use the current object-space surface normal." />
-      <input name="upaxis" type="integer" value="2" enum="X,Y,Z" enumvalues="0,1,2" uniform="true" spec_desc="Which axis is considered to be 'up', either 0 for X, 1 for Y, or 2 for Z. Default is Y (1)" spec_acceptedvalues="0, 1, 2" />
-      <input name="blend" type="float" value="1.0" uimin="0.0" uimax="1.0" spec_desc="A 0-1 weighting factor for blending the three axis samples using the geometric normal, with higher values giving softer blending. Default is 1.0." />
-      <input name="filtertype" type="string" value="linear" enum="closest,linear,cubic" uiname="Filter Type" uniform="true" spec_desc="The type of texture filtering to use; standard values include 'closest' (nearest-neighbor single-sample), 'linear', and 'cubic'. If not specified, an application may use its own default texture filtering method." />
-      <input name="framerange" type="string" value="" uiname="Frame Range" uniform="true" spec_desc="A string 'minframe-maxframe', e.g. '10-99', to specify the range of frames that the image file is allowed to have, usually the range of image files on disk. Default is unbounded. " />
-      <input name="frameoffset" type="integer" value="0" uiname="Frame Offset" uniform="true" spec_desc="A number that is added to the current frame number to get the image file frame number. E.g. if `frameoffset` is 25, then processing frame 100 will result in reading frame 125 from the imagefile sequence. Default is no frame offset." />
+      <input name="layerx" type="string" value="" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file for the X-axis projection" />
+      <input name="layery" type="string" value="" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file for the Y-axis projection"/>
+      <input name="layerz" type="string" value="" uniform="true" spec_desc="The name of the layer to extract from a multi-layer input file for the Z-axis projection"/>
+      <input name="default" type="@typeName@" value="Value:zero" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved" />
+      <input name="position" type="vector3" defaultgeomprop="Pobject" spec_desc="A spatially-varying input specifying the 3D position at which the projection is evaluated" />
+      <input name="normal" type="vector3" defaultgeomprop="Nobject" spec_desc="A spatially-varying input specifying the 3D normal vector used for blending" />
+      <input name="upaxis" type="integer" value="2" enum="X,Y,Z" enumvalues="0,1,2" uniform="true" spec_desc="Which axis is considered to be 'up', either 0 for X, 1 for Y, or 2 for Z" spec_acceptedvalues="0, 1, 2" />
+      <input name="blend" type="float" value="1.0" uimin="0.0" uimax="1.0" spec_desc="A 0-1 weighting factor for blending the three axis samples using the geometric normal, with higher values giving softer blending" />
+      <input name="filtertype" type="string" value="linear" enum="closest,linear,cubic" uiname="Filter Type" uniform="true" spec_desc="The type of texture filtering to use" />
+      <input name="framerange" type="string" value="" uiname="Frame Range" uniform="true" spec_desc="A string 'minframe-maxframe', e.g. '10-99', to specify the range of frames that the image file is allowed to have" />
+      <input name="frameoffset" type="integer" value="0" uiname="Frame Offset" uniform="true" spec_desc="A number that is added to the current frame number to get the image file frame number" />
       <input name="frameendaction" type="string" value="constant" enum="constant,clamp,periodic,mirror" uiname="Frame End Action" uniform="true" spec_desc="What to do when the resolved image frame number is outside the `framerange` range" spec_acceptedvalues="constant, clamp, periodic, mirror" />
       <output name="out" type="@typeName@" default="Value:zero" spec_desc="the blended texture value" />
     </nodedef>
