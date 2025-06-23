@@ -1375,7 +1375,7 @@
     Transform a normal vector from one named space to another.
   -->
   <nodedef name="ND_transformnormal_vector3" node="transformnormal" nodegroup="math">
-    <input name="in" type="vector3" value="0.0, 0.0, 1.0" />
+    <input name="in" type="vector3" value="0.0, 0.0, 1.0" spec_desc="The normal to be transformed" />
     <input name="fromspace" type="string" value="" uniform="true" spec_desc="The name of a vector space understood by the rendering target to transform the `in` normal from; may be empty to specify the renderer's working space."/>
     <input name="tospace" type="string" value="" uniform="true" spec_desc="The name of a vector space understood by the rendering target for the space to transform the `in` normal to."/>
     <output name="out" type="vector3" defaultinput="in" spec_desc="point transformed from `fromspace` to `tospace`"/>
