@@ -1,3 +1,6 @@
 build
 dist
+dev_spec/dest
+dev_spec/nodes
 .DS_Store
+.cache
