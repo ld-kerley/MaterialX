@@ -14,21 +14,18 @@ Samples data from a single image, or from a layer within a multi-layer image.
 
 @MX_TABLE_image@
 
----
 
 ### tiledimage
 Samples data from a single image, with provisions for tiling and offsetting the image across uv space.
 
 @MX_TABLE_tiledimage@
 
----
 
 ### latlongimage
 Samples an equiangular map along a view direction with adjustable latitudinal offset.
 
 @MX_TABLE_latlongimage@
 
----
 
 ### triplanarprojection
 Samples data from three images (or layers within multi-layer images), and projects a tiled representation of the images along each of the three respective coordinate axes, computing a weighted blend of the three samples using the geometric normal.
@@ -47,7 +44,6 @@ The output, `out`, of this node corresponds directly to its input, `value`, in b
 
 $$out = value$$
 
----
 
 ### ramplr
 A left-to-right linear value ramp
@@ -62,14 +58,13 @@ By default the first set of UV coordinates will be used for `texcoord`.
 
 The output, `out`, of this node is the linear interpolation of `value_l` and `value_r` with respect to interpolant parameter `U`:
 
-$$
+```math
 \begin{align*}
 U &= \text{Clamp}(\text{texcoord}_x, 0.0, 1.0) \\
 \text{out}_i &= \text{value}_{r_i} \cdot U + \text{value}_{l_i} \cdot (1 - U)
 \end{align*}
-$$
+```
 
----
 
 ### ramptb
 A top-to-bottom linear value ramp.
@@ -91,7 +86,6 @@ V &= \text{Clamp}(\text{texcoord}_y, 0.0, 1.0) \\
 \end{align*}
 ```
 
----
 
 ### ramp4
 A 4-corner bilinear value ramp.
@@ -112,7 +106,6 @@ T &= \text{Clamp}(\text{texcoord}_y, 0.0, 1.0) \\
 \end{align*}
 ```
 
----
 
 ### splitlr
 A left-right split matte, split at a specified `U` value.
@@ -128,7 +121,6 @@ T &= \text{aastep}(\text{center}, \text{texcoord}_x) \\
 \end{align*}
 ```
 
----
 
 ### splittb
 A top-bottom split matte, split at a specified `V`` value.
@@ -144,44 +136,36 @@ T &= \text{aastep}(\text{center}, \text{texcoord}_y) \\
 \end{align*}
 ```
 
----
 
 ### noise2d
 2D Perlin noise in 1, 2, 3 or 4 channels.
 
 @MX_TABLE_noise2d@
 
----
 
 ### noise3d
 @MX_TABLE_noise3d@
 
----
 
 ### fractal3d
 @MX_TABLE_fractal3d@
 
----
 
 ### cellnoise2s
 @MX_TABLE_cellnoise2d@
 
----
 
 ### cellnoise3d
 @MX_TABLE_cellnoise3d@
 
----
 
 ### worleynoise2d
 @MX_TABLE_worleynoise2d@
 
----
 
 ### worleynoise3d
 @MX_TABLE_worleynoise3d@
 
----
 
 ### unifiednoise2d
 @MX_TABLE_unifiednoise2d@
@@ -216,7 +200,6 @@ outmin         & \text{if } clampoutput \text{ is } true \text{ and } remapped <
 outmax         & \text{if } clampoutput \text{ is } true \text{ and } remapped > outmax\\
 \end{cases}$$
 
----
 
 ### unifiednoise3d
 @MX_TABLE_unifiednoise3d@
@@ -249,7 +232,6 @@ outmin         & \text{if } clampoutput \text{ is } true \text{ and } remapped <
 outmax         & \text{if } clampoutput \text{ is } true \text{ and } remapped > outmax\\
 \end{cases}$$
 
----
 
 ### randomfloat:
 Produces a stable randomized float value between 'min' and 'max', based on an 'input' signal and 'seed' value. Uses a 2d cellnoise function to produce the output.
@@ -269,7 +251,6 @@ n &= \text{cellnoise2d}(\vec{v}) \quad \text{where } n \in [0, 1] \\
 \end{aligned}
 ```
 
----
 
 ### randomcolor: 
 Produces a randomized RGB color within a randomized hue, saturation and brightness range, based on an 'input' signal and 'seed' value. Output type color3.
@@ -304,7 +285,6 @@ The output, `out`, is a random color computed by the method below:
 Draws a checkerboard pattern
 [there will be a vector illustration figure here]
 
----
 
 ### line
 2D line pattern.
@@ -316,7 +296,6 @@ Returns 1 if texcoord is at less than radius distance from a line segment define
 of the lines semi-circles.
 [there will be a vector illustration figure here]
 
----
 
 ### circle
 2D circle(disk) pattern.
@@ -326,7 +305,6 @@ of the lines semi-circles.
 Returns 1 if texcoord is inside a circle defined by center and radius; otherwise returns 0
 [there will be a vector illustration figure here]
 
----
 
 ### cloverleaf
 2D cloverleaf pattern: four semicircles on the edges of a square defined by center and radius.
@@ -336,7 +314,6 @@ Returns 1 if texcoord is inside a circle defined by center and radius; otherwise
 Returns 1 if texcoord is inside a cloverleaf shape described by four semicircles on the edges of a square defined by center and radius; otherwise returns 0.
 [there will be a vector illustration figure here]
 
----
 
 ### hexagon
 2D hexagon pattern.
@@ -346,35 +323,30 @@ Returns 1 if texcoord is inside a cloverleaf shape described by four semicircles
 Returns 1 if texcoord is inside a hexagon shape inscribed by a circle defined by center and radius; otherwise returns 0.
 [there will be a vector illustration figure here]
 
----
 
 ### grid
 Creates a grid pattern of (1, 1, 1) white lines on a (0, 0, 0) black background with the given tiling, offset, and line thickness. Pattern can be regular or staggered.
 
 @MX_TABLE_grid@
 
----
 
 ### crosshatch
 Creates a crosshatch pattern with the given tiling, offset, and line thickness. Pattern can be regular or staggered.
 
 @MX_TABLE_crosshatch@
 
----
 
 ### tiledcircles
 Creates a black and white pattern of circles with a defined tiling and size (diameter). Pattern can be regular or staggered.
 
 @MX_TABLE_tiledcircles@
 
----
 
 ### tiledcloverleafs
 Creates a black and white pattern of cloverleafs with a defined tiling and size (diameter of the circles circumscribing the shape). Pattern can be regular or staggered.
 
 @MX_TABLE_tiledcloverleafs@
 
----
 
 ### tiledhexagons
 Creates a black and white pattern of hexagons with a defined tiling and size (diameter of the circles circumscribing the shape). Pattern can be regular or staggered.
@@ -392,7 +364,6 @@ The coordinates associated with the currently-processed data, as defined in a sp
 
 Outputs the three-dimensional coordinate (x,y,z) of the currently processed data.
 
----
 
 ### normal
 The normalized geometric normal associated with the currently-processed data, as defined in a specific coordinate space.
@@ -403,7 +374,6 @@ Outputs the normalized observer/ray facing normal. If the geometry has texture c
 When going between the different coordinate spaces, the transformation matrices of the spaces are applied to the normal as their inverse transpose
 (or equivalently, transpose inverse), with the exception of the model space, which
 
----
 
 ### tangent
 The geometric tangent vector associated with the currently-processed data, as defined in a specific coordinate space.
@@ -416,7 +386,6 @@ texture coordinates on the geometry, or the texture coordinate index is out of r
 not necessarily orthogonal to the "bitangent".
 For curves, tangent goes along the length of the curve.
 
----
 
 ### bitangent
 The geometric bi-tangent vector associated with the currently-processed data, as defined in a specific coordinate space.
@@ -426,7 +395,6 @@ The geometric bi-tangent vector associated with the currently-processed data, as
 Outputs the un-normalized partial derivative at "position" with respect to the second element 'v' in the texture coordinate touple ('u','v'). If there are no
 texture coordinates on the geometry, or the texture coordinate index is out of range, the output falls back to the default vector3(0,0,0). For curves, bitangent goes across the width of the curve.
 
----
 
 ### bump
 The normalized normal computed by offsetting the surface world space position along its world space normal.
@@ -436,7 +404,6 @@ The normalized normal computed by offsetting the surface world space position al
 Outputs the un-normalized partial derivative at "position" with respect to the second element 'v' in the texture coordinate touple ('u','v'). If there are no
 texture coordinates on the geometry, or the texture coordinate index is out of range, the output falls back to the default vector3(0,0,0). For curves, bitangent goes across the width of the curve.
 
----
 
 ### texcoord
 The 2D or 3D texture coordinates associated with the currently-processed data
@@ -444,7 +411,6 @@ The 2D or 3D texture coordinates associated with the currently-processed data
 @MX_TABLE_texcoord@
 
 
----
 
 
 ### geomcolor
@@ -452,21 +418,18 @@ The color associated with the current geometry at the current position, generall
 
 @MX_TABLE_geomcolor@
 
----
 
 ### geompropvalue
 The value of the specified varying geometric property (defined using <geompropdef>) of the currently-bound geometry. This node's type must match that of the referenced geomprop.
 
 @MX_TABLE_geompropvalue@
 
----
 
 ### geompropvalueuniform
 The value of the specified uniform geometric property (defined using <geompropdef>) of the currently-bound geometry. This node's type must match that of the referenced geomprop.
 
 @MX_TABLE_geompropvalueuniform@
 
----
 
 ### Geometric Spaces
 
@@ -509,7 +472,6 @@ Add a value to the incoming float/color/vector/matrix
 \mathtt{out}_{i,j} = \mathtt{in1}_{i,j} + \mathtt{in2}_{i,j} 
 ```
 
----
 
 ### subtract
 Subtract a value from the incoming float/color/vector/matrix
@@ -522,7 +484,6 @@ Subtract a value from the incoming float/color/vector/matrix
 \mathtt{out}_{i,j} = \mathtt{in2}_{i,j} - \mathtt{in1}_{i,j} 
 ```
 
----
 
 ### multiply
 Multiply two values together. Scalar and vector types multiply component-wise, while matrices multiply with the standard matrix product.
@@ -537,7 +498,6 @@ For scalar and vector types, `out` shall be computed as the component-wise multi
 
 For matrix types, `out` shall be computed as the matrix inner product.
 
----
 
 ### divide
 Divide one value by another. Scalar and vector types divide component-wise, while for matrices `in1` is multiplied with the inverse of `in2`.
@@ -556,7 +516,6 @@ For matrix types, `out` shall be computed as the matrix inner product of `in1` a
 \mathtt{out} = \mathtt{in}_1 \mathtt{in}_2^{-1}
 ```
 
----
 
 ### modulo
 The remaining fraction after dividing an incoming float/color/vector by a value and subtracting the integer portion. Modulo always returns a non-negative result.
@@ -568,7 +527,6 @@ The remaining fraction after dividing an incoming float/color/vector by a value 
 \mathtt{out}_{i} = \lvert \mathtt{in1}_{i} \space mod \space \mathtt{in2}_{i} \rvert
 ```
 
----
 
 ### fract
 Returns the fractional part of the floating-point input.
@@ -583,7 +541,6 @@ x &= \lvert \mathtt{in}_{i} \rvert \\
 \end{align}
 ```
 
----
 
 ### invert
 subtract the incoming float, color, or vector from `amount` in all channels, outputting: `amount - in`.
@@ -595,7 +552,6 @@ subtract the incoming float, color, or vector from `amount` in all channels, out
 \mathtt{out}_{i} = \mathtt{amount}_{i} - \mathtt{in}_{i}
 ```
 
----
 
 ### absval
 The per-channel absolute value of the incoming float/color/vector.
@@ -607,7 +563,6 @@ The per-channel absolute value of the incoming float/color/vector.
 \mathtt{out}_{i} = \lvert \mathtt{in}_{i} \rvert
 ```
 
----
 
 ### floor
 The per-channel nearest integer value less than or equal to the incoming float/color/vector. The output remains in floating point per-channel, i.e. the same type as the input, except that the floor(float) also has a variant outputting an integer type.
@@ -620,7 +575,6 @@ The per-channel nearest integer value less than or equal to the incoming float/c
 \mathtt{out}_{i} = \lfloor \mathtt{in}_{i} \rfloor
 ```
 
----
 
 ### ceil
 The per-channel nearest integer value greater than or equal to the incoming float/color/vector. The output remains in floating point per-channel, i.e. the same type as the input, except that the ceil(float) also has a variant outputting an integer type.
@@ -633,7 +587,6 @@ The per-channel nearest integer value greater than or equal to the incoming floa
 \mathtt{out}_{i} = \lceil \mathtt{in}_{i} \rceil
 ```
 
----
 
 ### round
 Round each channel of the incoming float/color/vector values to the nearest integer value.
@@ -646,7 +599,6 @@ Round each channel of `in` to the nearest whole number, storing the result in th
 \mathtt{out}_{i} = \lfloor \mathtt{in}_{i} \rceil
 ```
 
----
 
 ### power
 Raise incoming float/color values to the specified exponent, commonly used for "gamma" adjustment.
@@ -659,7 +611,6 @@ Raise incoming float/color values to the specified exponent, commonly used for "
 \mathtt{out}_{i} = \mathtt{in1}_{i}^{\mathtt{in2}_{i}}
 ```
 
----
 
 ### safepower
 Raise incoming float/color values to the specified exponent. Negative "in1" values will result in negative output values.
@@ -672,7 +623,6 @@ Raise incoming float/color values to the specified exponent. Negative "in1" valu
 \mathtt{out}_{i} = (sgn \space \mathtt{in1}_{i}) \mathtt{in1}_{i}^{\lvert \mathtt{in2}_{i} \rvert}
 ```
 
----
 
 ### sin
 The sine of the incoming value, which is expected to be expressed in radians.
@@ -684,7 +634,6 @@ The sine of the incoming value, which is expected to be expressed in radians.
 ```math
 \mathtt{out}_{i} = \sin{\mathtt{in}_{i}}
 ```
----
 
 ### cos
 The cosine of the incoming value, which is expected to be expressed in radians.
@@ -696,7 +645,6 @@ The cosine of the incoming value, which is expected to be expressed in radians.
 ```math
 \mathtt{out}_{i} = \cos{\mathtt{in}_{i}}
 ```
----
 
 ### tan
 The tangent of the incoming value, which is expected to be expressed in radians.
@@ -708,7 +656,6 @@ The tangent of the incoming value, which is expected to be expressed in radians.
 ```math
 \mathtt{out}_{i} = \tan{\mathtt{in}_{i}}
 ```
----
 
 ### asin
 The arcsine of the incoming value. The output will be expressed in radians.
@@ -720,7 +667,6 @@ The arcsine of the incoming value. The output will be expressed in radians.
 ```math
 \mathtt{out}_{i} = \sin^{-1}{\mathtt{in}_{i}}
 ```
----
 
 ### acos
 The arccosine of the incoming value. The output will be expressed in radians.
@@ -732,7 +678,6 @@ The arccosine of the incoming value. The output will be expressed in radians.
 ```math
 \mathtt{out}_{i} = \cos^{-1}{\mathtt{in}_{i}}
 ```
----
 
 ### atan2
 the arctangent of the expression (`iny`/`inx`). The output will be expressed in radians.
@@ -748,7 +693,6 @@ the arctangent of the expression (`iny`/`inx`). The output will be expressed in 
 \mathtt{out}_{i} = \tan^{-1}{\frac{\mathtt{iny}_{i}}{\mathtt{inx}_{i}}}
 ```
 
----
 
 ### sqrt
 The square root of the incoming value. 
@@ -761,7 +705,6 @@ The square root of the incoming value.
 \mathtt{out}_{i} = \sqrt{\max(\mathtt{in}_{i}, 0)}
 ```
 
----
 
 ### ln
 The natural logarithm of the incoming value. 
@@ -774,7 +717,6 @@ The natural logarithm of the incoming value.
 \mathtt{out}_{i} = \ln{\mathtt{in}_{i}}
 ```
 
----
 
 ### exp
 $e$ to the power of the incoming value.
@@ -787,7 +729,6 @@ $e$ to the power of the incoming value.
 \mathtt{out}_{i} = e^{\mathtt{in}_{i}}
 ```
 
----
 
 ### sign
 The per-channel sign of the incoming float/color/vector value: -1 for negative, +1 for positive, or 0 for zero.
@@ -799,7 +740,6 @@ The per-channel sign of the incoming float/color/vector value: -1 for negative, 
 \mathtt{out}_{i} = sgn \space \mathtt{in}_{i}
 ```
 
----
 
 ### clamp
 Clamp incoming values per-channel to a specified range of float/color/vector values.
@@ -811,7 +751,6 @@ Clamp incoming values per-channel to a specified range of float/color/vector val
 ```math
 \mathtt{out}_{i} = \max(\mathtt{low}_{i}, \min(\mathtt{high}_{i}, {\mathtt{in}_{i}}))
 ```
----
 
 ### min
 Select the minimum of the two incoming values
@@ -823,7 +762,6 @@ Select the minimum of the two incoming values
 \mathtt{out}_{i} = \min(\mathtt{in1}_{i}, \mathtt{in2}_{i})
 ```
 
----
 
 ### max
 Select the maximum of the two incoming values
@@ -835,7 +773,6 @@ Select the maximum of the two incoming values
 \mathtt{out}_{i} = \max(\mathtt{in1}_{i}, \mathtt{in2}_{i})
 ```
 
----
 
 ### normalize
 Output the incoming vectorN stream normalized. 
@@ -848,7 +785,6 @@ Output the incoming vectorN stream normalized.
 \mathtt{out} = \frac{\mathtt{in}}{\lVert \mathtt{in} \rVert}
 ```
 
----
 
 ### magnitude
 Output the float magnitude (vector length) of the incoming vectorN stream; cannot be used on float or colorN streams. Note: the fourth channel in vector4 streams is not treated any differently, e.g. not as a homogeneous "w" value.
@@ -861,7 +797,6 @@ Output the float magnitude (vector length) of the incoming vectorN stream; canno
 \mathtt{out} = \lVert \mathtt{in} \rVert = \sqrt{\sum_{i=0}^{N-1} {\mathtt{in}_i}^2}
 ```
 
----
 
 ### distance
 Measures the distance between two points in 2D, 3D, or 4D.
@@ -874,7 +809,6 @@ Measures the distance between two points in 2D, 3D, or 4D.
 \mathtt{out} = \lVert \mathtt{in2} - \mathtt{in1} \rVert
 ```
 
----
 
 ### dotproduct
 Output the (float) dot product of two incoming vectorN streams; cannot be used on float or colorN streams.
@@ -887,7 +821,6 @@ Output the (float) dot product of two incoming vectorN streams; cannot be used o
 \mathtt{out} = \mathtt{in1} \cdot \mathtt{in2}
 ```
 
----
 
 ### crossproduct
 Output the (vector3) cross product of two incoming vector3 streams; cannot be used on any other stream type. A disabled crossproduct node passes through the value of `in1` unchanged.
@@ -901,7 +834,6 @@ Output the (vector3) cross product of two incoming vector3 streams; cannot be us
 ```
 If the node is disabled, `out` shall be `in1`.
 
----
 
 ### transformpoint
 Transform the incoming vector3 coordinate from one specified space to another; cannot be used on any other stream type.
@@ -928,7 +860,6 @@ p' &= p \cdot M \\
 > [!WARNING]
 > What did we decide about common vs world?
 
----
 
 ### transformvector
 Transform the incoming vector3 coordinate from one specified space to another; cannot be used on any other stream type.
@@ -956,30 +887,24 @@ _v'_ shall be computed as multiplication of _v_ with _M_.
 > [!WARNING]
 > What did we decide about common vs world?
 
----
 
 ### transformnormal
 Transform the incoming vector3 normal from one specified space to another; cannot be used on any other stream type.
 
 @MX_TABLE_transformnormal@
 
----
 
 ### transformmatrix
 Transform the incoming vectorN by the specified matrix.
 
 @MX_TABLE_transformmatrix@
 
----
 
 ### normalmap
 Transform a normal vector from the encoded tangent space to world space. The input normal vector is assumed to be encoded with all channels in the [0-1] range, as would commonly be output from a normal map.
 
 @MX_TABLE_normalmap@
 
----
-
----
 
 ### creatematrix
 
@@ -987,14 +912,12 @@ Build a 3x3 or 4x4 matrix from three vector3 or four vector3 or vector4 inputs. 
 
 @MX_TABLE_creatematrix@
 
----
 
 ### hextilednormalmap
 Transform a normal vector from the encoded tangent space to world space. The input normal vector is assumed to be encoded with all channels in the [0-1] range, as would commonly be output from a normal map.
 
 @MX_TABLE_hextilednormalmap@
 
----
 
 ### transpose
 Transpose the incoming matrix
@@ -1007,7 +930,6 @@ Transpose the incoming matrix
 \mathrm{out} = \mathrm{in}^T
 ```
 
----
 
 ### determinant
 Output the determinant of the incoming matrix.
@@ -1020,7 +942,6 @@ Output the determinant of the incoming matrix.
 \mathrm{out} = \det(\mathrm{in})
 ```
 
----
 
 ### invertmatrix
 Invert the incoming matrix.
@@ -1029,7 +950,6 @@ Invert the incoming matrix.
                                                                
 `out` shall be computed as the matrix inverse of `in`. If `in` is not invertible, every component out `out` shall be set to `NaN`.
 
----
 
 ### rotate2d
 Rotate the incoming 2D vector about the origin.
@@ -1050,7 +970,6 @@ where:
 \theta = \frac{\mathrm{amount} \cdot \pi}{180}
 ```
 
----
 
 ### rotate3d
 Rotate the incoming 3D vector about the specified unit axis vector.
@@ -1075,7 +994,6 @@ where:
 \end{align}
 ```
 
----
 
 ### place2d
 Transform incoming 2D texture coordinates from one frame of reference to another.
@@ -1083,7 +1001,6 @@ Transform incoming 2D texture coordinates from one frame of reference to another
 @MX_TABLE_place2d@
 
 
----
 
 ### trianglewave
 Generate a triangle wave from the given scalar input. The generated wave ranges from zero to one and repeats on integer boundaries.
@@ -1098,7 +1015,6 @@ Generate a triangle wave from the given scalar input. The generated wave ranges 
 > [!WARNING]
 > define defaultinput?
                                                                                   
----
 
 ### reflect
 Reflect the incoming 3D vector about a surface normal vector.
@@ -1122,7 +1038,6 @@ N &= \mathtt{normal} \notag
 \end{align}
 ```
 
----
 
 
 ### refract
@@ -1158,11 +1073,10 @@ Increase or decrease the contrast of the incoming `in` values using `amount` as 
 
 The output is determined as follows:
 
-$out =  (in - pivot) \cdot amount + pivot$
+$$out =  (in - pivot) \cdot amount + pivot$$
 
 Note that the contrast increases when `amount` $>$ 1, and decreases when `amount` is between 0 and 1. Also `pivot` will not change as contrast is adjusted.
 
----
 
 ### remap
 Linearly remap incoming values from one range of values [`inlow`, `inhigh`] to another [`outlow`, `outhigh`].
@@ -1171,7 +1085,7 @@ Linearly remap incoming values from one range of values [`inlow`, `inhigh`] to a
 
 The output is determined as follows:
 
-$out = outlow + \left( \dfrac{in - inlow}{inhigh - inlow}  \right) \cdot (outhigh - outlow)$
+$$out = outlow + \left( \dfrac{in - inlow}{inhigh - inlow}  \right) \cdot (outhigh - outlow)$$
 
 
 
@@ -1182,7 +1096,6 @@ Remap incoming values from one range of values to another, optionally applying a
 
 This node first remaps the input from [`inlow`, `inhigh`] to [0,1], using the remap node. It then applies gamma correction, using $1/gamma$ as the exponent. Note that gamma values greater than `1.0` make midtones brighter. This gamma corrected result is then remaped from [0,1], to [`outlow`, `outhigh`]. Then based on the value of `doclamp` the final output may be clamped to [`outlow`, `outhigh`].
 
----
 
 ### smoothstep
 Output a smooth, hermite-interpolated remapping of input values from [`low`, `high`] to [0,1].
@@ -1193,13 +1106,14 @@ Output a smooth, hermite-interpolated remapping of input values from [`low`, `hi
 This remaps the input to [0,1], using a hermite-interpolated or smoothstep remapping.
 Note that inputs outside the [`low`, `high`] range are clamped.
 
-$out = \begin{cases}
+```math
+out = \begin{cases}
     1, \ in \geq high\\
     0, \ in \leq low  \\
     remap(low, high, in), \ otherwise
-\end{cases}$
+\end{cases}
+```
 
----
 
 ### luminance
 Output a grayscale value containing the luminance of the incoming RGB color in all color channels
@@ -1208,7 +1122,6 @@ Output a grayscale value containing the luminance of the incoming RGB color in a
 
 Output a grayscale value containing the luminance of the incoming RGB color in all color channels, computed using the dot product of the incoming color `in` with the luma coefficients `lumacoeffs` of the working colorspace; the alpha channel is left unchanged if present.
 
----
 
 ### rgbtohsv
 Convert an incoming color from RGB to HSV space (with H and S ranging from 0 to 1); the alpha channel is left unchanged if present. This conversion is not affected by the current color space.
@@ -1217,7 +1130,6 @@ Convert an incoming color from RGB to HSV space (with H and S ranging from 0 to 
 
 See Foley & van Dam 
 
----
 
 ### hsvtorgb
 Convert an incoming color from HSV to RGB space; the alpha channel is left unchanged if present. This conversion is not affected by the current color space.
@@ -1225,7 +1137,7 @@ Convert an incoming color from HSV to RGB space; the alpha channel is left uncha
 @MX_TABLE_hsvtorgb@
 
 See Foley & van Dam 
----
+
 
 ### hsvadjust
 Adjust the hue, saturation and value of an RGB color by converting the input color to HSV, adding amount.x to the hue, multiplying the saturation by amount.y, multiplying the value by amount.z, then converting back to RGB.
@@ -1239,7 +1151,6 @@ Note:
 - The internal conversions between RGB and HSV spaces are not affected by the current color space. 
 - For color4 inputs, the alpha value is unchanged.
 
----
 
 ### saturate
 Adjust the saturation of a color, the alpha channel will be unchanged if present.
@@ -1250,7 +1161,6 @@ The `amount` value is used to perform linear interpolation between the incomihng
 
 Note that this operation is not equivalent to the saturation adjustment of the `hsvadjust` node, as that operator does not take the working or any other colorspace into account.
 
----
 
 ### colorcorrect
 Combines various adjustment nodes into one artist-friendly color correction node. For color4 inputs, the alpha value is unchanged.
@@ -1276,7 +1186,6 @@ Each component of the `out` output should be calculated by linearly interpolatin
 
 $$out_i = mix * fg_i + (1.0 - mix) * bg_i$$
 
----
 
 ### premult
 Multiply the R or RGB channels of the input by the Alpha channel of the input.
@@ -1293,7 +1202,6 @@ in_a              & \text{if } i \text{ is } a
 
 </details>
 
----
 
 ### unpremult
 Divide the RGB channels of the input by the Alpha channel of the input. If the Alpha value is zero, it is passed through unchanged.
@@ -1342,7 +1250,6 @@ $$out_i=mix*(bg_i + fg_i) + (1.0-mix)*bg_i$$
 
 </details>
 
----
 
 ### minus
 Subtract two 1-4 channel inputs, with optional mixing between the bg input and the result.
@@ -1355,7 +1262,6 @@ Each component of the `out` output should be calculated by linearly interpolatin
 
 $$out_i=mix*(bg_i - fg_i) + (1.0-mix)*bg_i$$
 
----
 
 ### difference
 Absolute-value difference of two 1-4 channel inputs, with optional mixing between the bg input and the result.
@@ -1368,7 +1274,6 @@ Each component of the `out` output should be calculated by linearly interpolatin
 
 $$out_i = mix* | bg_i - fg_i | + (1.0-mix)*bg_i$$
 
----
 
 ### burn
 Take two 1-4 channel inputs and apply the same operator to all channels: 
@@ -1382,13 +1287,14 @@ Otherwise, each component of the `bg` input is inverted and then divided by the 
 
 Each component of the `out` output should be calculated by linearly interpolating the respective component of the intermediate result and the respective component of `bg` using the `mix` input as the interpolant.
 
-$$out_i =
+```math
+out_i =
 \begin{cases}
 mix*(1.0 - (\frac{1.0 - bg_i}{fg_i}) + (1.0-mix)*bg_i       & \text{if } fg_i > 0\\
 0                                                           & \text{if } fg_i <= 0
-\end{cases}$$
+\end{cases}
+```
 
----
 
 ### dodge
 Take two 1-4 channel inputs and apply the same operator to all channels: 
@@ -1402,13 +1308,14 @@ Otherwise, each component of the `bg` input is divided by the respective compone
 
 Each component of the `out` output should be calculated by linearly interpolating the respective component of the intermediate result and the respective component of `bg` using the `mix` input as the interpolant.
 
-$$out_i =
+```math
+out_i =
 \begin{cases}
 mix*\frac{bg_i}{1.0 - fg_i} + (1.0-mix)*bg_i       & \text{if } (1.0 - fg_i) > 0\\
 0                                                           & \text{if } (1.0 - fg_i) <= 0
-\end{cases}$$
+\end{cases}
+```
 
----
 
 ### screen
 Take two 1-4 channel inputs and apply the same operator to all channels: 
@@ -1422,7 +1329,6 @@ Each component of the `out` output should be calculated by linearly interpolatin
 
 $$out_i = mix*(1.0 - (1.0 - fg_i) * (1.0 - bg_)) + (1.0-mix)*bg_i$$
 
----
 
 ### overlay
 Take two 1-4 channel inputs and apply the same operator to all channels:
@@ -1435,11 +1341,13 @@ For each component of the `bg` input, if the value is less than 0.5 then both th
 
 Each component of the `out` output should be calculated by linearly interpolating the respective component of the intermediate result and the respective component of `bg` using the `mix` input as the interpolant.
 
-$$out_i =
+```math
+out_i =
 \begin{cases}
 mix*(2 * fg_i * bg_i) + (1.0-mix)*bg_i                      & \text{ if } bg_i < 0.5 \\
 mix*(1 - 2(1 - fg_i)(1 - bg_i)) + (1.0-mix)*bg_i            & \text{ if } bg_i >= 0.5
-\end{cases}$$
+\end{cases}
+```
 
 
 ## Merge Nodes
@@ -1467,13 +1375,14 @@ If the sum of the `a` components of both the `fg` and `bg` inputs is less than o
 
 Each component of the `out` output should be calculated by linearly interpolating the respective component of the intermediate result and the respective component of `bg` using the `mix` input as the interpolant.
 
-$$out_i =
+```math
+out_i =
 \begin{cases}
 mix*(fg_i + bg_i) + (1.0-mix)*bg_i                      & \text{ if } fg_a + bg_a <= 1 \\
 mix*(fg_i+bg_i(1-fg_a)/bg_a) + (1.0-mix)*bg_i            & \text{ if } fg_a + bg_a > 1
-\end{cases}$$
+\end{cases}
+```
 
----
 
 ### in
 Take two color4 inputs and use the built-in alpha channel(s) to control the compositing of the fg and bg inputs:
@@ -1488,7 +1397,6 @@ Each component of the `out` output should be calculated by linearly interpolatin
 
 $$out_i = mix*(fg_i*bg_a) + (1.0-mix) * bg_i$$
 
----
 
 ### mask
 Take two color4 inputs and use the built-in alpha channel(s) to control the compositing of the fg and bg inputs: 
@@ -1502,7 +1410,6 @@ Each component of the `out` output should be calculated by linearly interpolatin
 
 $$out_i = mix*(bg_i*fg_a) + (1.0-mix)*bg_i$$
 
----
 
 ### matte
 Take two color4 inputs and use the built-in alpha channel(s) to control the compositing of the fg and bg inputs: 
@@ -1514,13 +1421,14 @@ Each of the `r`,`g` and `b` components of `fg` and `bg` inputs are linearly inte
 
 Each component of the `out` output should be calculated by linearly interpolating the respective component of the the absolute value of this intermediate result and the respective component of `bg` using the `mix` input as the interpolant.
 
-$$out_i =
+```math
+out_i =
 \begin{cases}
 mix*(fg_i*fg_a + bg_i*(1.0-fg_a)) + (1.0-mix)*bg_i       & \text{ if } i \text{ in } r,g,b \\
 mix*(fg_i + bg_i*(1.0-fg_a)) + (1.0-mix)*bg_i            & \text{ if } i = a
-\end{cases}$$
+\end{cases}
+```
 
----
 
 ### out
 Take two color4 inputs and use the built-in alpha channel(s) to control the compositing of the fg and bg inputs: 
@@ -1534,7 +1442,6 @@ Each component of the `out` output should be calculated by linearly interpolatin
 
 $$out_i = mix * (fg_i*(1.0-bg_a)) + (1.0-mix) * bg_i$$
 
----
 
 ### over
 Take two color4 inputs and use the built-in alpha channel(s) to control the compositing of the fg and bg inputs: 
@@ -1562,7 +1469,6 @@ The components of `out` must be calculated by multiplying the components `in` by
 
 $$out_i = in_i * mask$$
 
----
 
 ### outside
 Take one 1-4 channel input `in` and multiply each channel by the inverse of a separate float `mask` input.
@@ -1592,7 +1498,6 @@ Output the value of the `in1` or `in2` stream depending on whether the `value1` 
 |`out`   |Output: the result of the comparison              |Same as `in1`                            |`in1`   |               |
 
 
----
 
 ### ifgreatereq
 
@@ -1607,7 +1512,6 @@ Output the value of the `in1` or `in2` stream depending on whether the `value1` 
 |`in2`   |The value stream to output if `value1` < `value2` |Same as `in1`                            |__zero__|               |
 |`out`   |Output: the result of the comparison              |Same as `in1`                            |`in1`   |               |
 
----
 
 ### ifequal
 
@@ -1636,7 +1540,6 @@ Output the value of the `in1` or `in2` stream depending on whether the `value1` 
 |`value2`|The first value to be compared    |boolean|false  |               |
 |`out`   |Output: true if `value1` = `value2|boolean|       |               |
 
----
 
 ### switch
 
@@ -1646,13 +1549,15 @@ Output the value of one of up to ten input streams, according to the value of a 
 
 The value of `which` determines the output as follows:
 
-$out = \begin{cases}
+```math
+out = \begin{cases}
     in1, \  &which < 1\\
     in2, \ 1 \leq &which < 2 \\
     in3, \ 2 \leq &which < 3 \\
     ... \\
     in10, \ 9 \leq &which < 10 \\
-\end{cases}$
+\end{cases}
+```
 
 For values `which` $\geq 10$ we return __zero__
 
@@ -1668,7 +1573,6 @@ Isolate a single float channel from a __vectorN__ or __colorN__ stream. The outp
 
 The valid range for `index` should be clamped to $[0,N)$ in the user interface, where __N__ is the size of the input vector stream. `index` is a uniform, non-varying value. Any `index` values outside of the valid range should result in an error.
 
----
 
 ### separate2
 
@@ -1678,7 +1582,6 @@ Split the channels of a 2-channel stream into separate float outputs.
 
 For the vector2-input `in`, `outx` and `outy` correspond to the x- and y-components of `in`..
 
----
 
 ### separate3
 
@@ -1690,7 +1593,6 @@ When the input `in` is a color3, `outr`, `outg`, and `outb` correspond to the r-
 
 When the input `in` is a vector3, `outx`, `outy`, and `outz` correspond to the x-, y-, and z-components of `in`, respectively.
 
----
 
 ### separate4
 
@@ -1702,7 +1604,6 @@ When the input `in` is a color4, `outr`, `outg`, `outb`, and `outa` correspond t
 
 When the input `in` is a vector4, `outx`, `outy`, `outz`, and `outw` correspond to the x-, y-, z-, and w-components of `in`, respectively.
 
----
 
 ### combine2
 
@@ -1710,7 +1611,6 @@ Combine the channels from two streams into the same number of channels of a sing
 
 @MX_TABLE_combine2@
 
----
 
 ### combine3
 
@@ -1718,7 +1618,6 @@ Combine the channels from three streams into the same number of channels of a si
 
 @MX_TABLE_combine3@
 
----
 
 ### combine4
 
@@ -1756,7 +1655,6 @@ Applies a gaussian filter to the input:
 
 $$G(u,v) = \frac{1}{2 \pi \sigma ^2} e ^{- \frac{u^2 + v^2}{2 \sigma ^2}}$$
 
----
 
 ### heighttonormal
 
@@ -1775,36 +1673,33 @@ $$N = \left(-\frac{\partial h}{\partial u}, -\frac{\partial h}{\partial v}, 1\ri
 To normalize the normal vector, we divide it by its magnitude:
 $$N = \frac{1}{\sqrt{1 + \left(\frac{\partial h}{\partial u}\right)^2 + \left(\frac{\partial h}{\partial v}\right)^2}} \left(-\frac{\partial h}{\partial u}, -\frac{\partial h}{\partial v}, 1\right)$$
 
-# Logical Operator Nodes 
+## Logical Operator Nodes 
 
-## and
+### and
 logically AND the two input boolean values
 
 @MX_TABLE_and@
 
 Output the boolean value resulting from the logical AND of the input values. 
 
----
 
-## or
+### or
 logically Inclusive OR the two input boolean values
 
 @MX_TABLE_or@
 
 Output the boolean value resulting from the logical Inclusive OR of the input values. 
 
----
 
-## xor
+### xor
 logically Exclusive OR the two input boolean values
 
 @MX_TABLE_xor@
 
 Output the boolean value resulting from the logical Exclusive OR of the input values. 
 
----
 
-## not
+### not
 logically NOT the input boolean value
 
 @MX_TABLE_not@
