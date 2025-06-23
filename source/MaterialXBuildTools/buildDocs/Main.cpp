@@ -324,7 +324,7 @@ int main(int argc, char* const argv[])
                 portDefault = port->getAttribute("defaultinput");
                 if (portDefault.empty())
                 {
-                    portDefault = port->getAttribute("defaultgeomprop");
+                    portDefault = std::string("_") + port->getAttribute("defaultgeomprop") + "_";
                 }
                 else
                 {
