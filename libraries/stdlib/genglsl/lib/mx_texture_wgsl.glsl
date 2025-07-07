@@ -1,7 +1,7 @@
 struct MxTexture
 {
-    texture2d<float> tex;
-    sampler s;
+    texture2D tex_texture;
+    sampler tex_sampler;
 
     // needed for Storm
     int get_width() { return tex.get_width(); }
@@ -19,7 +19,7 @@ float4 textureLod(MxTexture mxTex, float2 uv, float lod)
     return mxTex.tex.sample(mxTex.s, uv, level(lod));
 }
 
-float4 textureGrad(MxTexture mxTex, float2 uv, float2 dx, float2 dy)
+float4 textureGrad(MxTexture mtlTex, float2 uv, float2 dx, float2 dy)
 {
     return mxTex.tex.sample(mxTex.s, uv, gradient2d(dx, dy));
 }

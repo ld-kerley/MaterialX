@@ -30,6 +30,11 @@ WgslShaderGenerator::WgslShaderGenerator(TypeSystemPtr typeSystem) :
     _tokenSubstitutions[HW::T_TEX_SAMPLER_SIGNATURE]    = HW::TEX_SAMPLER_SIGNATURE_SPLIT;
 }
 
+void WgslShaderGenerator::emitMxTextureClass(GenContext& context, ShaderStage& stage) const
+{
+    emitLibraryInclude("stdlib/genglsl/lib/mx_texture_wgsl.glsl", context, stage);
+}
+
 void WgslShaderGenerator::emitDirectives(GenContext& context, ShaderStage& stage) const
 {
     VkShaderGenerator::emitDirectives(context, stage);

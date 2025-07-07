@@ -252,7 +252,7 @@ MslSyntax::MslSyntax(TypeSystemPtr typeSystem) : Syntax(typeSystem)
         Type::FILENAME,
         std::make_shared<ScalarTypeSyntax>(
             this,
-            "MetalTexture",
+            "MxTexture",
             EMPTY_STRING,
             EMPTY_STRING));
 

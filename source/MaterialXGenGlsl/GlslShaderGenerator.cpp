@@ -123,6 +123,11 @@ GlslShaderGenerator::GlslShaderGenerator(TypeSystemPtr typeSystem) :
     _lightSamplingNodes.push_back(ShaderNode::create(nullptr, "sampleLightSource", LightSamplerNodeGlsl::create()));
 }
 
+void GlslShaderGenerator::emitMxTextureClass(GenContext& context, ShaderStage& stage) const
+{
+    emitLibraryInclude("stdlib/genglsl/lib/mx_texture_glsl.glsl", context, stage);
+}
+
 ShaderPtr GlslShaderGenerator::generate(const string& name, ElementPtr element, GenContext& context) const
 {
     ShaderPtr shader = createShader(name, element, context);
@@ -379,6 +384,8 @@ void GlslShaderGenerator::emitPixelStage(const ShaderGraph& graph, GenContext& c
         resourceBindingCtx->emitDirectives(context, stage);
     }
     emitLineBreak(stage);
+
+    emitMxTextureClass(context, stage);
 
     // Add type definitions
     emitTypeDefinitions(context, stage);
@@ -658,7 +665,7 @@ void GlslShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, co
     {
         // Samplers must always be uniforms
         string str = qualifier.empty() ? EMPTY_STRING : qualifier + " ";
-        emitString(str + "sampler2D " + variable->getVariable(), stage);
+        emitString(str + "MxTexture " + variable->getVariable(), stage);
     }
     else
     {

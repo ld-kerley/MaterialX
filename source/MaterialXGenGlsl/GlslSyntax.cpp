@@ -271,7 +271,7 @@ GlslSyntax::GlslSyntax(TypeSystemPtr typeSystem) :
         Type::FILENAME,
         std::make_shared<ScalarTypeSyntax>(
             this,
-            "sampler2D",
+            "MxTexture",
             EMPTY_STRING,
             EMPTY_STRING));
 

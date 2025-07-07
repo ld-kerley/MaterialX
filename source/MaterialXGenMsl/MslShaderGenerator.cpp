@@ -229,7 +229,6 @@ void MslShaderGenerator::MetalizeGeneratedShader(ShaderStage& shaderStage) const
 
     // Renames GLSL constructs that are used in shared code to MSL equivalent constructs.
     std::unordered_map<string, string> replaceTokens;
-    replaceTokens["sampler2D"] = "MetalTexture";
     replaceTokens["dFdy"] = "dfdy";
     replaceTokens["dFdx"] = "dfdx";
 
@@ -440,7 +439,7 @@ void MslShaderGenerator::emitGlobalVariables(GenContext& context,
                             if (globalContextInit)
                             {
                                 emitString(separator, stage);
-                                emitString("MetalTexture", stage);
+                                emitString("MxTexture", stage);
                                 emitScopeBegin(stage);
                                 emitString(TEXTURE_NAME(uniforms[i]->getVariable()), stage);
                                 emitString(separator, stage);
@@ -699,7 +698,7 @@ void MslShaderGenerator::emitConstantBufferDeclarations(GenContext& context,
     }
 }
 
-void MslShaderGenerator::emitMetalTextureClass(GenContext& context, ShaderStage& stage) const
+void MslShaderGenerator::emitMxTextureClass(GenContext& context, ShaderStage& stage) const
 {
     emitLibraryInclude("stdlib/genmsl/lib/mx_texture.metal", context, stage);
 }
@@ -851,7 +850,7 @@ void MslShaderGenerator::emitPixelStage(const ShaderGraph& graph, GenContext& co
     }
     emitLineBreak(stage);
 
-    emitMetalTextureClass(context, stage);
+    emitMxTextureClass(context, stage);
 
     // Add type definitions
     emitTypeDefinitions(context, stage);
@@ -1171,7 +1170,7 @@ void MslShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, con
     {
         // Samplers must always be uniforms
         string str = qualifier.empty() ? EMPTY_STRING : qualifier + " ";
-        emitString(str + "MetalTexture " + variable->getVariable(), stage);
+        emitString(str + "MxTexture " + variable->getVariable(), stage);
     }
     else
     {

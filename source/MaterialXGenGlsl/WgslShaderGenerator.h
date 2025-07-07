@@ -44,6 +44,8 @@ class MX_GENGLSL_API WgslShaderGenerator : public VkShaderGenerator
     void emitInput(const ShaderInput* input, GenContext& context, ShaderStage& stage) const override;
 
   protected:
+    void emitMxTextureClass(GenContext& context, ShaderStage& stage) const override;
+
     static const string LIGHTDATA_TYPEVAR_STRING;
 };
 
