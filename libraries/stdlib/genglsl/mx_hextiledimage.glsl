@@ -71,7 +71,6 @@ void mx_hextiledimage_color4(
 
     HextileData tile_data = mx_hextile_coord(coord, rotation, rotation_range, scale, scale_range, offset, offset_range);
 
-
     vec4 c1 = textureGrad(tex_sampler, tile_data.coord1, tile_data.ddx1, tile_data.ddy1);
     vec4 c2 = textureGrad(tex_sampler, tile_data.coord2, tile_data.ddx2, tile_data.ddy2);
     vec4 c3 = textureGrad(tex_sampler, tile_data.coord3, tile_data.ddx3, tile_data.ddy3);
