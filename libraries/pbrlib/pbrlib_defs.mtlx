@@ -24,12 +24,12 @@
     A BSDF node for diffuse reflection.
   -->
   <nodedef name="ND_oren_nayar_diffuse_bsdf" node="oren_nayar_diffuse_bsdf" bsdf="R" nodegroup="pbr" doc="A BSDF node for diffuse reflections.">
-    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" />
-    <input name="color" type="color3" value="0.18, 0.18, 0.18" />
-    <input name="roughness" type="float" value="0.0" />
-    <input name="normal" type="vector3" defaultgeomprop="Nworld" />
-    <input name="energy_compensation" type="boolean" value="false" uniform="true" />
-    <output name="out" type="BSDF" />
+    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" spec_desc="Weight of the BSDF contribution" spec_acceptedvalues="[0, 1]" />
+    <input name="color" type="color3" value="0.18, 0.18, 0.18" spec_desc="Diffuse reflectivity or albedo" />
+    <input name="roughness" type="float" value="0.0" spec_desc="Surface roughness" spec_acceptedvalues="[0, 1]" />
+    <input name="normal" type="vector3" defaultgeomprop="Nworld" spec_desc="Normal vector of the surface" />
+    <input name="energy_compensation" type="boolean" value="false" uniform="true" spec_desc="Enable energy compensation for the BSDF" />
+    <output name="out" type="BSDF" spec_desc="diffuse reflection BSDF" />
   </nodedef>
 
   <!--
@@ -60,17 +60,17 @@
     A reflection/transmission BSDF node based on a microfacet model and a Fresnel curve for dielectrics.
   -->
   <nodedef name="ND_dielectric_bsdf" node="dielectric_bsdf" nodegroup="pbr" doc="A reflection/transmission BSDF node based on a microfacet model and a Fresnel curve for dielectrics.">
-    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" />
-    <input name="tint" type="color3" value="1.0, 1.0, 1.0" />
-    <input name="ior" type="float" value="1.5" />
-    <input name="roughness" type="vector2" value="0.05, 0.05" />
+    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" spec_desc="Weight of the BSDF contribution" spec_acceptedvalues="[0, 1]" />
+    <input name="tint" type="color3" value="1.0, 1.0, 1.0" spec_desc="Color weight to tint the reflected and transmitted light" />
+    <input name="ior" type="float" value="1.5" spec_desc="Index of refraction of the surface" />
+    <input name="roughness" type="vector2" value="0.05, 0.05" spec_desc="Surface roughness along the tangent and bitangent" />
     <input name="thinfilm_thickness" type="float" value="0" unittype="distance" unit="nanometer" />
     <input name="thinfilm_ior" type="float" value="1.5" />
-    <input name="normal" type="vector3" defaultgeomprop="Nworld" />
-    <input name="tangent" type="vector3" defaultgeomprop="Tworld" />
+    <input name="normal" type="vector3" defaultgeomprop="Nworld" spec_desc="Normal vector of the surface" />
+    <input name="tangent" type="vector3" defaultgeomprop="Tworld" spec_desc="Tangent vector of the surface"/>
     <input name="distribution" type="string" value="ggx" enum="ggx" uniform="true" />
-    <input name="scatter_mode" type="string" value="R" enum="R,T,RT" uniform="true" />
-    <output name="out" type="BSDF" />
+    <input name="scatter_mode" type="string" value="R" enum="R,T,RT" uniform="true" spec_desc="Surface Scatter mode, specifying reflection and/or transmission"  />
+    <output name="out" type="BSDF" spec_desc="dielectric BSDF" />
   </nodedef>
 
   <!--
@@ -95,19 +95,19 @@
     A reflection/transmission BSDF node based on a microfacet model and a generalized Schlick Fresnel curve.
   -->
   <nodedef name="ND_generalized_schlick_bsdf" node="generalized_schlick_bsdf" nodegroup="pbr" doc="A reflection/transmission BSDF node based on a microfacet model and a generalized Schlick Fresnel curve.">
-    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" />
-    <input name="color0" type="color3" value="1.0, 1.0, 1.0" />
-    <input name="color82" type="color3" value="1.0, 1.0, 1.0" />
-    <input name="color90" type="color3" value="1.0, 1.0, 1.0" />
-    <input name="exponent" type="float" value="5.0" />
-    <input name="roughness" type="vector2" value="0.05, 0.05" />
+    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" spec_desc="Weight of the BSDF contribution" spec_acceptedvalues="[0, 1]"/>
+    <input name="color0" type="color3" value="1.0, 1.0, 1.0" spec_desc="Reflectivity per color component at facing angles" />
+    <input name="color82" type="color3" value="1.0, 1.0, 1.0" spec_desc="Multiplier on the reflectivity per color component at 82 degrees" />
+    <input name="color90" type="color3" value="1.0, 1.0, 1.0" spec_desc="Reflectivity per color component at grazing angles" />
+    <input name="exponent" type="float" value="5.0" spec_desc="Exponent for Schlick blending between color0 and color90" />
+    <input name="roughness" type="vector2" value="0.05, 0.05" spec_desc="Surface roughness along the tangent and bitangent" />
     <input name="thinfilm_thickness" type="float" value="0" unittype="distance" unit="nanometer" />
     <input name="thinfilm_ior" type="float" value="1.5" />
-    <input name="normal" type="vector3" defaultgeomprop="Nworld" />
-    <input name="tangent" type="vector3" defaultgeomprop="Tworld" />
+    <input name="normal" type="vector3" defaultgeomprop="Nworld" spec_desc="Normal vector of the surface" />
+    <input name="tangent" type="vector3" defaultgeomprop="Tworld" spec_desc="Tangent vector of the surface"/>
     <input name="distribution" type="string" value="ggx" enum="ggx" uniform="true" />
-    <input name="scatter_mode" type="string" value="R" enum="R,T,RT" uniform="true" />
-    <output name="out" type="BSDF" />
+    <input name="scatter_mode" type="string" value="R" enum="R,T,RT" uniform="true" spec_desc="Surface Scatter mode, specifying reflection and/or transmission" />
+    <output name="out" type="BSDF" spec_desc="generalized Schlick BSDF" />
   </nodedef>
 
   <!--
@@ -128,12 +128,12 @@
     A microfacet BSDF for the back-scattering properties of cloth-like materials.
   -->
   <nodedef name="ND_sheen_bsdf" node="sheen_bsdf" bsdf="R" nodegroup="pbr" doc="A microfacet BSDF for the back-scattering properties of cloth-like materials.">
-    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" />
-    <input name="color" type="color3" value="1.0, 1.0, 1.0" />
-    <input name="roughness" type="float" value="0.3" />
-    <input name="normal" type="vector3" defaultgeomprop="Nworld" />
-    <input name="mode" type="string" value="conty_kulla" enum="conty_kulla, zeltner" uniform="true" />
-    <output name="out" type="BSDF" />
+    <input name="weight" type="float" value="1.0" uimin="0.0" uimax="1.0" spec_desc="Weight of the BSDF contribution" spec_acceptedvalues="[0, 1]"/>
+    <input name="color" type="color3" value="1.0, 1.0, 1.0" spec_desc="Sheen reflectivity" />
+    <input name="roughness" type="float" value="0.3" spec_desc="Surface roughness" />
+    <input name="normal" type="vector3" defaultgeomprop="Nworld" spec_desc="Normal vector of the surface" />
+    <input name="mode" type="string" value="conty_kulla" enum="conty_kulla, zeltner" uniform="true" spec_desc="Selects between `conty_kulla` and `zeltner` sheen models" />
+    <output name="out" type="BSDF" spec_desc="sheen BSDF" />
   </nodedef>
 
   <!--
