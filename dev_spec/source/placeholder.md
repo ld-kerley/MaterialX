@@ -1773,6 +1773,7 @@ Output the boolean value resulting from the logical NOT of the input value.
 
 ### dot
 
+
 @MX_TABLE_dot@
 
 A no-op, passes its input through to its output unchanged. Users can use dot nodes to shape edge connection paths or provide documentation checkpoints in node graph layout UI's. Dot nodes may also pass uniform values from <constant> or other nodes with uniform="true" outputs to uniform <input>s and <token>s.

@@ -308,17 +308,34 @@ int main(int argc, char* const argv[])
 
     auto processNodeDef = [&](const mx::NodeDefPtr nodedef, std::string matchString="#NOT_MATCHING#", std::string optionsTypeStr = "")
     {
-        MDTable table(headings);
 
         std::string firstPortMatchingType = "";
         auto ports = nodedef->getChildrenOfType<mx::PortElement>();
 
+        bool doAcceptedValues = false;
+        for (const auto& port: ports)
+        {
+            std::string portAcceptedValues = port->getAttribute("spec_acceptedvalues");
+            if (!portAcceptedValues.empty())
+            {
+                doAcceptedValues = true;
+                break;
+            }
+        }
+
+        MDTable table = doAcceptedValues ? MDTable({"Port", "Description", "Type", "Default", "Accepted Values"}) : MDTable({"Port", "Description", "Type", "Default"});
         for (const auto& port : ports)
         {
             std::string portName = port->getName();
             std::string portDesc = port->getAttribute("spec_desc");
             std::string portType = port->getType();
             std::string portDefault = port->getValueString();
+
+            if (auto output = port->asA<mx::Output>())
+            {
+                portDefault = port->getAttribute("default");
+            }
+
             if (portDefault.empty())
             {
                 portDefault = port->getAttribute("defaultinput");
@@ -329,11 +346,20 @@ int main(int argc, char* const argv[])
                     {
                         portDefault = std::string("_") + portDefault + "_";
                     }
+                    else if (portType == "string" || portType == "filename")
+                    {
+                        portDefault = "";
+                    }
                 }
                 else
                 {
                     portDefault = std::string("`") + portDefault + "`";
                 }
+            }
+
+            if (portType == "string" || portType == "filename")
+            {
+                portDefault = std::string("\"") + portDefault + "\"";
             }
 
             std::string portAcceptedValues = port->getAttribute("spec_acceptedvalues");
@@ -376,7 +402,11 @@ int main(int argc, char* const argv[])
             row.emplace_back(portDesc);
             row.emplace_back(portType);
             row.emplace_back(portDefault);
-            row.emplace_back(portAcceptedValues);
+
+            if (doAcceptedValues)
+            {
+                row.emplace_back(portAcceptedValues);
+            }
 
             table.addRow(row);
         }

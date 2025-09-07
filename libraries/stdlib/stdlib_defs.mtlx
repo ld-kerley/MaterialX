@@ -150,7 +150,7 @@
   -->
   <template name="TP_ND_tiledimage" varName="typeName" options="float, color3, color4, vector2, vector3, vector4">
     <nodedef name="ND_tiledimage_@typeName@" node="tiledimage" nodegroup="texture2d">
-      <input name="file" type="filename" value="" uniform="true" spec_desc="the URI of an image file"/>
+      <input name="file" type="filename" value="" uniform="true" spec_desc="The URI of an image file"/>
       <input name="default" type="@typeName@" value="Value:zero" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved" />
       <input name="texcoord" type="vector2" defaultgeomprop="UV0" uiname="Texture Coordinates" spec_desc="The 2D texture coordinate at which the image data is read" />
       <input name="uvtiling" type="vector2" value="1.0, 1.0" spec_desc="The tiling rate for the given image along the U and V axes" />
@@ -170,7 +170,7 @@
     Samples an equiangular map with adjustable rotation offset.
   -->
   <nodedef name="ND_latlongimage" node="latlongimage" nodegroup="texture2d">
-    <input name="file" type="filename" value="" uniform="true" spec_desc="the URI of an image file"/>
+    <input name="file" type="filename" value="" uniform="true" spec_desc="The URI of an image file"/>
     <input name="default" type="color3" value="0.0, 0.0, 0.0" uiname="Default Color" spec_desc="A default value to use if the file reference can not be resolved" />
     <input name="viewdir" type="vector3" value="0.0, 0.0, 1.0" uiname="View Direction" spec_desc="The view direction determining the value sampled from the projected equiangular map" />
     <input name="rotation" type="float" value="0.0" unittype="angle" unit="degree" uimin="0" uimax="360" uiname="Longitude Offset" spec_desc="The longitudinal sampling offset, in degrees" />
