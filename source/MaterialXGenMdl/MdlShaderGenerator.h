@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_MDLSHADERGENERATOR_H
-#define MATERIALX_MDLSHADERGENERATOR_H
+#ifndef MATERIALXGENMDL_MDLSHADERGENERATOR_H
+#define MATERIALXGENMDL_MDLSHADERGENERATOR_H
 
 /// @file
 /// MDL shading language generator

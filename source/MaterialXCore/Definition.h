@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_DEFINITION_H
-#define MATERIALX_DEFINITION_H
+#ifndef MATERIALXCORE_DEFINITION_H
+#define MATERIALXCORE_DEFINITION_H
 
 /// @file
 /// Definition element subclasses

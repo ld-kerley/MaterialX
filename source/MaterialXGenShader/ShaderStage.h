@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SHADERSTAGE_H
-#define MATERIALX_SHADERSTAGE_H
+#ifndef MATERIALXGENSHADER_SHADERSTAGE_H
+#define MATERIALXGENSHADER_SHADERSTAGE_H
 
 /// @file
 /// Class related to holding information for shader stages

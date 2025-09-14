@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_HARMONICS_H
-#define MATERIALX_HARMONICS_H
+#ifndef MATERIALXRENDER_HARMONICS_H
+#define MATERIALXRENDER_HARMONICS_H
 
 /// @file
 /// Spherical harmonics functionality

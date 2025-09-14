@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GENOPTIONS_H
-#define MATERIALX_GENOPTIONS_H
+#ifndef MATERIALXGENSHADER_GENOPTIONS_H
+#define MATERIALXGENSHADER_GENOPTIONS_H
 
 /// @file
 /// Shader generation options class

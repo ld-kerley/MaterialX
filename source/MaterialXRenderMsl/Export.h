@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_RENDERMSL_EXPORT_H
-#define MATERIALX_RENDERMSL_EXPORT_H
+#ifndef MATERIALXRENDERMSL_EXPORT_H
+#define MATERIALXRENDERMSL_EXPORT_H
 
 #include <MaterialXCore/Library.h>
 

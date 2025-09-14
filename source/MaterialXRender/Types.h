@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_RENDER_TYPES_H
-#define MATERIALX_RENDER_TYPES_H
+#ifndef MATERIALXRENDER_TYPES_H
+#define MATERIALXRENDER_TYPES_H
 
 /// @file
 /// Data types for rendering functionality

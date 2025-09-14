@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_XMLIO_H
-#define MATERIALX_XMLIO_H
+#ifndef MATERIALXFORMAT_XMLIO_H
+#define MATERIALXFORMAT_XMLIO_H
 
 /// @file
 /// Support for the MTLX file format

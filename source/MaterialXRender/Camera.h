@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_CAMERA_H
-#define MATERIALX_CAMERA_H
+#ifndef MATERIALXRENDER_CAMERA_H
+#define MATERIALXRENDER_CAMERA_H
 
 #include <MaterialXRender/Types.h>
 

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALXVIEW_METALSTATE_H
-#define MATERIALXVIEW_METALSTATE_H
+#ifndef MATERIALXRENDERMSL_METALSTATE_H
+#define MATERIALXRENDERMSL_METALSTATE_H
 
 #include <stack>
 #include <memory>

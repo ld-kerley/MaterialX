@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef RENDER_UTIL_H
-#define RENDER_UTIL_H
+#ifndef MATERIALXTEST_RENDERUTIL_H
+#define MATERIALXTEST_RENDERUTIL_H
 
 #include <MaterialXTest/MaterialXGenShader/GenShaderUtil.h>
 

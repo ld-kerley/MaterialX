@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_VKSYNTAX_H
-#define MATERIALX_VKSYNTAX_H
+#ifndef MATERIALXGENGLSL_VKSYNTAX_H
+#define MATERIALXGENGLSL_VKSYNTAX_H
 
 /// @file
 /// Vulkan GLSL syntax class

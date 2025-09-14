@@ -3,8 +3,8 @@
 // Licensed under the Apache License v2.0
 //
 
-#ifndef COMPILEMSL_H
-#define COMPILEMSL_H
+#ifndef MATERIALXTEST_COMPILEMSL_H
+#define MATERIALXTEST_COMPILEMSL_H
 
 #if __APPLE__
 void CompileMslShader(const char* pShaderFilePath, const char* pEntryFuncName);

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_PROPERTY_H
-#define MATERIALX_PROPERTY_H
+#ifndef MATERIALXCORE_PROPERTY_H
+#define MATERIALXCORE_PROPERTY_H
 
 /// @file
 /// Property element subclasses

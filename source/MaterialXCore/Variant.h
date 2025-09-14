@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_VARIANT_H
-#define MATERIALX_VARIANT_H
+#ifndef MATERIALXCORE_VARIANT_H
+#define MATERIALXCORE_VARIANT_H
 
 /// @file
 /// Variant element subclasses

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_TEXTUREBAKERMSL
-#define MATERIALX_TEXTUREBAKERMSL
+#ifndef MATERIALXRENDERMSL_TEXTUREBAKER_H
+#define MATERIALXRENDERMSL_TEXTUREBAKER_H
 
 /// @file
 /// Texture baking functionality

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef GENOSL_H
-#define GENOSL_H
+#ifndef MATERIALXTEST_GENOSL_H
+#define MATERIALXTEST_GENOSL_H
 
 #include <MaterialXTest/External/Catch/catch.hpp>
 #include <MaterialXTest/MaterialXGenShader/GenShaderUtil.h>

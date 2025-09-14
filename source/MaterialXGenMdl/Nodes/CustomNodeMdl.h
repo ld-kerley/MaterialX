@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_CUSTOMNODEMDL_H
-#define MATERIALX_CUSTOMNODEMDL_H
+#ifndef MATERIALXGENMDL_CUSTOMNODEMDL_H
+#define MATERIALXGENMDL_CUSTOMNODEMDL_H
 
 #include <MaterialXGenMdl/Nodes/SourceCodeNodeMdl.h>
 

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_ELEMENT_H
-#define MATERIALX_ELEMENT_H
+#ifndef MATERIALXCORE_ELEMENT_H
+#define MATERIALXCORE_ELEMENT_H
 
 /// @file
 /// Base and generic element classes

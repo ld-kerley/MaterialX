@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GLSLPROGRAM_H
-#define MATERIALX_GLSLPROGRAM_H
+#ifndef MATERIALXRENDERGLSL_GLSLPROGRAM_H
+#define MATERIALXRENDERGLSL_GLSLPROGRAM_H
 
 /// @file
 /// GLSL Program interfaces

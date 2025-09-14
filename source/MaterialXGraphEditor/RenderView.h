@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_RENDERVIEW_H
-#define MATERIALX_RENDERVIEW_H
+#ifndef MATERIALXGRAPHEDITOR_RENDERVIEW_H
+#define MATERIALXGRAPHEDITOR_RENDERVIEW_H
 
 #include <MaterialXRenderGlsl/GLFramebuffer.h>
 #include <MaterialXRenderGlsl/GlslMaterial.h>

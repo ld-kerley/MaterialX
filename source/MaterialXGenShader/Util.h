@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SHADERGEN_UTIL_H
-#define MATERIALX_SHADERGEN_UTIL_H
+#ifndef MATERIALXGENSHADER_UTIL_H
+#define MATERIALXGENSHADER_UTIL_H
 
 /// @file
 /// Shader generation utility methods

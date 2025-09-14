@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_MATERIAL_H
-#define MATERIALX_MATERIAL_H
+#ifndef MATERIALXCORE_MATERIAL_H
+#define MATERIALXCORE_MATERIAL_H
 
 /// @file
 /// Material node helper functions

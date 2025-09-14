@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_ENVIRON_H
-#define MATERIALX_ENVIRON_H
+#ifndef MATERIALXFORMAT_ENVIRON_H
+#define MATERIALXFORMAT_ENVIRON_H
 
 /// @file
 /// Cross-platform environment variable functionality

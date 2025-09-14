@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_INTERFACE_H
-#define MATERIALX_INTERFACE_H
+#ifndef MATERIALXCORE_INTERFACE_H
+#define MATERIALXCORE_INTERFACE_H
 
 /// @file
 /// Interface element subclasses

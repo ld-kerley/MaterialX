@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_UNITSYSTEM_H
-#define MATERIALX_UNITSYSTEM_H
+#ifndef MATERIALXGENSHADER_UNITSYSTEM_H
+#define MATERIALXGENSHADER_UNITSYSTEM_H
 
 /// @file
 /// Unit system classes

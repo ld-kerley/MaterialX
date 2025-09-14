@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_HWIMAGECODENODE_H
-#define MATERIALX_HWIMAGECODENODE_H
+#ifndef MATERIALXGENSHADER_HWIMAGENODE_H
+#define MATERIALXGENSHADER_HWIMAGENODE_H
 
 #include <MaterialXGenShader/Nodes/SourceCodeNode.h>
 

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_TYPEDESC_H
-#define MATERIALX_TYPEDESC_H
+#ifndef MATERIALXGENSHADER_TYPEDESC_H
+#define MATERIALXGENSHADER_TYPEDESC_H
 
 /// @file
 /// Type descriptor for a MaterialX data type.

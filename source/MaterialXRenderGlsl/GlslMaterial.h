@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GLSLMATERIAL_H
-#define MATERIALX_GLSLMATERIAL_H
+#ifndef MATERIALXRENDERGLSL_GLSLMATERIAL_H
+#define MATERIALXRENDERGLSL_GLSLMATERIAL_H
 
 /// @file
 /// GLSL material helper classes

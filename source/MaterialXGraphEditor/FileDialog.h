@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_FILEDIALOG_H
-#define MATERIALX_FILEDIALOG_H
+#ifndef MATERIALXGRAPHEDITOR_FILEDIALOG_H
+#define MATERIALXGRAPHEDITOR_FILEDIALOG_H
 
 #include <MaterialXFormat/File.h>
 

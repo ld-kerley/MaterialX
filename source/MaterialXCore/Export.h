@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_CORE_EXPORT_H
-#define MATERIALX_CORE_EXPORT_H
+#ifndef MATERIALXCORE_EXPORT_H
+#define MATERIALXCORE_EXPORT_H
 
 #include <MaterialXCore/Library.h>
 

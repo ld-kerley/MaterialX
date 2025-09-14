@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GEOMETRYHANDLER_H
-#define MATERIALX_GEOMETRYHANDLER_H
+#ifndef MATERIALXRENDER_GEOMETRYHANDLER_H
+#define MATERIALXRENDER_GEOMETRYHANDLER_H
 
 /// @file
 /// Geometry loader interfaces

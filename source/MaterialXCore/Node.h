@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_NODE_H
-#define MATERIALX_NODE_H
+#ifndef MATERIALXCORE_NODE_H
+#define MATERIALXCORE_NODE_H
 
 /// @file
 /// Node element subclasses

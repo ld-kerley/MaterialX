@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_CLOSURECOMPOUNDNODEMDL_H
-#define MATERIALX_CLOSURECOMPOUNDNODEMDL_H
+#ifndef MATERIALXGENMDL_CLOSURECOMPOUNDNODEMDL_H
+#define MATERIALX_GENMDL_CLOSURECOMPOUNDNODEMDL_H
 
 #include <MaterialXGenMdl/Export.h>
 #include <MaterialXGenMdl/Nodes/CompoundNodeMdl.h>

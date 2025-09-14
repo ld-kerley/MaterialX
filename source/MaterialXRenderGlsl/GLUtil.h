@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GLUTIL_H
-#define MATERIALX_GLUTIL_H
+#ifndef MATERIALXRENDERGLSL_GLUTIL_H
+#define MATERIALXRENDERGLSL_GLUTIL_H
 
 /// @file
 /// OpenGL utilities

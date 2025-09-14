@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_MESH_H
-#define MATERIALX_MESH_H
+#ifndef MATERIALXRENDER_MESH_H
+#define MATERIALXRENDER_MESH_H
 
 /// @file
 /// Mesh interfaces

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_CGLTFLOADER_H
-#define MATERIALX_CGLTFLOADER_H
+#ifndef MATERIALXRENDER_CGLTFLOADER_H
+#define MATERIALXRENDER_CGLTFLOADER_H
 
 /// @file
 /// GLTF format loader using the Cgltf library

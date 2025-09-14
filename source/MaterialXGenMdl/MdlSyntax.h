@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_MDLSYNTAX_H
-#define MATERIALX_MDLSYNTAX_H
+#ifndef MATERIALXGENMDL_MDLSYNTAX_H
+#define MATERIALXGENMDL_MDLSYNTAX_H
 
 /// @file
 /// MDL syntax class

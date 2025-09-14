@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_LOOK_H
-#define MATERIALX_LOOK_H
+#ifndef MATERIALXCORE_LOOK_H
+#define MATERIALXCORE_LOOK_H
 
 /// @file
 /// Look element subclasses

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_LIGHTHANDLER_H
-#define MATERIALX_LIGHTHANDLER_H
+#ifndef MATERIALXRENDER_LIGHTHANDLER_H
+#define MATERIALXRENDER_LIGHTHANDLER_H
 
 /// @file
 /// Handler for hardware lights

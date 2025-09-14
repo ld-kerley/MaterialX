@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef RENDER_PIPELINE_GL_H
-#define RENDER_PIPELINE_GL_H
+#ifndef MATERIALXVIEW_RENDERPIPELINEGL_H
+#define MATERIALXVIEW_RENDERPIPELINEGL_H
 
 #include <MaterialXView/RenderPipeline.h>
 

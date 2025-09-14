@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GLCONTEXT_H
-#define MATERIALX_GLCONTEXT_H
+#ifndef MATERIALXRENDERGLSL_GLCONTEXT_H
+#define MATERIALXRENDERGLSL_GLCONTEXT_H
 
 /// @file
 /// OpenGL context class

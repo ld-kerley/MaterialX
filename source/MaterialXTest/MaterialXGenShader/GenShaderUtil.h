@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef GENSHADER_UTIL_H
-#define GENSHADER_UTIL_H
+#ifndef MATERIALXTEST_GENSHADERUTIL_H
+#define MATERIALXTEST_GENSHADERUTIL_H
 
 #include <MaterialXCore/Document.h>
 

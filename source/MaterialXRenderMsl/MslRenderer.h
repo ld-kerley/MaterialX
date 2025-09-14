@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_MSLRENDERER_H
-#define MATERIALX_MSLRENDERER_H
+#ifndef MATERIALXRENDERMSL_MSLRENDERER_H
+#define MATERIALXRENDERMSL_MSLRENDERER_H
 
 /// @file
 /// MSL code renderer

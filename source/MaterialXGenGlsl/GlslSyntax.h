@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GLSL_SYNTAX_H
-#define MATERIALX_GLSL_SYNTAX_H
+#ifndef MATERIALXGENGLSL_GLSLSYNTAX_H
+#define MATERIALXGENGLSL_GLSLSYNTAX_H
 
 /// @file
 /// GLSL syntax class

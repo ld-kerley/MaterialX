@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_CONVOLUTIONNODE_H
-#define MATERIALX_CONVOLUTIONNODE_H
+#ifndef MATERIALXGENMDL_CONVOLUTIONNODE_H
+#define MATERIALX_GENMDL_CONVOLUTIONNODE_H
 
 #include <MaterialXGenMdl/Export.h>
 

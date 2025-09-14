@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_TINYOBJLOADER_H
-#define MATERIALX_TINYOBJLOADER_H
+#ifndef MATERIALXRENDER_TINYOBJLOADER_H
+#define MATERIALXRENDER_TINYOBJLOADER_H
 
 /// @file
 /// OBJ geometry format loader using the TinyObj library

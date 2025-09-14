@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SHADERRENDERER_H
-#define MATERIALX_SHADERRENDERER_H
+#ifndef MATERIALXRENDER_SHADERRENDERER_H
+#define MATERIALXRENDER_SHADERRENDERER_H
 
 /// @file
 /// Base class for shader rendering

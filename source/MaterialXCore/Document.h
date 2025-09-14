@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_DOCUMENT
-#define MATERIALX_DOCUMENT
+#ifndef MATERIALXCORE_DOCUMENT_H
+#define MATERIALXCORE_DOCUMENT_H
 
 /// @file
 /// The top-level Document class

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_RENDER_UTIL_H
-#define MATERIALX_RENDER_UTIL_H
+#ifndef MATERIALXRENDER_UTIL_H
+#define MATERIALXRENDER_UTIL_H
 
 /// @file
 /// Rendering utility methods

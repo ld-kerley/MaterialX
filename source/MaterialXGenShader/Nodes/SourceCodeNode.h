@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SOURCECODENODE_H
-#define MATERIALX_SOURCECODENODE_H
+#ifndef MATERIALXGENSHADER_SOURCECODENODE_H
+#define MATERIALXGENSHADER_SOURCECODENODE_H
 
 #include <MaterialXGenShader/ShaderNodeImpl.h>
 

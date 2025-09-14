@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SHADER_H
-#define MATERIALX_SHADER_H
+#ifndef MATERIALXGENSHADER_SHADER_H
+#define MATERIALXGENSHADER_SHADER_H
 
 /// @file
 /// Shader instance class created during shader generation

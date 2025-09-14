@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_IMAGE_H
-#define MATERIALX_IMAGE_H
+#ifndef MATERIALXRENDER_IMAGE_H
+#define MATERIALXRENDER_IMAGE_H
 
 /// @file
 /// Image class

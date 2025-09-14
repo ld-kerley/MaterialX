@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_FILE_H
-#define MATERIALX_FILE_H
+#ifndef MATERIALXFORMAT_FILE_H
+#define MATERIALXFORMAT_FILE_H
 
 /// @file
 /// Cross-platform support for file and search paths

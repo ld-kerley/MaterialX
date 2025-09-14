@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_TIMER_H
-#define MATERIALX_TIMER_H
+#ifndef MATERIALXRENDER_TIMER_H
+#define MATERIALXRENDER_TIMER_H
 
 /// @file
 /// Support for event timing

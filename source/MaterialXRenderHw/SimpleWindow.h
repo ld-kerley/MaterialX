@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SIMPLEWINDOW_H
-#define MATERIALX_SIMPLEWINDOW_H
+#ifndef MATERIALXRENDERHW_SIMPLEWINDOW_H
+#define MATERIALXRENDERHW_SIMPLEWINDOW_H
 
 #include <MaterialXCore/Library.h>
 

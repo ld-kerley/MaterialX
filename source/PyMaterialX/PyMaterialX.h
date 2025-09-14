@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_PYMATERIALX_H
-#define MATERIALX_PYMATERIALX_H
+#ifndef PYMATERIALX_PYMATERIALX_H
+#define PYMATERIALX_PYMATERIALX_H
 
 //
 // This header is used to include PyBind11 headers consistently across the

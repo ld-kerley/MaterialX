@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_IMAGEHANDLER_H
-#define MATERIALX_IMAGEHANDLER_H
+#ifndef MATERIALXRENDER_IMAGEHANDLER_H
+#define MATERIALXRENDER_IMAGEHANDLER_H
 
 /// @file
 /// Image handler interfaces

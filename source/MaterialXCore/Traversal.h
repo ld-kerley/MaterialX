@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_TRAVERSAL_H
-#define MATERIALX_TRAVERSAL_H
+#ifndef MATERIALXCORE_TRAVERSAL_H
+#define MATERIALXCORE_TRAVERSAL_H
 
 /// @file
 /// Graph traversal classes

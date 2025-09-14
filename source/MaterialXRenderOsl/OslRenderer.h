@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_OSLRENDERER_H
-#define MATERIALX_OSLRENDERER_H
+#ifndef MATERIALXRENDEROSL_OSLRENDERER_H
+#define MATERIALXRENDEROSL_OSLRENDERER_H
 
 /// @file
 /// OSL code renderer

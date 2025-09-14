@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GENSHADERLIBRARY_H
-#define MATERIALX_GENSHADERLIBRARY_H
+#ifndef MATERIALXGENSHADER_LIBRARY_H
+#define MATERIALXGENSHADER_LIBRARY_H
 
 /// @file
 /// Library-wide includes and types.  This file should be the first include for

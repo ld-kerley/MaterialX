@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_UTIL
-#define MATERIALX_UTIL
+#ifndef MATERIALXCORE_UTIL_H
+#define MATERIALXCORE_UTIL_H
 
 /// @file
 /// Utility methods

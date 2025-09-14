@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GENCONTEXT_H
-#define MATERIALX_GENCONTEXT_H
+#ifndef MATERIALXGENSHADER_GENCONTEXT_H
+#define MATERIALXGENSHADER_GENCONTEXT_H
 
 /// @file
 /// Context classes for shader generation

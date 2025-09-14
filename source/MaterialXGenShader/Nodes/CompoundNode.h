@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_COMPOUNDNODE_H
-#define MATERIALX_COMPOUNDNODE_H
+#ifndef MATERIALXGENSHADER_COMPOUNDNODE_H
+#define MATERIALXGENSHADER_COMPOUNDNODE_H
 
 #include <MaterialXGenShader/GenContext.h>
 #include <MaterialXGenShader/ShaderNodeImpl.h>

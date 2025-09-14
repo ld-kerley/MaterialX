@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_TYPES_H
-#define MATERIALX_TYPES_H
+#ifndef MATERIALXCORE_TYPES_H
+#define MATERIALXCORE_TYPES_H
 
 /// @file
 /// Data type classes

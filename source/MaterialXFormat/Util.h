@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_FORMAT_UTIL_H
-#define MATERIALX_FORMAT_UTIL_H
+#ifndef MATERIALXFORMAT_UTIL_H
+#define MATERIALXFORMAT_UTIL_H
 
 /// @file
 /// Format utility methods

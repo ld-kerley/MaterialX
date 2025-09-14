@@ -3,8 +3,8 @@
 // Licensed under the Apache License v2.0
 //
 
-#ifndef GENGLSL_H
-#define GENGLSL_H
+#ifndef MATERIALXTEST_GENMSL_H
+#define MATERIALXTEST_GENMSL_H
 
 #include <MaterialXTest/MaterialXGenShader/GenShaderUtil.h>
 

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_OSLSYNTAX_H
-#define MATERIALX_OSLSYNTAX_H
+#ifndef MATERIALXGENOSL_OSLSYNTAX_H
+#define MATERIALX_GENOSL_OSLSYNTAX_H
 
 /// @file
 /// OSL syntax class

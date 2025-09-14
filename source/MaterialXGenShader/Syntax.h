@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SYNTAX_H
-#define MATERIALX_SYNTAX_H
+#ifndef MATERIALXGENSHADER_SYNTAX_H
+#define MATERIALXGENSHADER_SYNTAX_H
 
 /// @file
 /// Base class for syntax handling for shader generators

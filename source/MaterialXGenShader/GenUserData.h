@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GENUSERDATA_H
-#define MATERIALX_GENUSERDATA_H
+#ifndef MATERIALXGENSHADER_GENUSERDATA_H
+#define MATERIALXGENSHADER_GENUSERDATA_H
 
 /// @file
 /// User data base class for shader generation

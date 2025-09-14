@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_UINODE_H
-#define MATERIALX_UINODE_H
+#ifndef MATERIALXGRAPHEDITOR_UINODE_H
+#define MATERIALXGRAPHEDITOR_UINODE_H
 
 #include <MaterialXCore/Unit.h>
 

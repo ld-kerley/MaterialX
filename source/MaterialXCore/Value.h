@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_VALUE_H
-#define MATERIALX_VALUE_H
+#ifndef MATERIALXCORE_VALUE_H
+#define MATERIALXCORE_VALUE_H
 
 /// @file
 /// Generic value classes

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_LIBRARY_H
-#define MATERIALX_LIBRARY_H
+#ifndef MATERIALXCORE_LIBRARY_H
+#define MATERIALXCORE_LIBRARY_H
 
 /// @file
 /// Library-wide includes and types.  This file should be the first include for

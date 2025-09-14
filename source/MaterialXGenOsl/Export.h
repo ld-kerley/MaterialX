@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GENOSL_EXPORT_H
+#ifndef MATERIALXGENOSL_EXPORT_H
 #define MATERIALX_GENOSL_EXPORT_H
 
 #include <MaterialXCore/Library.h>

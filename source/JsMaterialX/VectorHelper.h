@@ -11,8 +11,8 @@
  * and types that have bindings defined.
  */
 
-#ifndef JSMATERIALX_VECTOR_HELPERS_H
-#define JSMATERIALX_VECTOR_HELPERS_H
+#ifndef JSMATERIALX_VECTORHELPER_H
+#define JSMATERIALX_VECTORHELPER_H
 
 #ifdef __EMSCRIPTEN__
 

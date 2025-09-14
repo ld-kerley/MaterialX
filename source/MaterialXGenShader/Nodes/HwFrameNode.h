@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_HWFRAMENODE_H
-#define MATERIALX_HWFRAMENODE_H
+#ifndef MATERIALXGENSHADER_HWFRAMENODE_H
+#define MATERIALXGENSHADER_HWFRAMENODE_H
 
 #include <MaterialXGenShader/HwShaderGenerator.h>
 

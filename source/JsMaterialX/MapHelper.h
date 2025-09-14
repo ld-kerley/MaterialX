@@ -12,8 +12,8 @@
  * i.e. primitive (built-in) types and types that have bindings defined.
  */
 
-#ifndef JSMATERIALX_MAP_HELPER_H
-#define JSMATERIALX_MAP_HELPER_H
+#ifndef JSMATERIALX_MAPHELPER_H
+#define JSMATERIALX_MAPHELPER_H
 
 #ifdef __EMSCRIPTEN__
 

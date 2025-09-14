@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GRAPH_H
-#define MATERIALX_GRAPH_H
+#ifndef MATERIALXGRAPHEDITOR_GRAPH_H
+#define MATERIALXGRAPHEDITOR_GRAPH_H
 
 #include <MaterialXGraphEditor/FileDialog.h>
 #include <MaterialXGraphEditor/RenderView.h>

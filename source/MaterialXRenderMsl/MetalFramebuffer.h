@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_METALFRAMEBUFFER_H
-#define MATERIALX_METALFRAMEBUFFER_H
+#ifndef MATERIALXRENDERMSL_METALFRAMEBUFFER_H
+#define MATERIALXRENDERMSL_METALFRAMEBUFFER_H
 
 /// @file
 /// Metal framebuffer handling

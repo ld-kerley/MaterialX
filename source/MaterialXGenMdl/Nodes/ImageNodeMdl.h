@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_IMAGENODEMDL_H
-#define MATERIALX_IMAGENODEMDL_H
+#ifndef MATERIALXGENMDL_IMAGENODEMDL_H
+#define MATERIALX_GENMDL_IMAGENODEMDL_H
 
 #include <MaterialXGenMdl/Export.h>
 

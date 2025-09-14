@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_GEOM_H
-#define MATERIALX_GEOM_H
+#ifndef MATERIALXCORE_GEOM_H
+#define MATERIALXCORE_GEOM_H
 
 /// @file
 /// Geometric element subclasses

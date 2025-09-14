@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_LIGHTNODEGLSL_H
-#define MATERIALX_LIGHTNODEGLSL_H
+#ifndef MATERIALXGENGLSL_LIGHTNODEGLSL_H
+#define MATERIALXGENGLSL_LIGHTNODEGLSL_H
 
 #include <MaterialXGenGlsl/GlslShaderGenerator.h>
 

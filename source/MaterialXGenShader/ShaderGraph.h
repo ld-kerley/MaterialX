@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SHADERGRAPH_H
-#define MATERIALX_SHADERGRAPH_H
+#ifndef MATERIALXGENSHADER_SHADERGRAPH_H
+#define MATERIALXGENSHADER_SHADERGRAPH_H
 
 /// @file
 /// Shader graph class

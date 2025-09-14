@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef GENMDL_H
-#define GENMDL_H
+#ifndef MATERIALXTEST_GENMDL_H
+#define MATERIALXTEST_GENMDL_H
 
 #include <MaterialXTest/External/Catch/catch.hpp>
 

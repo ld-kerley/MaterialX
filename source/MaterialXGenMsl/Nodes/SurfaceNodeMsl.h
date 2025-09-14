@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_SURFACENODEMSL_H
-#define MATERIALX_SURFACENODEMSL_H
+#ifndef MATERIALXGENMSL_SURFACENODEMSL_H
+#define MATERIALXGENMSL_SURFACENODEMSL_H
 
 #include <MaterialXGenMsl/Export.h>
 #include <MaterialXGenMsl/MslShaderGenerator.h>

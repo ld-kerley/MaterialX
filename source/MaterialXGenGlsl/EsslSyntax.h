@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_ESSLSYNTAX_H
-#define MATERIALX_ESSLSYNTAX_H
+#ifndef MATERIALXGENGLSL_ESSLSYNTAX_H
+#define MATERIALXGENGLSL_ESSLSYNTAX_H
 
 /// @file
 /// ESSL syntax class

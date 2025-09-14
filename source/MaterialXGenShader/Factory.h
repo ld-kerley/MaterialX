@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-#ifndef MATERIALX_FACTORY_H
-#define MATERIALX_FACTORY_H
+#ifndef MATERIALXGENSHADER_FACTORY_H
+#define MATERIALXGENSHADER_FACTORY_H
 
 /// @file
 /// Class instantiator factory helper class
