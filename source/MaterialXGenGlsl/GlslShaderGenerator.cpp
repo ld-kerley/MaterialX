@@ -245,7 +245,7 @@ void GlslShaderGenerator::emitConstants(GenContext& context, ShaderStage& stage)
     const VariableBlock& constants = stage.getConstantBlock();
     if (!constants.empty())
     {
-        emitVariableDeclarations(constants, _syntax->getConstantQualifier(), Syntax::SEMICOLON, context, stage);
+        emitVariableDeclarations(constants, getSyntax().getConstantQualifier(), Syntax::SEMICOLON, context, stage);
         emitLineBreak(stage);
     }
 }
@@ -267,7 +267,7 @@ void GlslShaderGenerator::emitUniforms(GenContext& context, ShaderStage& stage) 
             }
             else
             {
-                emitVariableDeclarations(uniforms, _syntax->getUniformQualifier(), Syntax::SEMICOLON, context, stage);
+                emitVariableDeclarations(uniforms, getSyntax().getUniformQualifier(), Syntax::SEMICOLON, context, stage);
                 emitLineBreak(stage);
             }
         }
@@ -305,7 +305,7 @@ void GlslShaderGenerator::emitInputs(GenContext& context, ShaderStage& stage) co
         if (!vertexInputs.empty())
         {
             emitComment("Inputs block: " + vertexInputs.getName(), stage);
-            emitVariableDeclarations(vertexInputs, _syntax->getInputQualifier(), Syntax::SEMICOLON, context, stage, false);
+            emitVariableDeclarations(vertexInputs, getSyntax().getInputQualifier(), Syntax::SEMICOLON, context, stage, false);
             emitLineBreak(stage);
         }
     }
@@ -347,7 +347,7 @@ void GlslShaderGenerator::emitOutputs(GenContext& context, ShaderStage& stage) c
     {
         emitComment("Pixel shader outputs", stage);
         const VariableBlock& outputs = stage.getOutputBlock(HW::PIXEL_OUTPUTS);
-        emitVariableDeclarations(outputs, _syntax->getOutputQualifier(), Syntax::SEMICOLON, context, stage, false);
+        emitVariableDeclarations(outputs, getSyntax().getOutputQualifier(), Syntax::SEMICOLON, context, stage, false);
         emitLineBreak(stage);
     }
 }
@@ -569,12 +569,12 @@ void GlslShaderGenerator::emitPixelStage(const ShaderGraph& graph, GenContext& c
         else
         {
             string outputValue = outputSocket->getValue() ?
-                                 _syntax->getValue(outputSocket->getType(), *outputSocket->getValue()) :
-                                 _syntax->getDefaultValue(outputSocket->getType());
+                                 getSyntax().getValue(outputSocket->getType(), *outputSocket->getValue()) :
+                                 getSyntax().getDefaultValue(outputSocket->getType());
             if (!outputSocket->getType().isFloat4())
             {
                 string finalOutput = outputSocket->getVariable() + "_tmp";
-                emitLine(_syntax->getTypeName(outputSocket->getType()) + " " + finalOutput + " = " + outputValue, stage);
+                emitLine(getSyntax().getTypeName(outputSocket->getType()) + " " + finalOutput + " = " + outputValue, stage);
                 toVec4(outputSocket->getType(), finalOutput);
                 emitLine(outputSocket->getVariable() + " = " + finalOutput, stage);
             }
@@ -663,12 +663,12 @@ void GlslShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, co
         {
             str += GlslSyntax::FLAT_QUALIFIER + " ";
         }
-        str += _syntax->getTypeName(variable->getType()) + " " + variable->getVariable();
+        str += getSyntax().getTypeName(variable->getType()) + " " + variable->getVariable();
 
         // If an array we need an array qualifier (suffix) for the variable name
         if (variable->getType().isArray() && variable->getValue())
         {
-            str += _syntax->getArrayVariableSuffix(variable->getType(), *variable->getValue());
+            str += getSyntax().getArrayVariableSuffix(variable->getType(), *variable->getValue());
         }
 
         if (!variable->getSemantic().empty())
@@ -679,8 +679,8 @@ void GlslShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, co
         if (assignValue)
         {
             const string valueStr = (variable->getValue() ?
-                                    _syntax->getValue(variable->getType(), *variable->getValue(), true) :
-                                    _syntax->getDefaultValue(variable->getType(), true));
+                                    getSyntax().getValue(variable->getType(), *variable->getValue(), true) :
+                                    getSyntax().getDefaultValue(variable->getType(), true));
             str += valueStr.empty() ? EMPTY_STRING : " = " + valueStr;
         }
 

@@ -96,11 +96,11 @@ void ShaderGenerator::emitFunctionDefinitionParameter(const ShaderPort* shaderPo
 {
     if (isOutput)
     {
-        emitString(_syntax->getOutputTypeName(shaderPort->getType()) + " " + shaderPort->getVariable(), stage);
+        emitString(getSyntax().getOutputTypeName(shaderPort->getType()) + " " + shaderPort->getVariable(), stage);
     }
     else 
     {
-        emitString(_syntax->getTypeName(shaderPort->getType()) + " " + shaderPort->getVariable(), stage);
+        emitString(getSyntax().getTypeName(shaderPort->getType()) + " " + shaderPort->getVariable(), stage);
     }
 }
 
@@ -165,7 +165,7 @@ void ShaderGenerator::emitFunctionBodyEnd(const ShaderNode&, GenContext&, Shader
 void ShaderGenerator::emitTypeDefinitions(GenContext&, ShaderStage& stage) const
 {
     // Emit typedef statements for all data types that have an alias
-    for (const auto& syntax : _syntax->getTypeSyntaxes())
+    for (const auto& syntax : getSyntax().getTypeSyntaxes())
     {
         if (!syntax->getTypeDefinition().empty())
         {
@@ -180,12 +180,12 @@ void ShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, const 
                                               bool assignValue) const
 {
     string str = qualifier.empty() ? EMPTY_STRING : qualifier + " ";
-    str += _syntax->getTypeName(variable->getType());
+    str += getSyntax().getTypeName(variable->getType());
 
     bool haveArray = variable->getType().isArray() && variable->getValue();
     if (haveArray)
     {
-        str += _syntax->getArrayTypeSuffix(variable->getType(), *variable->getValue());
+        str += getSyntax().getArrayTypeSuffix(variable->getType(), *variable->getValue());
     }
 
     str += " " + variable->getVariable();
@@ -193,14 +193,14 @@ void ShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, const 
     // If an array we need an array qualifier (suffix) for the variable name
     if (haveArray)
     {
-        str += _syntax->getArrayVariableSuffix(variable->getType(), *variable->getValue());
+        str += getSyntax().getArrayVariableSuffix(variable->getType(), *variable->getValue());
     }
 
     if (assignValue)
     {
         const string valueStr = (variable->getValue() ?
-                                 _syntax->getValue(variable->getType(), *variable->getValue(), true) :
-                                 _syntax->getDefaultValue(variable->getType(), true));
+                                 getSyntax().getValue(variable->getType(), *variable->getValue(), true) :
+                                 getSyntax().getDefaultValue(variable->getType(), true));
         str += valueStr.empty() ? EMPTY_STRING : " = " + valueStr;
     }
 
@@ -227,7 +227,7 @@ void ShaderGenerator::emitInput(const ShaderInput* input, GenContext& context, S
 
 void ShaderGenerator::emitOutput(const ShaderOutput* output, bool includeType, bool assignValue, GenContext& context, ShaderStage& stage) const
 {
-    stage.addString(includeType ? _syntax->getTypeName(output->getType()) + " " + output->getVariable() : output->getVariable());
+    stage.addString(includeType ? getSyntax().getTypeName(output->getType()) + " " + output->getVariable() : output->getVariable());
 
     // Look for any additional suffix to append
     string suffix;
@@ -239,7 +239,7 @@ void ShaderGenerator::emitOutput(const ShaderOutput* output, bool includeType, b
 
     if (assignValue)
     {
-        const string& value = _syntax->getDefaultValue(output->getType());
+        const string& value = getSyntax().getDefaultValue(output->getType());
         if (!value.empty())
         {
             stage.addString(" = " + value);
@@ -251,7 +251,7 @@ string ShaderGenerator::getUpstreamResult(const ShaderInput* input, GenContext& 
 {
     if (!input->getConnection())
     {
-        return input->getValue() ? _syntax->getValue(input->getType(), *input->getValue()) : _syntax->getDefaultValue(input->getType());
+        return input->getValue() ? getSyntax().getValue(input->getType(), *input->getValue()) : getSyntax().getDefaultValue(input->getType());
     }
 
     string variable = input->getConnection()->getVariable();
@@ -392,7 +392,7 @@ void ShaderGenerator::registerTypeDefs(const DocumentPtr& doc)
         typeDefinition += " };";
         defaultValue += " )";
 
-        StructTypeSyntaxPtr structTypeSyntax = _syntax->createStructSyntax(
+        StructTypeSyntaxPtr structTypeSyntax = getSyntax().createStructSyntax(
             structTypeName,
             defaultValue,
             uniformDefaultValue,

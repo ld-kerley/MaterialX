@@ -41,7 +41,7 @@ void VkShaderGenerator::emitInputs(GenContext& context, ShaderStage& stage) cons
             {
                 emitLineBegin(stage);
                 emitString("layout (location = " + std::to_string(i) + ") ", stage);
-                emitVariableDeclaration(vertexInputs[i], _syntax->getInputQualifier(), context, stage, false);
+                emitVariableDeclaration(vertexInputs[i], getSyntax().getInputQualifier(), context, stage, false);
                 emitString(Syntax::SEMICOLON, stage);
                 emitLineEnd(stage, false);
             }
@@ -55,7 +55,7 @@ void VkShaderGenerator::emitInputs(GenContext& context, ShaderStage& stage) cons
         if (!vertexData.empty())
         {
             emitString("layout (location = " + std::to_string(vertexDataLocation) + ") " +
-                        _syntax->getInputQualifier() + " " + vertexData.getName(), stage);
+                        getSyntax().getInputQualifier() + " " + vertexData.getName(), stage);
             emitLineBreak(stage);
             emitScopeBegin(stage);
             emitVariableDeclarations(vertexData, EMPTY_STRING, Syntax::SEMICOLON, context, stage, false);
@@ -80,7 +80,7 @@ void VkShaderGenerator::emitOutputs(GenContext& context, ShaderStage& stage) con
         if (!vertexData.empty())
         {
             emitString("layout (location = " + std::to_string(vertexDataLocation) + ") " +
-                        _syntax->getOutputQualifier() + " " + vertexData.getName(), stage);
+                        getSyntax().getOutputQualifier() + " " + vertexData.getName(), stage);
             emitLineBreak(stage);
             emitScopeBegin(stage);
             emitVariableDeclarations(vertexData, EMPTY_STRING, Syntax::SEMICOLON, context, stage, false);
@@ -100,7 +100,7 @@ void VkShaderGenerator::emitOutputs(GenContext& context, ShaderStage& stage) con
         {
             emitLineBegin(stage);
             emitString("layout (location = " + std::to_string(i) + ") ", stage);
-            emitVariableDeclaration(outputs[i], _syntax->getOutputQualifier(), context, stage, false);
+            emitVariableDeclaration(outputs[i], getSyntax().getOutputQualifier(), context, stage, false);
             emitString(Syntax::SEMICOLON, stage);
             emitLineEnd(stage, false);
         }

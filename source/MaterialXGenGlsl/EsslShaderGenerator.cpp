@@ -40,7 +40,7 @@ void EsslShaderGenerator::emitUniforms(GenContext& context, ShaderStage& stage) 
         if (!uniforms.empty() && uniforms.getName() != HW::LIGHT_DATA)
         {
             emitComment("Uniform block: " + uniforms.getName(), stage);
-            emitVariableDeclarations(uniforms, _syntax->getUniformQualifier(), Syntax::SEMICOLON, context, stage, false);
+            emitVariableDeclarations(uniforms, getSyntax().getUniformQualifier(), Syntax::SEMICOLON, context, stage, false);
             emitLineBreak(stage);
         }
     }
@@ -54,7 +54,7 @@ void EsslShaderGenerator::emitInputs(GenContext& context, ShaderStage& stage) co
         if (!vertexInputs.empty())
         {
             emitComment("Inputs block: " + vertexInputs.getName(), stage);
-            emitVariableDeclarations(vertexInputs, _syntax->getInputQualifier(), Syntax::SEMICOLON, context, stage, false);
+            emitVariableDeclarations(vertexInputs, getSyntax().getInputQualifier(), Syntax::SEMICOLON, context, stage, false);
             emitLineBreak(stage);
         }
     }
@@ -64,7 +64,7 @@ void EsslShaderGenerator::emitInputs(GenContext& context, ShaderStage& stage) co
         const VariableBlock& vertexData = stage.getInputBlock(HW::VERTEX_DATA);
         if (!vertexData.empty())
         {
-            emitVariableDeclarations(vertexData, _syntax->getInputQualifier(), Syntax::SEMICOLON, context, stage, false);
+            emitVariableDeclarations(vertexData, getSyntax().getInputQualifier(), Syntax::SEMICOLON, context, stage, false);
             emitLineBreak(stage);
         }
     }
@@ -77,7 +77,7 @@ void EsslShaderGenerator::emitOutputs(GenContext& context, ShaderStage& stage) c
         const VariableBlock& vertexData = stage.getOutputBlock(HW::VERTEX_DATA);
         if (!vertexData.empty())
         {
-            emitVariableDeclarations(vertexData, _syntax->getOutputQualifier(), Syntax::SEMICOLON, context, stage, false);
+            emitVariableDeclarations(vertexData, getSyntax().getOutputQualifier(), Syntax::SEMICOLON, context, stage, false);
             emitLineBreak(stage);
         }
     }
@@ -86,7 +86,7 @@ void EsslShaderGenerator::emitOutputs(GenContext& context, ShaderStage& stage) c
     {
         emitComment("Pixel shader outputs", stage);
         const VariableBlock& outputs = stage.getOutputBlock(HW::PIXEL_OUTPUTS);
-        emitVariableDeclarations(outputs, _syntax->getOutputQualifier(), Syntax::SEMICOLON, context, stage, false);
+        emitVariableDeclarations(outputs, getSyntax().getOutputQualifier(), Syntax::SEMICOLON, context, stage, false);
         emitLineBreak(stage);
     }
 }

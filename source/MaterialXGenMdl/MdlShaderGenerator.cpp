@@ -187,7 +187,7 @@ ShaderPtr MdlShaderGenerator::generate(const string& name, ElementPtr element, G
 
     // Begin shader signature. Note that makeIdentifier() will sanitize the name.
     string functionName = shader->getName();
-    _syntax->makeIdentifier(functionName, graph.getIdentifierMap());
+    getSyntax().makeIdentifier(functionName, graph.getIdentifierMap());
     setFunctionName(functionName, stage);
     emitLine(functionName, stage, false);
     emitScopeBegin(stage, Syntax::PARENTHESES);
@@ -206,12 +206,12 @@ ShaderPtr MdlShaderGenerator::generate(const string& name, ElementPtr element, G
     const VariableBlock& constants = stage.getConstantBlock();
     if (constants.size())
     {
-        emitVariableDeclarations(constants, _syntax->getConstantQualifier(), Syntax::SEMICOLON, context, stage);
+        emitVariableDeclarations(constants, getSyntax().getConstantQualifier(), Syntax::SEMICOLON, context, stage);
         emitLineBreak(stage);
     }
 
     // Emit shader inputs that have been filtered during printing of the public interface
-    const string uniformPrefix = _syntax->getUniformQualifier() + " ";
+    const string uniformPrefix = getSyntax().getUniformQualifier() + " ";
     for (ShaderGraphInputSocket* inputSocket : graph.getInputSockets())
     {
         if (inputSocket->getConnections().size() &&
@@ -222,11 +222,11 @@ ShaderPtr MdlShaderGenerator::generate(const string& name, ElementPtr element, G
             const string& qualifier = inputSocket->isUniform() || inputSocket->getType() == Type::FILENAME 
                 ? uniformPrefix 
                 : EMPTY_STRING;
-            const string& type = _syntax->getTypeName(inputSocket->getType());
+            const string& type = getSyntax().getTypeName(inputSocket->getType());
 
             emitLineBegin(stage);
             emitString(qualifier + type + " " + inputSocket->getVariable() + " = ", stage);
-            emitString(_syntax->getDefaultValue(inputSocket->getType(), true), stage);
+            emitString(getSyntax().getDefaultValue(inputSocket->getType(), true), stage);
             emitLineEnd(stage, true);
         }
     }
@@ -314,7 +314,7 @@ ShaderPtr MdlShaderGenerator::generate(const string& name, ElementPtr element, G
     }
     else
     {
-        emitLine(_syntax->getTypeSyntax(outputType).getName() + " finalOutput__ = " + result, stage);
+        emitLine(getSyntax().getTypeSyntax(outputType).getName() + " finalOutput__ = " + result, stage);
 
         // End shader body
         emitScopeEnd(stage);
@@ -707,15 +707,15 @@ void emitInputAnnotations(const MdlShaderGenerator& _this, const ShaderPort* var
 
 void MdlShaderGenerator::emitShaderInputs(const VariableBlock& inputs, ShaderStage& stage) const
 {
-    const string uniformPrefix = _syntax->getUniformQualifier() + " ";
+    const string uniformPrefix = getSyntax().getUniformQualifier() + " ";
     for (size_t i = 0; i < inputs.size(); ++i)
     {
         const ShaderPort* input = inputs[i];
 
         const string& qualifier = input->isUniform() || input->getType() == Type::FILENAME ? uniformPrefix : EMPTY_STRING;
-        const string& type = _syntax->getTypeName(input->getType());
+        const string& type = getSyntax().getTypeName(input->getType());
 
-        string value = input->getValue() ? _syntax->getValue(input->getType(), *input->getValue(), true) : EMPTY_STRING;
+        string value = input->getValue() ? getSyntax().getValue(input->getType(), *input->getValue(), true) : EMPTY_STRING;
         const string& geomprop = input->getGeomProp();
         if (!geomprop.empty())
         {
@@ -727,7 +727,7 @@ void MdlShaderGenerator::emitShaderInputs(const VariableBlock& inputs, ShaderSta
         }
         if (value.empty())
         {
-            value = _syntax->getDefaultValue(input->getType(), true);
+            value = getSyntax().getDefaultValue(input->getType(), true);
         }
 
         emitLineBegin(stage);
@@ -808,7 +808,7 @@ void MdlShaderGenerator::emitMdlVersionFilenameSuffix(GenContext& context, Shade
 void MdlShaderGenerator::emitTypeDefinitions(GenContext&, ShaderStage& stage) const
 {
     // Emit typedef statements for all data types that have an alias
-    for (const auto& syntax : _syntax->getTypeSyntaxes())
+    for (const auto& syntax : getSyntax().getTypeSyntaxes())
     {
         if (!syntax->getTypeDefinition().empty())
         {

@@ -76,7 +76,7 @@ ShaderPtr OslShaderGenerator::generate(const string& name, ElementPtr element, G
 
     // Begin shader signature. Note that makeIdentifier() will sanitize the name.
     string functionName = shader->getName();
-    _syntax->makeIdentifier(functionName, graph.getIdentifierMap());
+    getSyntax().makeIdentifier(functionName, graph.getIdentifierMap());
     setFunctionName(functionName, stage);
     emitLine(functionName, stage, false);
 
@@ -97,8 +97,8 @@ ShaderPtr OslShaderGenerator::generate(const string& name, ElementPtr element, G
         {
             const ShaderMetadata& data = (*metadata)[j];
             const string& delim = (j == metadata->size() - 1) ? EMPTY_STRING : Syntax::COMMA;
-            const string& dataType = _syntax->getTypeName(data.type);
-            const string dataValue = _syntax->getValue(data.type, *data.value, true);
+            const string& dataType = getSyntax().getTypeName(data.type);
+            const string dataValue = getSyntax().getValue(data.type, *data.value, true);
             emitLine(dataType + " " + data.name + " = " + dataValue + delim, stage, false);
         }
     }
@@ -141,7 +141,7 @@ ShaderPtr OslShaderGenerator::generate(const string& name, ElementPtr element, G
     const VariableBlock& constants = stage.getConstantBlock();
     if (constants.size())
     {
-        emitVariableDeclarations(constants, _syntax->getConstantQualifier(), Syntax::SEMICOLON, context, stage);
+        emitVariableDeclarations(constants, getSyntax().getConstantQualifier(), Syntax::SEMICOLON, context, stage);
         emitLineBreak(stage);
     }
 
@@ -156,7 +156,7 @@ ShaderPtr OslShaderGenerator::generate(const string& name, ElementPtr element, G
         {
             // Construct the textureresource variable.
             const string newVariableName = input->getVariable() + "_";
-            const string& type = _syntax->getTypeName(input->getType());
+            const string& type = getSyntax().getTypeName(input->getType());
             emitLine(type + newVariableName + " = {" + input->getVariable() + ", " + input->getVariable() + "_colorspace}", stage);
 
             // Update the variable name to be used downstream.
@@ -343,7 +343,7 @@ void OslShaderGenerator::emitShaderInputs(const VariableBlock& inputs, ShaderSta
     for (size_t i = 0; i < inputs.size(); ++i)
     {
         const ShaderPort* input = inputs[i];
-        const string& type = _syntax->getTypeName(input->getType());
+        const string& type = getSyntax().getTypeName(input->getType());
 
         if (input->getType() == Type::FILENAME)
         {
@@ -376,7 +376,7 @@ void OslShaderGenerator::emitShaderInputs(const VariableBlock& inputs, ShaderSta
             emitLineBegin(stage);
             emitString(type + " " + input->getVariable(), stage);
 
-            string value = _syntax->getValue(input, true);
+            string value = getSyntax().getValue(input, true);
             const string& geomprop = input->getGeomProp();
             if (!geomprop.empty())
             {
@@ -388,7 +388,7 @@ void OslShaderGenerator::emitShaderInputs(const VariableBlock& inputs, ShaderSta
             }
             if (value.empty())
             {
-                value = _syntax->getDefaultValue(input->getType());
+                value = getSyntax().getDefaultValue(input->getType());
             }
 
             emitString(" = " + value, stage);
@@ -410,8 +410,8 @@ void OslShaderGenerator::emitShaderOutputs(const VariableBlock& outputs, ShaderS
     {
         const ShaderPort* output = outputs[i];
         const TypeDesc outputType = output->getType();
-        const string type = _syntax->getOutputTypeName(outputType);
-        const string value = _syntax->getDefaultValue(outputType, true);
+        const string type = getSyntax().getOutputTypeName(outputType);
+        const string value = getSyntax().getDefaultValue(outputType, true);
         const string& delim = (i == outputs.size() - 1) ? EMPTY_STRING : Syntax::COMMA;
         emitLine(type + " " + output->getVariable() + " = " + value + delim, stage, false);
     }
@@ -452,8 +452,8 @@ void OslShaderGenerator::emitMetadata(const ShaderPort* port, ShaderStage& stage
                 if (METADATA_TYPE_BLACKLIST.count(data.type) == 0)
                 {
                     const string& delim = (widgetMetadata || j < metadata->size() - 1) ? Syntax::COMMA : EMPTY_STRING;
-                    const string& dataType = _syntax->getTypeName(data.type);
-                    const string dataValue = _syntax->getValue(data.type, *data.value, true);
+                    const string& dataType = getSyntax().getTypeName(data.type);
+                    const string dataValue = getSyntax().getValue(data.type, *data.value, true);
                     metadataLines.emplace_back(dataType + " " + data.name + " = " + dataValue + delim);
                 }
             }
@@ -461,13 +461,13 @@ void OslShaderGenerator::emitMetadata(const ShaderPort* port, ShaderStage& stage
         if (widgetMetadata)
         {
             const string& delim = geomprop.empty() ? EMPTY_STRING : Syntax::COMMA;
-            const string& dataType = _syntax->getTypeName(widgetMetadata->type);
-            const string dataValue = _syntax->getValue(widgetMetadata->type, *widgetMetadata->value, true);
+            const string& dataType = getSyntax().getTypeName(widgetMetadata->type);
+            const string dataValue = getSyntax().getValue(widgetMetadata->type, *widgetMetadata->value, true);
             metadataLines.emplace_back(dataType + " " + widgetMetadata->name + " = " + dataValue + delim);
         }
         if (!geomprop.empty())
         {
-            const string& dataType = _syntax->getTypeName(Type::STRING);
+            const string& dataType = getSyntax().getTypeName(Type::STRING);
             metadataLines.emplace_back(dataType + " mtlx_defaultgeomprop = \"" + geomprop + "\"");
         }
         if (metadataLines.size())

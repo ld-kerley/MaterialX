@@ -319,7 +319,7 @@ void MslShaderGenerator::emitGlobalVariables(GenContext& context,
                     }
                     else if (globalContextMembers || globalContextConstructorParams)
                     {
-                        emitLine(_syntax->getTypeName(it->getType()) + " " + it->getName(), stage, !globalContextConstructorParams);
+                        emitLine(getSyntax().getTypeName(it->getType()) + " " + it->getName(), stage, !globalContextConstructorParams);
                     }
                     else if (globalContextConstructorInit)
                     {
@@ -376,7 +376,7 @@ void MslShaderGenerator::emitGlobalVariables(GenContext& context,
             emitString(separator, stage);
             if (entryFunctionArgs)
             {
-                emitString(_syntax->getUniformQualifier() + " " +
+                emitString(getSyntax().getUniformQualifier() + " " +
                                uniforms.getName() + "_" + stage.getName() + "& " +
                                uniforms.getInstance() +
                                "[[ buffer(" + std::to_string(buffer_slot++) + ") ]]",
@@ -389,7 +389,7 @@ void MslShaderGenerator::emitGlobalVariables(GenContext& context,
             else if (globalContextMembers || globalContextConstructorParams)
             {
                 const string structArraySuffix = "[" + HW::LIGHT_DATA_MAX_LIGHT_SOURCES + "]";
-                emitLine((globalContextConstructorParams ? (_syntax->getUniformQualifier() + " ") : std::string()) +
+                emitLine((globalContextConstructorParams ? (getSyntax().getUniformQualifier() + " ") : std::string()) +
                              uniforms.getName() + " " +
                              uniforms.getInstance() +
                              structArraySuffix,
@@ -428,7 +428,7 @@ void MslShaderGenerator::emitGlobalVariables(GenContext& context,
                             }
                             else if (globalContextMembers || globalContextConstructorParams)
                             {
-                                emitLine(_syntax->getTypeName(uniforms[i]->getType()) + " " + uniforms[i]->getVariable(), stage, !globalContextConstructorParams);
+                                emitLine(getSyntax().getTypeName(uniforms[i]->getType()) + " " + uniforms[i]->getVariable(), stage, !globalContextConstructorParams);
                             }
                             else if (globalContextConstructorInit)
                             {
@@ -493,7 +493,7 @@ void MslShaderGenerator::emitGlobalVariables(GenContext& context,
                     if (hasUniforms)
                     {
                         emitString(separator, stage);
-                        emitString(_syntax->getUniformQualifier() + " " +
+                        emitString(getSyntax().getUniformQualifier() + " " +
                                        uniforms.getName() + "& " +
                                        uniforms.getInstance() +
                                        "[[ buffer(" + std::to_string(buffer_slot++) + ") ]]",
@@ -516,7 +516,7 @@ void MslShaderGenerator::emitGlobalVariables(GenContext& context,
         {
             if (globalContextMembers)
             {
-                emitLine(_syntax->getTypeName(it->getType()) + " " + it->getVariable(), stage, true);
+                emitLine(getSyntax().getTypeName(it->getType()) + " " + it->getVariable(), stage, true);
             }
         }
     }
@@ -672,7 +672,7 @@ void MslShaderGenerator::emitConstants(GenContext& context, ShaderStage& stage) 
     const VariableBlock& constants = stage.getConstantBlock();
     if (!constants.empty())
     {
-        emitVariableDeclarations(constants, _syntax->getUniformQualifier(), Syntax::SEMICOLON, context, stage);
+        emitVariableDeclarations(constants, getSyntax().getUniformQualifier(), Syntax::SEMICOLON, context, stage);
         emitLineBreak(stage);
     }
 }
@@ -697,7 +697,7 @@ void MslShaderGenerator::emitConstantBufferDeclarations(GenContext& context,
             }
             else
             {
-                emitVariableDeclarations(uniforms, _syntax->getUniformQualifier(), Syntax::SEMICOLON, context, stage);
+                emitVariableDeclarations(uniforms, getSyntax().getUniformQualifier(), Syntax::SEMICOLON, context, stage);
                 emitLineBreak(stage);
             }
         }
@@ -1052,12 +1052,12 @@ void MslShaderGenerator::emitPixelStage(const ShaderGraph& graph, GenContext& co
             else
             {
                 string outputValue = outputSocket->getValue() ?
-                                    _syntax->getValue(outputSocket->getType(), *outputSocket->getValue()) :
-                                    _syntax->getDefaultValue(outputSocket->getType());
+                                    getSyntax().getValue(outputSocket->getType(), *outputSocket->getValue()) :
+                                    getSyntax().getDefaultValue(outputSocket->getType());
                 if (!outputSocket->getType().isFloat4())
                 {
                     string finalOutput = outputSocket->getVariable() + "_tmp";
-                    emitLine(_syntax->getTypeName(outputSocket->getType()) + " " + finalOutput + " = " + outputValue, stage);
+                    emitLine(getSyntax().getTypeName(outputSocket->getType()) + " " + finalOutput + " = " + outputValue, stage);
                     toVec4(outputSocket->getType(), finalOutput);
                     emitLine(outputSocket->getVariable() + " = " + finalOutput, stage);
                 }
@@ -1173,12 +1173,12 @@ void MslShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, con
     {
         string str = qualifier.empty() ? EMPTY_STRING : qualifier + " ";
 
-        str += _syntax->getTypeName(variable->getType()) + " " + variable->getVariable();
+        str += getSyntax().getTypeName(variable->getType()) + " " + variable->getVariable();
 
         // If an array we need an array qualifier (suffix) for the variable name
         if (variable->getType().isArray() && variable->getValue())
         {
-            str += _syntax->getArrayVariableSuffix(variable->getType(), *variable->getValue());
+            str += getSyntax().getArrayVariableSuffix(variable->getType(), *variable->getValue());
         }
 
         if (!variable->getSemantic().empty())
@@ -1196,8 +1196,8 @@ void MslShaderGenerator::emitVariableDeclaration(const ShaderPort* variable, con
         if (assignValue)
         {
             const string valueStr = (variable->getValue() ?
-                                    _syntax->getValue(variable->getType(), *variable->getValue(), true) :
-                                    _syntax->getDefaultValue(variable->getType(), true));
+                                    getSyntax().getValue(variable->getType(), *variable->getValue(), true) :
+                                    getSyntax().getDefaultValue(variable->getType(), true));
             str += valueStr.empty() ? EMPTY_STRING : " = " + valueStr;
         }
 
