@@ -28,6 +28,7 @@ OslRendererPtr OslRenderer::create(unsigned int width, unsigned int height, Imag
 OslRenderer::OslRenderer(unsigned int width, unsigned int height, Image::BaseType baseType) :
     ShaderRenderer(width, height, baseType),
     _useTestRender(true),
+    _useOslCommandStrings(false),
     _raysPerPixelLit(1),
     _raysPerPixelUnlit(1)
 {
@@ -54,7 +55,7 @@ void OslRenderer::initialize(RenderContextHandle)
     }
 }
 
-void OslRenderer::renderOSL(const FilePath& dirPath, const string& shaderName, const string& outputName)
+void OslRenderer::renderCommon(const FilePath& dirPath, const string& shaderName, const StringMap& replacementMap, bool isColorClosure, const string& fileSuffix)
 {
     // If command options missing, skip testing.
     if (_oslTestRenderExecutable.isEmpty() ||
@@ -63,29 +64,17 @@ void OslRenderer::renderOSL(const FilePath& dirPath, const string& shaderName, c
         throw ExceptionRenderError("Command input arguments are missing");
     }
 
-    static const StringSet RENDERABLE_TYPES = { "float", "color", "vector", "closure color", "color4", "vector2", "vector4" };
-    static const StringSet REMAPPABLE_TYPES = { "color4", "vector2", "vector4" };
-
-    // If the output type is not which can be supported for rendering then skip testing.
-    if (RENDERABLE_TYPES.count(_oslShaderOutputType) == 0)
-    {
-        throw ExceptionRenderError("Output type to render is not supported: " + _oslShaderOutputType);
-    }
-
-    const bool isColorClosure = _oslShaderOutputType == "closure color";
-    const bool isRemappable = REMAPPABLE_TYPES.count(_oslShaderOutputType) != 0;
-
     // Determine the shader path from output path and shader name
     FilePath shaderFilePath(dirPath);
     shaderFilePath = shaderFilePath / shaderName;
     string shaderPath = shaderFilePath.asString();
 
     // Set output image name.
-    string outputFileName = shaderPath + "_osl.png";
+    string outputFileName = shaderPath + fileSuffix + ".png";
     _oslOutputFileName = outputFileName;
 
     // Use a known error file name to check
-    string errorFile(shaderPath + "_render_errors.txt");
+    string errorFile(shaderPath + "_render_errors"+fileSuffix+".txt");
     const string redirectString(" 2>&1");
 
     // Read in scene template and replace the applicable tokens to have a valid ShaderGroup.
@@ -95,43 +84,6 @@ void OslRenderer::renderOSL(const FilePath& dirPath, const string& shaderName, c
     sceneTemplateString.assign(std::istreambuf_iterator<char>(sceneTemplateStream),
                                std::istreambuf_iterator<char>());
 
-    // Get final output to use in the shader
-    const string CLOSURE_PASSTHROUGH_SHADER_STRING("closure_passthrough");
-    const string CONSTANT_COLOR_SHADER_STRING("constant_color");
-    const string CONSTANT_COLOR_SHADER_PREFIX_STRING("constant_");
-    string outputShader = isColorClosure ? CLOSURE_PASSTHROUGH_SHADER_STRING :
-        (isRemappable ? CONSTANT_COLOR_SHADER_PREFIX_STRING + _oslShaderOutputType : CONSTANT_COLOR_SHADER_STRING);
-
-    // Perform token replacement
-    const string ENVIRONMENT_SHADER_PARAMETER_OVERRIDES("%environment_shader_parameter_overrides%");
-    const string OUTPUT_SHADER_TYPE_STRING("%output_shader_type%");
-    const string OUTPUT_SHADER_INPUT_STRING("%output_shader_input%");
-    const string OUTPUT_SHADER_INPUT_VALUE_STRING("Cin");
-    const string INPUT_SHADER_TYPE_STRING("%input_shader_type%");
-    const string INPUT_SHADER_PARAMETER_OVERRIDES("%input_shader_parameter_overrides%");
-    const string INPUT_SHADER_OUTPUT_STRING("%input_shader_output%");
-    const string BACKGROUND_COLOR_STRING("%background_color%");
-
-    StringMap replacementMap;
-    replacementMap[OUTPUT_SHADER_TYPE_STRING] = outputShader;
-    replacementMap[OUTPUT_SHADER_INPUT_STRING] = OUTPUT_SHADER_INPUT_VALUE_STRING;
-    replacementMap[INPUT_SHADER_TYPE_STRING] = shaderName;
-    string overrideString;
-    for (const auto& param : _oslShaderParameterOverrides)
-    {
-        overrideString.append(param);
-    }
-    string envOverrideString;
-    for (const auto& param : _envOslShaderParameterOverrides)
-    {
-        envOverrideString.append(param);
-    }
-    replacementMap[INPUT_SHADER_PARAMETER_OVERRIDES] = overrideString;
-    replacementMap[ENVIRONMENT_SHADER_PARAMETER_OVERRIDES] = envOverrideString;
-    replacementMap[INPUT_SHADER_OUTPUT_STRING] = outputName;
-    replacementMap[BACKGROUND_COLOR_STRING] = std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[0]) + " " +
-                                              std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[1]) + " " +
-                                              std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[2]);
     string sceneString = replaceSubstrings(sceneTemplateString, replacementMap);
     if ((sceneString == sceneTemplateString) || sceneTemplateString.empty())
     {
@@ -146,7 +98,7 @@ void OslRenderer::renderOSL(const FilePath& dirPath, const string& shaderName, c
     rootPath.setCurrentPath();
 
     // Write scene file
-    const string sceneFileName("scene_template.xml");
+    const string sceneFileName("scene_template"+fileSuffix+".xml");
     std::ofstream shaderFileStream;
     shaderFileStream.open(sceneFileName);
     if (shaderFileStream.is_open())
@@ -209,6 +161,84 @@ void OslRenderer::renderOSL(const FilePath& dirPath, const string& shaderName, c
         errors.push_back("Command return code: " + std::to_string(returnValue));
         throw ExceptionRenderError("OSL rendering error", errors);
     }
+}
+
+void OslRenderer::renderOSL(const FilePath& dirPath, const string& shaderName, const string& outputName)
+{
+    static const StringSet RENDERABLE_TYPES = { "float", "color", "vector", "closure color", "color4", "vector2", "vector4" };
+    static const StringSet REMAPPABLE_TYPES = { "color4", "vector2", "vector4" };
+
+    // If the output type is not which can be supported for rendering then skip testing.
+    if (RENDERABLE_TYPES.count(_oslShaderOutputType) == 0)
+    {
+        throw ExceptionRenderError("Output type to render is not supported: " + _oslShaderOutputType);
+    }
+
+    const bool isColorClosure = _oslShaderOutputType == "closure color";
+    const bool isRemappable = REMAPPABLE_TYPES.count(_oslShaderOutputType) != 0;
+
+    // Get final output to use in the shader
+    const string CLOSURE_PASSTHROUGH_SHADER_STRING("closure_passthrough");
+    const string CONSTANT_COLOR_SHADER_STRING("constant_color");
+    const string CONSTANT_COLOR_SHADER_PREFIX_STRING("constant_");
+    string outputShader = isColorClosure ? CLOSURE_PASSTHROUGH_SHADER_STRING :
+        (isRemappable ? CONSTANT_COLOR_SHADER_PREFIX_STRING + _oslShaderOutputType : CONSTANT_COLOR_SHADER_STRING);
+
+    // Perform token replacement
+    const string ENVIRONMENT_SHADER_PARAMETER_OVERRIDES("%environment_shader_parameter_overrides%");
+    const string OUTPUT_SHADER_TYPE_STRING("%output_shader_type%");
+    const string OUTPUT_SHADER_INPUT_STRING("%output_shader_input%");
+    const string OUTPUT_SHADER_INPUT_VALUE_STRING("Cin");
+    const string INPUT_SHADER_TYPE_STRING("%input_shader_type%");
+    const string INPUT_SHADER_PARAMETER_OVERRIDES("%input_shader_parameter_overrides%");
+    const string INPUT_SHADER_OUTPUT_STRING("%input_shader_output%");
+    const string BACKGROUND_COLOR_STRING("%background_color%");
+
+    StringMap replacementMap;
+    replacementMap[OUTPUT_SHADER_TYPE_STRING] = outputShader;
+    replacementMap[OUTPUT_SHADER_INPUT_STRING] = OUTPUT_SHADER_INPUT_VALUE_STRING;
+    replacementMap[INPUT_SHADER_TYPE_STRING] = shaderName;
+    string overrideString;
+    for (const auto& param : _oslShaderParameterOverrides)
+    {
+        overrideString.append(param);
+    }
+    string envOverrideString;
+    for (const auto& param : _envOslShaderParameterOverrides)
+    {
+        envOverrideString.append(param);
+    }
+    replacementMap[INPUT_SHADER_PARAMETER_OVERRIDES] = overrideString;
+    replacementMap[ENVIRONMENT_SHADER_PARAMETER_OVERRIDES] = envOverrideString;
+    replacementMap[INPUT_SHADER_OUTPUT_STRING] = outputName;
+    replacementMap[BACKGROUND_COLOR_STRING] = std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[0]) + " " +
+                                              std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[1]) + " " +
+                                              std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[2]);
+
+    renderCommon(dirPath, shaderName, replacementMap, isColorClosure, "_osl");
+}
+
+void OslRenderer::renderOSLNodes(const FilePath& dirPath, const string& shaderName)
+{
+    // Perform token replacement
+    const string ENVIRONMENT_SHADER_PARAMETER_OVERRIDES("%environment_shader_parameter_overrides%");
+    const string BACKGROUND_COLOR_STRING("%background_color%");
+    const string OSL_COMMANDS("%osl_commands%");
+
+    string envOverrideString;
+    for (const auto& param : _envOslShaderParameterOverrides)
+    {
+        envOverrideString.append(param);
+    }
+
+    StringMap replacementMap;
+    replacementMap[OSL_COMMANDS] = _oslCommandString;
+    replacementMap[ENVIRONMENT_SHADER_PARAMETER_OVERRIDES] = envOverrideString;
+    replacementMap[BACKGROUND_COLOR_STRING] = std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[0]) + " " +
+                                              std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[1]) + " " +
+                                              std::to_string(DEFAULT_SCREEN_COLOR_LIN_REC709[2]);
+
+    renderCommon(dirPath, shaderName, replacementMap, true, "_oslnodes");
 }
 
 void OslRenderer::shadeOSL(const FilePath& dirPath, const string& shaderName, const string& outputName)
@@ -374,27 +404,35 @@ void OslRenderer::render()
     {
         throw ExceptionRenderError("OSL output file path string has not been specified");
     }
-    if (_oslShaderOutputName.empty())
-    {
-        throw ExceptionRenderError("OSL shader output name has not been specified");
-    }
 
     _oslOutputFileName.assign(EMPTY_STRING);
 
-    // Use testshade
-    if (!_useTestRender)
+    if (_useOslCommandStrings)
     {
-        shadeOSL(_oslOutputFilePath, _oslShaderName, _oslShaderOutputName);
+        renderOSLNodes(_oslOutputFilePath, _oslShaderName);
     }
-
-    // Use testrender
     else
     {
-        if (_oslShaderName.empty())
+        if (_oslShaderOutputName.empty())
         {
-            throw ExceptionRenderError("OSL shader name has not been specified");
+            throw ExceptionRenderError("OSL shader output name has not been specified");
         }
-        renderOSL(_oslOutputFilePath, _oslShaderName, _oslShaderOutputName);
+
+        // Use testshade
+        if (!_useTestRender)
+        {
+            shadeOSL(_oslOutputFilePath, _oslShaderName, _oslShaderOutputName);
+        }
+
+        // Use testrender
+        else
+        {
+            if (_oslShaderName.empty())
+            {
+                throw ExceptionRenderError("OSL shader name has not been specified");
+            }
+            renderOSL(_oslOutputFilePath, _oslShaderName, _oslShaderOutputName);
+        }
     }
 }
 

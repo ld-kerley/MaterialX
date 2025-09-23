@@ -1,0 +1,9 @@
+surface 
+test_node
+(
+    color col = color(1,0,0),
+	output closure color Out_Ci = 0.0
+)
+{
+	Out_Ci = col * diffuse(N);
+}

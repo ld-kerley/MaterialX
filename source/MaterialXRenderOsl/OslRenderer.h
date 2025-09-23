@@ -196,6 +196,16 @@ class MX_RENDEROSL_API OslRenderer : public ShaderRenderer
         _useTestRender = useTestRender;
     }
 
+    void useOslCommandStrings(bool useOslCommandStrings)
+    {
+        _useOslCommandStrings = useOslCommandStrings;
+    }
+
+    void setOslCommandString(const string& oslCommandString)
+    {
+        _oslCommandString = oslCommandString;
+    }
+
     /// Set the number of rays per pixel to be used for lit surfaces.
     void setRaysPerPixelLit(int rays)
     {
@@ -223,12 +233,16 @@ class MX_RENDEROSL_API OslRenderer : public ShaderRenderer
     /// @param outputName Name of OSL shader output to use.
     void shadeOSL(const FilePath& dirPath, const string& shaderName, const string& outputName);
 
+    void renderCommon(const FilePath& dirPath, const string& shaderName, const StringMap& replacementMap, bool isColorClosure, const string& fileSuffix);
+
     ///
     /// Render using OSO input file. Will throw an exception if an error occurs.
     /// @param dirPath Path to location containing input .oso file.
     /// @param shaderName Name of OSL shader. A corresponding .oso file is assumed to exist in the output path folder.
     /// @param outputName Name of OSL shader output to use.
     void renderOSL(const FilePath& dirPath, const string& shaderName, const string& outputName);
+
+    void renderOSLNodes(const FilePath& dirPath, const string& shaderName);
 
     /// Constructor
     OslRenderer(unsigned int width, unsigned int height, Image::BaseType baseType);
@@ -247,8 +261,10 @@ class MX_RENDEROSL_API OslRenderer : public ShaderRenderer
     StringVec _envOslShaderParameterOverrides;
     string _oslShaderOutputName;
     string _oslShaderOutputType;
+    string _oslCommandString;
     FilePath _oslUtilityOSOPath;
     bool _useTestRender;
+    bool _useOslCommandStrings;
     int _raysPerPixelLit;
     int _raysPerPixelUnlit;
 };
