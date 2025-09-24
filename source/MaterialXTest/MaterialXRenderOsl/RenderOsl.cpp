@@ -76,8 +76,8 @@ class BitangentOsl : public mx::ShaderNodeImpl
 class OslShaderRenderTester : public RenderUtil::ShaderRenderTester
 {
   public:
-    explicit OslShaderRenderTester(mx::ShaderGeneratorPtr shaderGenerator) :
-        RenderUtil::ShaderRenderTester(shaderGenerator)
+    explicit OslShaderRenderTester(mx::ShaderGeneratorPtr shaderGenerator, bool useOslCommands) :
+        RenderUtil::ShaderRenderTester(shaderGenerator), _useOslCommands(useOslCommands)
     {
         // Preprocess to resolve to absolute image file names 
         // and all non-POSIX separators must be converted to POSIX ones (this only affects running on Windows)
@@ -115,6 +115,7 @@ class OslShaderRenderTester : public RenderUtil::ShaderRenderTester
 
     mx::ImageLoaderPtr _imageLoader;
     mx::OslRendererPtr _renderer;
+    bool _useOslCommands;
 };
 
 // Renderer setup
@@ -236,6 +237,16 @@ bool OslShaderRenderTester::runRenderer(const std::string& shaderName,
             }
             CHECK(shader->getSourceCode().length() > 0);
 
+            std::string sourceCode = shader->getSourceCode();
+
+            if (_useOslCommands)
+            {
+                // placeholder test command string - replace once shader generator is complete
+                sourceCode  = "shader test_node test_node;\n";
+                sourceCode += "shader closure_passthrough closure_passthrough;\n";
+                sourceCode += "connect test_node.Out_Ci closure_passthrough.Cin;\n";
+            }
+
             std::string shaderPath;
             mx::FilePath outputFilePath = outputPath;
             // Use separate directory for reduced output
@@ -257,8 +268,8 @@ bool OslShaderRenderTester::runRenderer(const std::string& shaderName,
             {
                 mx::ScopedTimer ioTimer(&profileTimes.languageTimes.ioTime);
                 std::ofstream file;
-                file.open(shaderPath + ".osl");
-                file << shader->getSourceCode();
+                file.open(shaderPath + (_useOslCommands ? ".oslcmds" : ".osl"));
+                file << sourceCode;
                 file.close();
             }
 
@@ -273,6 +284,7 @@ bool OslShaderRenderTester::runRenderer(const std::string& shaderName,
                 _renderer->setRaysPerPixelUnlit(testOptions.enableReferenceQuality ? 8 : 1);
 
                 // Validate compilation
+                if (!_useOslCommands)
                 {
                     mx::ScopedTimer compileTimer(&profileTimes.languageTimes.compileTime);
                     _renderer->createProgram(shader);
@@ -294,15 +306,24 @@ bool OslShaderRenderTester::runRenderer(const std::string& shaderName,
                 const mx::VariableBlock& outputs = stage.getOutputBlock(mx::OSL::OUTPUTS);
                 if (outputs.size() > 0)
                 {
-                    const mx::ShaderPort* output = outputs[0];
-                    const mx::TypeSyntax& typeSyntax = shadergen.getSyntax().getTypeSyntax(output->getType());
+                    const std::string& sceneTemplateFile =  _useOslCommands ? "oslnodes_scene_template.xml" : "scene_template.xml";
 
-                    const std::string& outputName = output->getVariable();
-                    const std::string& outputType = typeSyntax.getTypeAlias().empty() ? typeSyntax.getName() : typeSyntax.getTypeAlias();
-                    const std::string& sceneTemplateFile = "scene_template.xml";
+                    if (_useOslCommands)
+                    {
+                        _renderer->useOslCommandStrings(true);
+                        _renderer->setOslCommandString(sourceCode);
+                    }
+                    else
+                    {
+                        const mx::ShaderPort* output = outputs[0];
+                        const mx::TypeSyntax& typeSyntax = shadergen.getSyntax().getTypeSyntax(output->getType());
 
-                    // Set shader output name and type to use
-                    _renderer->setOslShaderOutput(outputName, outputType);
+                        const std::string& outputName = output->getVariable();
+                        const std::string& outputType = typeSyntax.getTypeAlias().empty() ? typeSyntax.getName() : typeSyntax.getTypeAlias();
+
+                        // Set shader output name and type to use
+                        _renderer->setOslShaderOutput(outputName, outputType);
+                    }
 
                     // Set scene template file. For now we only have the constant color scene file
                     mx::FileSearchPath searchPath = mx::getDefaultDataSearchPath();
@@ -365,6 +386,22 @@ TEST_CASE("Render: OSL TestSuite", "[renderosl]")
     mx::FileSearchPath searchPath = mx::getDefaultDataSearchPath();
     mx::FilePath optionsFilePath = searchPath.find("resources/Materials/TestSuite/_options.mtlx");
 
-    OslShaderRenderTester renderTester(mx::OslShaderGenerator::create());
+    OslShaderRenderTester renderTester(mx::OslShaderGenerator::create(), false);
+    renderTester.validate(optionsFilePath);
+}
+
+TEST_CASE("Render: OSL Nodes TestSuite", "[renderoslnodes]")
+{
+    if (std::string(MATERIALX_OSL_BINARY_OSLC).empty() &&
+        std::string(MATERIALX_OSL_BINARY_TESTRENDER).empty())
+    {
+        INFO("Skipping the OSL test suite as its executable locations haven't been set.");
+        return;
+    }
+
+    mx::FileSearchPath searchPath = mx::getDefaultDataSearchPath();
+    mx::FilePath optionsFilePath = searchPath.find("resources/Materials/TestSuite/_options.mtlx");
+
+    OslShaderRenderTester renderTester(mx::OslShaderGenerator::create(), true);
     renderTester.validate(optionsFilePath);
 }
