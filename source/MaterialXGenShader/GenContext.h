@@ -82,20 +82,6 @@ class MX_GENSHADER_API GenContext
         return searchPath.find(filename).getNormalized();
     }
 
-    /// Add reserved words that should not be used as
-    /// identifiers during code generation.
-    void addReservedWords(const StringSet& names)
-    {
-        _reservedWords.insert(names.begin(), names.end());
-    }
-
-    /// Return the set of reserved words that should not be used
-    /// as identifiers during code generation.
-    const StringSet& getReservedWords() const
-    {
-        return _reservedWords;
-    }
-
     /// Cache a shader node implementation.
     void addNodeImplementation(const string& name, ShaderNodeImplPtr impl);
 
@@ -210,7 +196,6 @@ class MX_GENSHADER_API GenContext
     ShaderGeneratorPtr _sg;
     GenOptions _options;
     FileSearchPath _sourceCodeSearchPath;
-    StringSet _reservedWords;
 
     std::unordered_map<string, ShaderNodeImplPtr> _nodeImpls;
     std::unordered_map<string, vector<GenUserDataPtr>> _userData;

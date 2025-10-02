@@ -20,23 +20,6 @@ GenContext::GenContext(ShaderGeneratorPtr sg) :
         throw ExceptionShaderGenError("GenContext must have a valid shader generator");
     }
 
-    // Collect and cache reserved words from the shader generator
-    StringSet reservedWords;
-
-    // Add reserved words from the syntax
-    reservedWords = _sg->getSyntax().getReservedWords();
-
-    // Add token substitution identifiers
-    for (const auto& it : _sg->getTokenSubstitutions())
-    {
-        if (!it.second.empty())
-        {
-            reservedWords.insert(it.second);
-        }
-    }
-
-    addReservedWords(reservedWords);
-
     _applicationVariableHandler = nullptr;
 }
 
