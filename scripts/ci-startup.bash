@@ -21,3 +21,27 @@ if [[ "$(which ccache)" != "" ]] ; then
     ccache -z
 fi
 mkdir -p $CCACHE_DIR
+
+
+
+echo "HOME = $HOME"
+echo "PWD = $PWD"
+echo "LOCAL_DEPS_DIR = $LOCAL_DEPS_DIR"
+echo "uname -a: " `uname -a`
+echo "uname -m: " `uname -m`
+echo "uname -s: " `uname -s`
+echo "uname -n: " `uname -n`
+pwd
+ls
+env | sort
+
+if [[ `uname -s` == "Linux" ]] ; then
+    echo "nprocs: " `nproc`
+    head -40 /proc/cpuinfo
+elif [[ "${RUNNER_OS}" == "macOS" ]] ; then
+    echo "nprocs: " `sysctl -n hw.ncpu`
+    sysctl machdep.cpu.features
+fi
+
+# Save the env for use by other stages
+src/build-scripts/save-env.bash
