@@ -169,6 +169,7 @@ jobs:
             echo "CXX=clang++-${{ matrix.compiler_version }}" >> $GITHUB_ENV
           fi
         fi
+        sudo apt-get ccache
 
     - name: Install Dependencies (MacOS)
       if: runner.os == 'macOS'
