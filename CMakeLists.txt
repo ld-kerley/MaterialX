@@ -208,6 +208,7 @@ if (MATERIALX_BUILD_USE_CCACHE)
     # Setup CCache for C/C++ compilation
     find_program(CCACHE_PROGRAM ccache)
     if(CCACHE_PROGRAM)
+        message("Found CCACHE")
         set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
         set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
     endif()
