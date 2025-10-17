@@ -44,4 +44,4 @@ elif [[ "${RUNNER_OS}" == "macOS" ]] ; then
 fi
 
 # Save the env for use by other stages
-src/build-scripts/save-env.bash
+scripts/save-env.bash
