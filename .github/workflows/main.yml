@@ -131,7 +131,7 @@ jobs:
 
     - name: Build setup
       run: |
-        .github/scripts/ci-startup.bash
+        scripts/ci-startup.bash
 
     - name: Prepare ccache timestamp
       id: ccache_cache_keys
