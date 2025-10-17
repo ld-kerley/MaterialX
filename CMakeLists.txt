@@ -205,13 +205,18 @@ if (MATERIALX_BUILD_GEN_MDL)
 endif()
 
 if (MATERIALX_BUILD_USE_CCACHE)
+    message("MATERIALX_BUILD_USE_CCACHE : ${MATERIALX_BUILD_USE_CCACHE}")
     # Setup CCache for C/C++ compilation
     find_program(CCACHE_PROGRAM ccache)
     if(CCACHE_PROGRAM)
-        message("Found CCACHE")
+        message("CCACHE : FOUND")
         set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
         set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    else()
+        message("CCACHE : NOT FOUND")
     endif()
+else()
+
 endif()
 
 # Allow the OSL CMake package to provide binary locations for render tests.
