@@ -13,7 +13,10 @@
 
 MATERIALX_NAMESPACE_BEGIN
 
-Value::CreatorMap Value::_creatorMap;
+Value::CreatorMap& Value::creatorMap() {
+    static auto ret = new Value::CreatorMap();
+    return *ret;
+}
 
 namespace
 {
@@ -268,8 +271,8 @@ int Value::getFloatPrecision()
 
 ValuePtr Value::createValueFromStrings(const string& value, const string& type, ConstTypeDefPtr typeDef)
 {
-    CreatorMap::iterator it = _creatorMap.find(type);
-    if (it != _creatorMap.end())
+    CreatorMap::iterator it = creatorMap().find(type);
+    if (it != creatorMap().end())
         return it->second(value);
 
     if (typeDef && !typeDef->getMembers().empty())
@@ -413,9 +416,9 @@ template <class T> class ValueRegistry
   public:
     ValueRegistry()
     {
-        if (!Value::_creatorMap.count(TypedValue<T>::TYPE))
+        if (!Value::creatorMap().count(TypedValue<T>::TYPE))
         {
-            Value::_creatorMap[TypedValue<T>::TYPE] = TypedValue<T>::createFromString;
+            Value::creatorMap()[TypedValue<T>::TYPE] = TypedValue<T>::createFromString;
         }
     }
     ~ValueRegistry() = default;

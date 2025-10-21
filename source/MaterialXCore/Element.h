@@ -858,7 +858,7 @@ class MX_CORE_API Element : public std::enable_shared_from_this<Element>
     using CreatorFunction = ElementPtr (*)(ElementPtr, const string&);
     using CreatorMap = std::unordered_map<string, CreatorFunction>;
 
-    static CreatorMap _creatorMap;
+    static CreatorMap& creatorMap();
 };
 
 /// @class TypedElement

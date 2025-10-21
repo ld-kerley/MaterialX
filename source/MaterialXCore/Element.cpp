@@ -40,7 +40,10 @@ const string ValueElement::UNIT_ATTRIBUTE = "unit";
 const string ValueElement::UNITTYPE_ATTRIBUTE = "unittype";
 const string ValueElement::UNIFORM_ATTRIBUTE = "uniform";
 
-Element::CreatorMap Element::_creatorMap;
+Element::CreatorMap& Element::creatorMap() {
+    static auto ret = new Element::CreatorMap();
+    return *ret;
+}
 
 //
 // Element methods
@@ -238,8 +241,8 @@ ElementPtr Element::addChildOfCategory(const string& category, string name)
     ElementPtr child;
 
     // Check for this category in the creator map.
-    CreatorMap::iterator it = _creatorMap.find(category);
-    if (it != _creatorMap.end())
+    CreatorMap::iterator it = creatorMap().find(category);
+    if (it != creatorMap().end())
     {
         child = it->second(getSelf(), name);
     }
@@ -953,7 +956,7 @@ template <class T> class ElementRegistry
   public:
     ElementRegistry()
     {
-        Element::_creatorMap[T::CATEGORY] = Element::createElement<T>;
+        Element::creatorMap()[T::CATEGORY] = Element::createElement<T>;
     }
     ~ElementRegistry() = default;
 };

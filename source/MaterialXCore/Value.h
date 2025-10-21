@@ -120,7 +120,7 @@ class MX_CORE_API Value
     using CreatorMap = std::unordered_map<string, CreatorFunction>;
 
   private:
-    static CreatorMap _creatorMap;
+    static CreatorMap& creatorMap();
 };
 
 /// The class template for typed subclasses of Value
