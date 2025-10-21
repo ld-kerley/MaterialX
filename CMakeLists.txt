@@ -310,6 +310,7 @@ else()
         endif()
     endif()
 endif()
+install(TARGETS CommonCompileOptions EXPORT MaterialX)
 
 # Shared functions
 function(assign_source_group prefix)

@@ -13,6 +13,7 @@ if(UNIX)
         target_compile_options(MaterialXRender_LocalCompileOptions INTERFACE -Wno-stringop-overflow)
     endif()
 endif()
+install(TARGETS MaterialXRender_LocalCompileOptions EXPORT MaterialX)
 
 
 mx_add_library(MaterialXRender
