@@ -67,17 +67,17 @@ target_include_directories(imgui
 
 # LocalCompileOptions target is used here to control the order that the compile options are
 # included, if applied directly to MaterialXGraphEditor, then they will be added first
-add_library(LocalCompileOptions INTERFACE)
+add_library(MaterialXGraphEditor_LocalCompileOptions INTERFACE)
 if(MSVC)
-    target_compile_options(LocalCompileOptions
+    target_compile_options(MaterialXGraphEditor_LocalCompileOptions
             INTERFACE
             -wd4100 -wd4152 -wd4201 -wd4244 -wd4456)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    target_compile_options(LocalCompileOptions
+    target_compile_options(MaterialXGraphEditor_LocalCompileOptions
             INTERFACE
             -Wno-unused -Wno-deprecated -Wno-comment -Wno-unused-variable -Wno-unused-parameter)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(LocalCompileOptions
+    target_compile_options(MaterialXGraphEditor_LocalCompileOptions
             INTERFACE
             -Wno-format-truncation -Wno-use-after-free -Wno-comment -Wno-unused-but-set-variable -Wno-unused-parameter)
 endif()
@@ -108,7 +108,7 @@ target_link_libraries(MaterialXGraphEditor
  	    glfw_minimal
         imgui
         CommonCompileOptions
-#        LocalCompileOptions
+        MaterialXGraphEditor_LocalCompileOptions
 )
 
 if(APPLE)

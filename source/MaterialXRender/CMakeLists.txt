@@ -6,6 +6,15 @@ if(NOT MATERIALX_BUILD_OIIO)
     list(REMOVE_ITEM materialx_source "${CMAKE_CURRENT_SOURCE_DIR}/OiioImageLoader.cpp")
 endif()
 
+add_library(MaterialXRender_LocalCompileOptions INTERFACE)
+if(UNIX)
+    target_compile_options(MaterialXRender_LocalCompileOptions INTERFACE -Wno-unused-function)
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        target_compile_options(MaterialXRender_LocalCompileOptions INTERFACE -Wno-stringop-overflow)
+    endif()
+endif()
+
+
 mx_add_library(MaterialXRender
     SOURCE_FILES
         ${materialx_source}
@@ -19,12 +28,10 @@ mx_add_library(MaterialXRender
     EXPORT_DEFINE
         MATERIALX_RENDER_EXPORTS)
 
-if(UNIX)
-    target_compile_options(${TARGET_NAME} PRIVATE -Wno-unused-function)
-    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-        target_compile_options(${TARGET_NAME} PRIVATE -Wno-stringop-overflow)
-    endif()
-endif()
+target_link_libraries(${TARGET_NAME}
+    PRIVATE
+        MaterialXRender_LocalCompileOptions
+)
 
 if(MATERIALX_BUILD_OIIO)
     find_package(OpenImageIO CONFIG REQUIRED)
