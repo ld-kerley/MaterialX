@@ -32,6 +32,8 @@ endfunction()
 
 add_executable(MaterialXTest ${materialx_source} ${materialx_headers})
 
+target_link_libraries(MaterialXTest CommonCompileOptions)
+
 target_include_directories( MaterialXTest PUBLIC
     ${EXTERNAL_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/../)

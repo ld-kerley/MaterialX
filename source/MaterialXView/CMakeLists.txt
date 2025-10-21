@@ -125,9 +125,11 @@ add_executable(MaterialXView ${materialx_source} ${materialx_headers})
 
 target_link_libraries(
     MaterialXView
+    PRIVATE
     ${MATERIALX_LIBRARIES}
     ${NANOGUI_LIBRARIES}
-    ${NANOGUI_EXTRA_LIBS})
+    ${NANOGUI_EXTRA_LIBS}
+    CommonCompileOptions)
 
 target_include_directories(
     MaterialXView
