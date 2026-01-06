@@ -1070,23 +1070,29 @@ void ShaderGraph::optimize(GenContext& context)
         _nodeOrder = usedNodesVec;
     }
 
-    // we take a copy of the node list because we might modify it during the optimization
+    // We store node names (not raw pointers) because optimization may call
+    // removeNode(), which deletes nodes via shared_ptr. Raw pointers would dangle.
     if (context.getOptions().optReplaceBsdfMixWithLinearCombination)
     {
-        const vector<ShaderNode*> nodeList = getNodes();
-        for (ShaderNode* node : nodeList)
+        vector<string> mixBsdfNodeNames;
+        for (ShaderNode* node : getNodes())
         {
-            // first check the node is still in the graph, and hasn't been removed by a
-            // prior optimization
-            if (!getNode(node->getName()))
-                continue;
-
             if (node->hasClassification(ShaderNode::Classification::MIX_BSDF))
             {
-                if (!optimizeMixMixBsdf(node, context))
-                {
-                    optimizeMixBsdf(node, context);
-                }
+                mixBsdfNodeNames.push_back(node->getName());
+            }
+        }
+
+        for (const string& name : mixBsdfNodeNames)
+        {
+            // Look up fresh each iteration - node may have been removed by prior optimization
+            ShaderNode* node = getNode(name);
+            if (!node)
+                continue;
+
+            if (!optimizeMixMixBsdf(node, context))
+            {
+                optimizeMixBsdf(node, context);
             }
         }
     }
